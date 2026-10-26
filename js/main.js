@@ -1,6 +1,6 @@
 /**
- * Bhanu Prakash & Vijaya Lakshmi Wedding Invitation
- * Complete GSAP Animations & Interactions
+ * Ravi & Sowjanaya Wedding Invitation
+ * Interactive Royal Premium Animations & Functions
  */
 
 // Register GSAP Plugins
@@ -12,9 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Elements
   const entryScreen = document.getElementById('entryScreen');
   const openBtn = document.getElementById('openInvitationBtn');
-  const mainInvitation = document.getElementById('mainInvitation');
+  const mainInvitation = document.getElementById('mainInvitation') || document.getElementById('mainContent') || document.querySelector('main');
   const musicBtn = document.getElementById('musicToggleBtn');
-  const bgMusic = document.getElementById('bgMusic');
+  const bgMusic = document.getElementById('bgMusic') || document.getElementById('weddingAudio');
 
   let isMusicPlaying = false;
   let isInvitationOpened = false;
@@ -139,19 +139,18 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       exitTl
-        .to('.rp-entry__cta', { scale: 0.9, duration: 0.12, ease: 'power2.in' })
-        .to('.rp-entry__cta', { scale: 1.15, opacity: 0, duration: 0.3, ease: 'power2.out' })
-        .to('.rp-entry__title, .rp-entry__ornament, .rp-entry__top-icon', { y: -40, opacity: 0, stagger: 0.04, duration: 0.4, ease: 'power3.in' }, '-=0.15')
-        .to('.rp-entry__names', { scale: 1.12, opacity: 0, duration: 0.5, ease: 'power2.in' }, '<0.1')
-        .to('.rp-entry__mandala', { scale: 6, rotate: 180, opacity: 0, duration: 1.2, ease: 'power2.in' }, '-=0.35')
-        .to('.rp-entry__glow', { scale: 8, opacity: 1, duration: 0.8, ease: 'power2.in' }, '-=1.0')
-        .call(fireConfetti, [], '-=0.6')
-        .to('.rp-entry__flash', { opacity: 1, duration: 0.35, ease: 'power2.in' }, '-=0.4')
+        .to('.rp-entry__cta', { scale: 0.92, duration: 0.1, ease: 'power2.in' })
+        .to('.rp-entry__cta', { scale: 1.1, opacity: 0, duration: 0.2, ease: 'power2.out' })
+        .to('.rp-entry__content', { scale: 1.05, opacity: 0, duration: 0.35, ease: 'power2.in' }, 0.1)
+        .call(fireConfetti, [], 0.15)
+        .to('.rp-entry__flash', { opacity: 1, duration: 0.25, ease: 'power2.in' }, 0.2)
         .call(() => {
-          mainInvitation.style.display = 'block';
-          mainInvitation.style.opacity = '1';
-        })
-        .to(entryScreen, { opacity: 0, duration: 0.6, ease: 'power2.out' });
+          if (mainInvitation) {
+            mainInvitation.style.display = 'block';
+            mainInvitation.style.opacity = '1';
+          }
+        }, [], 0.35)
+        .to(entryScreen, { opacity: 0, duration: 0.35, ease: 'power2.out' }, 0.35);
     } else {
       fireConfetti();
       entryScreen.style.opacity = '0';
@@ -170,16 +169,15 @@ document.addEventListener('DOMContentLoaded', () => {
     ScrollTrigger.refresh();
 
     // Hero Timeline
-    const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    const heroTl = gsap.timeline({ defaults: { ease: 'power2.out' } });
     heroTl
-      .from('.rp-hero__photo', { scale: 1.15, duration: 2, ease: 'power2.out' })
-      .from('.rp-hero__line', { scaleX: 0, duration: 0.8, ease: 'power2.inOut' }, '-=1.2')
-      .from('.rp-hero__ganesha, .rp-hero__emblem', { scale: 0.7, opacity: 0, duration: 0.6, ease: 'back.out(1.5)' }, '-=0.5')
-      .from('.rp-hero__label', { y: 14, opacity: 0, duration: 0.6 }, '-=0.3')
-      .from('.rp-hero__names', { y: 40, opacity: 0, duration: 0.8, ease: 'back.out(1.5)' }, '-=0.2')
-      .from('.rp-hero__chip', { scale: 0.8, opacity: 0, duration: 0.5, ease: 'back.out(1.5)' }, '-=0.2')
-      .from('.rp-hero__welcome', { y: 14, opacity: 0, duration: 0.55 }, '-=0.15')
-      .from('.rp-hero__ornament, .rp-hero__scroll', { y: 14, opacity: 0, stagger: 0.12, duration: 0.55 }, '-=0.2');
+      .from('.rp-hero__photo', { scale: 1.08, duration: 1.2, ease: 'power2.out' }, 0)
+      .from('.rp-hero__ganesha, .rp-hero__emblem', { scale: 0.8, opacity: 0, duration: 0.5, ease: 'back.out(1.5)' }, 0.1)
+      .from('.rp-hero__label', { y: 12, opacity: 0, duration: 0.4 }, 0.2)
+      .from('.rp-hero__names', { y: 24, opacity: 0, scale: 0.95, duration: 0.6, ease: 'back.out(1.4)' }, 0.25)
+      .from('.rp-hero__chip', { scale: 0.85, opacity: 0, duration: 0.4, ease: 'back.out(1.4)' }, 0.35)
+      .from('.rp-hero__welcome', { y: 12, opacity: 0, duration: 0.45 }, 0.4)
+      .from('.rp-hero__ornament, .rp-hero__scroll', { y: 12, opacity: 0, duration: 0.4, stagger: 0.08 }, 0.45);
 
     // Hero Parallax on Scroll
     gsap.to('.rp-hero__photo', {
@@ -321,15 +319,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Share Section
     gsap.from('.rp-share__title', {
-      scrollTrigger: { trigger: '.rp-share', start: 'top 84%' },
+      scrollTrigger: { trigger: '.rp-share', start: 'top 95%' },
       y: 24, opacity: 0, duration: 0.8, ease: 'power3.out'
     });
     gsap.from('.rp-share__subtitle', {
-      scrollTrigger: { trigger: '.rp-share', start: 'top 82%' },
+      scrollTrigger: { trigger: '.rp-share', start: 'top 95%' },
       y: 18, opacity: 0, duration: 0.7, delay: 0.12
     });
-    gsap.from('.rp-share__divider-wrap', {
-      scrollTrigger: { trigger: '.rp-share', start: 'top 84%' },
+    gsap.from('.rp-share .rp-divider', {
+      scrollTrigger: { trigger: '.rp-share', start: 'top 95%' },
       scaleX: 0, opacity: 0, duration: 0.9, delay: 0.18, ease: 'power2.out'
     });
     gsap.from('.rp-share__btn', {
@@ -346,7 +344,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- 6. Live Muhurat Countdown Timer ---
   // Target: Thursday, August 27, 2026, 11:40 PM IST
-  const targetDate = new Date('2026-08-27T23:40:00+05:30').getTime();
+  // Target: Thursday, 5th November 2026, 9:54 PM IST
+  const targetDate = new Date('2026-11-05T21:54:00+05:30').getTime();
 
   function updateCountdown() {
     const now = new Date().getTime();
@@ -365,10 +364,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-    const daysEl = document.querySelector('.rp-countdown__value--days');
-    const hoursEl = document.querySelector('.rp-countdown__value--hours');
-    const minsEl = document.querySelector('.rp-countdown__value--minutes');
-    const secsEl = document.querySelector('.rp-countdown__value--seconds');
+    const daysEl = document.getElementById('cdDays') || document.querySelector('.rp-countdown__value--days') || document.querySelectorAll('.rp-countdown__value')[0];
+    const hoursEl = document.getElementById('cdHours') || document.querySelector('.rp-countdown__value--hours') || document.querySelectorAll('.rp-countdown__value')[1];
+    const minsEl = document.getElementById('cdMinutes') || document.querySelector('.rp-countdown__value--minutes') || document.querySelectorAll('.rp-countdown__value')[2];
+    const secsEl = document.getElementById('cdSeconds') || document.querySelector('.rp-countdown__value--seconds') || document.querySelectorAll('.rp-countdown__value')[3];
 
     if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
     if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
@@ -525,7 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Payload matching the original API
       const payload = {
-        invitationSlug: 'bhanu-prakash-vijaya-lakshmi-wedding-invitation',
+        invitationSlug: 'ravi-sowjanaya-wedding-invitation',
         rsvpEmail: 'Vijayalakshmiinti19@gmail.com',
         rsvpSubject: 'Vijayalakshmiinti19@gmail.com',
         name: guestName,
@@ -564,7 +563,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Share Invitation on WhatsApp buttons
   function shareInvitationOnWa() {
-    const shareText = `You are warmly invited to celebrate the wedding of Bhanu Prakash & Vijaya Lakshmi on Thursday, 27th August 2026 at Sri Pulapartli Sampradayam Function Hall, Pasaladeevi.\n\nView personal invitation: ${window.location.href}`;
+    const shareText = "You are warmly invited to celebrate the wedding of Ravi Sri Surya Mani Sankar & Lakshmi Sowjanaya on Thursday, 5th November 2026 at Sitarama Community Hall, Mandapeta.\n\nView personal invitation: " + window.location.href;
     window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank', 'noopener,noreferrer');
   }
 
@@ -587,13 +586,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const icsData = [
         'BEGIN:VCALENDAR',
         'VERSION:2.0',
-        'PRODID:-//MyShaadhiLink//Wedding//EN',
+        'PRODID:-//RoyalWedding//Invitation//EN',
         'BEGIN:VEVENT',
-        'DTSTART:20260827T181000Z',
-        'DTEND:20260828T041000Z',
-        'SUMMARY:Wedding of Bhanu Prakash & Vijaya Lakshmi',
-        'DESCRIPTION:Join us for the wedding ceremony of Appikatla Bhanu Prakash and Inti Vijaya Lakshmi on Thursday, 27th August 2026 at 11:40 PM at Sri Pulapartli Sampradayam Function Hall, Pasaladeevi, West Godavari District.',
-        'LOCATION:Sri Pulapartli Sampradayam Function Hall Pasaladeevi (V), West Godavari District, India',
+        'DTSTART:20261105T162400Z',
+        'DTEND:20261106T000000Z',
+        'SUMMARY:Wedding of Ravi & Sowjanaya',
+        'DESCRIPTION:Join us for the wedding ceremony of Ravi Sri Surya Mani Sankar and Lakshmi Sowjanaya on Thursday, 5th November 2026 at 9:54 PM at Sitarama Community Hall, Beside DharmaGundam Cheruvu, Mandapeta.',
+        'LOCATION:Sitarama Community Hall, Beside DharmaGundam Cheruvu, Mandapeta, Andhra Pradesh',
         'STATUS:CONFIRMED',
         'END:VEVENT',
         'END:VCALENDAR'

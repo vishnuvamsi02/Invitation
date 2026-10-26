@@ -2419,3 +2419,345 @@
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
 }
 
+
+
+/* ========================================================
+   EXACT MOBILE RATIOS & LAYOUTS MATCHING USER SCREENSHOTS
+   ======================================================== */
+
+@media (max-width: 767px) {
+  /* Cover / Entry Screen (Screenshot 9) */
+  .rp-entry__content {
+    width: min(88vw, 360px);
+    gap: 0.8rem;
+  }
+  .rp-entry__mandala {
+    width: min(55vw, 200px);
+  }
+  .rp-entry__names {
+    font-size: clamp(2.8rem, 12vw, 4rem);
+    line-height: 0.95;
+  }
+  .rp-entry__cta {
+    padding: 0.85rem 2.2rem;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    letter-spacing: 0.16em;
+  }
+
+  /* Hero Section (Screenshot 10) */
+  .rp-hero {
+    padding-top: 3.5rem;
+    padding-bottom: 2rem;
+  }
+  .rp-hero__emblem {
+    width: min(60vw, 220px);
+    height: auto;
+    margin: 0.4rem 0 0.6rem;
+  }
+  .rp-hero__names {
+    gap: 0.4rem;
+  }
+  .rp-hero__name {
+    font-size: clamp(3rem, 13vw, 5rem);
+    line-height: 0.9;
+  }
+  .rp-hero__amp {
+    font-size: clamp(1.4rem, 5.5vw, 2.4rem);
+    margin-bottom: 0.35rem;
+  }
+  .rp-hero__chip {
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    margin: 0.4rem 0;
+  }
+  .rp-hero__welcome {
+    font-size: 1.05rem;
+    max-width: 32ch;
+    margin: 0.2rem auto;
+  }
+
+  /* The Couple Cards (Screenshots 6 & 7) */
+  .rp-couple__grid {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+  .rp-couple__card {
+    padding: 2.2rem 1.2rem 2.4rem;
+    border-radius: 28px;
+    background: linear-gradient(155deg, rgba(83, 35, 76, 0.65), rgba(31, 15, 43, 0.92));
+    border: 1px solid rgba(245, 217, 157, 0.28);
+  }
+  .rp-couple__photo-wrap {
+    width: min(76vw, 275px);
+    aspect-ratio: 5 / 6;
+    margin: 0 auto;
+    position: relative;
+  }
+  .rp-couple__arch {
+    width: 88%;
+    height: auto;
+  }
+  .rp-couple__photo {
+    width: 76%;
+    height: 85%;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 150px 150px 20px 20px;
+    border: 2px solid rgba(255, 238, 197, 0.35);
+  }
+  .rp-couple__name {
+    font-size: clamp(1.4rem, 5.2vw, 1.85rem);
+    letter-spacing: 0.05em;
+    margin: 1.2rem 0 0.35rem;
+    color: #fff4da;
+    text-align: center;
+  }
+  .rp-couple__parents-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 0.25rem;
+    color: var(--rp-gold-soft);
+    text-align: center;
+  }
+  .rp-couple__parents {
+    font-size: 1.05rem;
+    color: #f7ecd5;
+    text-align: center;
+    margin: 0;
+  }
+  .rp-couple__vow {
+    font-size: 1.02rem;
+    font-style: italic;
+    color: rgba(254, 242, 217, 0.9);
+    text-align: center;
+    max-width: 32ch;
+    margin: 1.4rem auto 0;
+  }
+
+  /* Celebration Schedule (Screenshot 5) */
+  .rp-events__grid {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+  .rp-events__card {
+    padding: 1.3rem 1.2rem 1.4rem;
+    border-radius: 20px;
+    background: linear-gradient(155deg, rgba(87, 37, 70, 0.85), rgba(24, 12, 38, 0.96));
+    border: 1px solid rgba(245, 217, 157, 0.25);
+  }
+  .rp-events__name {
+    font-size: 1.35rem;
+    color: #fff4da;
+    margin: 0.3rem 0 0.4rem;
+  }
+  .rp-events__ritual-desc {
+    font-size: 0.95rem;
+    color: rgba(250, 236, 210, 0.82);
+    font-style: italic;
+    line-height: 1.5;
+  }
+  .rp-events__meta {
+    font-size: 0.85rem;
+    color: var(--rp-gold-soft);
+    font-weight: 600;
+  }
+  .rp-events__venue {
+    font-size: 0.85rem;
+    color: rgba(254, 242, 217, 0.88);
+  }
+  .rp-events__link {
+    font-size: 0.76rem;
+    letter-spacing: 0.12em;
+    color: var(--rp-gold);
+    font-weight: 700;
+    margin-top: 0.8rem;
+  }
+
+  /* Countdown 2x2 Grid (Screenshot 8) */
+  .rp-countdown__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    max-width: 380px;
+    margin: 1.5rem auto 0;
+  }
+  .rp-countdown__cell {
+    padding: 1.3rem 0.5rem;
+    border-radius: 18px;
+    background: rgba(18, 10, 30, 0.78);
+    border: 1px solid rgba(245, 217, 157, 0.32);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+  .rp-countdown__value {
+    font-size: clamp(2.2rem, 9vw, 2.85rem);
+    color: var(--rp-gold-soft);
+    font-family: var(--rp-font-cinzel), serif;
+    line-height: 1;
+  }
+  .rp-countdown__label {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    color: rgba(253, 240, 211, 0.85);
+    margin-top: 0.4rem;
+    font-weight: 700;
+  }
+
+  /* Memories in Bloom / Gallery 2-Column (Screenshot 3) */
+  .rp-gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+  }
+  .rp-gallery__item {
+    aspect-ratio: 4 / 5;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(245, 217, 157, 0.22);
+    background: rgba(18, 10, 30, 0.5);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  }
+  .rp-gallery__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  /* Venue Event Pills (Screenshot 2) */
+  .rp-venue__event-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+  }
+  .rp-venue__event-card {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0.82rem 1rem;
+    border-radius: 999px;
+    background: rgba(24, 12, 34, 0.75);
+    border: 1px solid rgba(245, 217, 157, 0.3);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  }
+  .rp-venue__event-name {
+    font-family: var(--rp-font-cinzel), serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--rp-gold);
+    margin-bottom: 0.18rem;
+    text-transform: uppercase;
+  }
+  .rp-venue__event-detail {
+    font-family: var(--rp-font-manrope), sans-serif;
+    font-size: 0.74rem;
+    color: rgba(254, 242, 217, 0.88);
+    letter-spacing: 0.04em;
+  }
+  .rp-venue__card {
+    padding: 1.5rem 1.2rem;
+    border-radius: 24px;
+  }
+  .rp-venue__name {
+    font-size: clamp(1.2rem, 4.5vw, 1.55rem);
+    text-align: center;
+  }
+  .rp-venue__address {
+    font-size: 1.05rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  /* RSVP Form Card (Screenshot 4) */
+  .rp-rsvp__card {
+    padding: 1.4rem 1.15rem;
+    border-radius: 24px;
+    background: linear-gradient(150deg, rgba(78, 30, 70, 0.82), rgba(26, 13, 40, 0.96));
+    border: 1px solid rgba(245, 217, 157, 0.3);
+  }
+  .rp-rsvp__attendance {
+    gap: 0.65rem;
+  }
+  .rp-rsvp__attendance-btn {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.82rem;
+    border-radius: 14px;
+  }
+  .rp-rsvp__field {
+    gap: 0.35rem;
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
+  }
+  .rp-rsvp__input, .rp-rsvp__textarea, .rp-rsvp__select {
+    padding: 0.75rem 0.85rem;
+    border-radius: 12px;
+    font-size: 0.92rem;
+  }
+  .rp-rsvp__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-top: 0.6rem;
+  }
+  .rp-rsvp__submit, .rp-rsvp__whatsapp {
+    width: 100%;
+    padding: 0.95rem 1.2rem;
+    border-radius: 999px;
+    font-size: 0.84rem;
+    letter-spacing: 0.14em;
+  }
+
+  /* Share This Invitation Grid (Screenshot 1) */
+  .rp-share__grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    width: 100%;
+  }
+  .rp-share__btn--whatsapp,
+  .rp-share__btn--calendar {
+    flex: 1 1 calc(50% - 0.4rem);
+    min-width: 140px;
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    font-size: 0.88rem;
+  }
+  .rp-share__btn--copy {
+    flex: 0 1 auto;
+    min-width: 175px;
+    padding: 0.85rem 1.4rem;
+    border-radius: 12px;
+    font-size: 0.88rem;
+  }
+
+  /* Footer Section (Screenshot 1) */
+  .rp-footer {
+    padding-top: 3.5rem;
+    padding-bottom: 4.5rem;
+  }
+  .rp-footer__names {
+    font-size: clamp(2.8rem, 12vw, 4.4rem);
+    line-height: 0.95;
+    margin: 0.4rem 0;
+  }
+  .rp-footer__date {
+    font-size: 0.76rem;
+    letter-spacing: 0.2em;
+    color: var(--rp-gold-soft);
+  }
+  .rp-footer__hash {
+    font-size: 1.05rem;
+    color: rgba(254, 242, 217, 0.88);
+  }
+}
