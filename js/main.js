@@ -54,17 +54,25 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof gsap !== 'undefined') {
     const entryTl = gsap.timeline({ defaults: { ease: 'power2.out' } });
     entryTl
-      .from('.rp-entry__glow', { scale: 0.5, opacity: 0, duration: 1.2 })
-      .from('.rp-entry__mandala', { scale: 0.7, opacity: 0, rotate: -15, duration: 1.1 }, '-=0.7')
-      .from('.rp-entry__top-icon', { y: -15, opacity: 0, duration: 0.6 }, '-=0.6')
-      .from('.rp-entry__title', { y: 14, opacity: 0, duration: 0.65 }, '-=0.4')
-      .from('.rp-entry__names', { y: 24, opacity: 0, scale: 0.95, duration: 0.85 }, '-=0.3')
-      .from('.rp-entry__ornament', { scaleX: 0, opacity: 0, duration: 0.7 }, '-=0.3')
-      .from('.rp-entry__cta', { y: 18, opacity: 0, duration: 0.65 }, '-=0.25');
+      .from('.rp-entry__glow', { scale: 0.6, opacity: 0, duration: 0.8 }, 0)
+      .from('.rp-entry__mandala', { scale: 0.8, opacity: 0, rotate: -15, duration: 0.6 }, 0.05)
+      .from('.rp-entry__top-icon', { y: -10, opacity: 0, duration: 0.45 }, 0.1)
+      .from('.rp-entry__title', { y: 10, opacity: 0, duration: 0.45 }, 0.15)
+      .from('.rp-entry__names', { scale: 0.92, opacity: 0, duration: 0.55 }, 0.2)
+      .from('.rp-entry__ornament', { scaleX: 0.7, opacity: 0, duration: 0.45 }, 0.25)
+      .from('.rp-entry__cta', { scale: 0.9, opacity: 0, duration: 0.45, ease: 'back.out(1.5)' }, 0.3);
 
     // Idle breathing rotation of mandala
-    gsap.to('.rp-entry__mandala', { rotate: 6, duration: 5, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+    gsap.to('.rp-entry__mandala', { rotate: 8, duration: 6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
   }
+
+  // Ensure CTA button is always visible even if GSAP is interrupted or delayed
+  setTimeout(() => {
+    if (openBtn) {
+      openBtn.style.opacity = '1';
+      openBtn.style.visibility = 'visible';
+    }
+  }, 350);
 
   // --- 3. Confetti Celebratory Burst ---
   function fireConfetti() {
