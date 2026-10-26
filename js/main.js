@@ -1,5 +1,5 @@
 /**
- * Ravi & Sowjanaya Wedding Invitation
+ * Ravi & Sowjanya Wedding Invitation
  * Interactive Royal Premium Animations & Functions
  */
 
@@ -287,20 +287,6 @@ document.addEventListener('DOMContentLoaded', () => {
       y: 40, opacity: 0, scale: 0.96, duration: 0.9, ease: 'power3.out'
     });
 
-    // RSVP Section
-    gsap.from('.rp-rsvp__title', {
-      scrollTrigger: { trigger: '.rp-rsvp', start: 'top 84%' },
-      y: 30, opacity: 0, scale: 0.95, duration: 0.85, ease: 'power3.out'
-    });
-    gsap.from('.rp-rsvp__subtitle', {
-      scrollTrigger: { trigger: '.rp-rsvp', start: 'top 82%' },
-      y: 20, opacity: 0, duration: 0.7, delay: 0.12
-    });
-    gsap.from('.rp-rsvp__card', {
-      scrollTrigger: { trigger: '.rp-rsvp__card', start: 'top 88%' },
-      y: 40, opacity: 0, scale: 0.96, duration: 0.9, ease: 'power3.out'
-    });
-
     // Share Section
     gsap.from('.rp-share__title', {
       scrollTrigger: { trigger: '.rp-share', start: 'top 95%' },
@@ -426,139 +412,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'ArrowRight' && lightboxNext) lightboxNext.click();
   });
 
-  // --- 8. RSVP & Share Interactions (Exact Royal Premium Replicate) ---
-  const rsvpForm = document.getElementById('rsvpForm');
-  const rsvpSuccess = document.getElementById('rsvpSuccess');
-  const rsvpName = document.getElementById('rsvpName');
-  const rsvpSubmitBtn = document.getElementById('rsvpSubmitBtn');
-  const rsvpBtnAccept = document.getElementById('rsvpBtnAccept');
-  const rsvpBtnDecline = document.getElementById('rsvpBtnDecline');
-  const rsvpAcceptFields = document.getElementById('rsvpAcceptFields');
-  const rsvpAdults = document.getElementById('rsvpAdults');
-  const rsvpChildren = document.getElementById('rsvpChildren');
-  const rsvpMessage = document.getElementById('rsvpMessage');
-  const rsvpWhatsappBtn = document.getElementById('rsvpWhatsappBtn');
-  const successShareWhatsappBtn = document.getElementById('successShareWhatsappBtn');
-
-  let attendingState = null; // null initially, true for accept, false for decline
-  let selectedEvents = [];
-
-  function checkFormValidity() {
-    const nameValid = rsvpName && rsvpName.value.trim().length > 0;
-    const attendingValid = attendingState !== null;
-    if (rsvpSubmitBtn) {
-      rsvpSubmitBtn.disabled = !(nameValid && attendingValid);
-    }
-  }
-
-  if (rsvpName) {
-    rsvpName.addEventListener('input', checkFormValidity);
-  }
-
-  if (rsvpBtnAccept && rsvpBtnDecline) {
-    rsvpBtnAccept.addEventListener('click', () => {
-      attendingState = true;
-      rsvpBtnAccept.classList.add('is-active');
-      rsvpBtnDecline.classList.remove('is-active');
-      if (rsvpAcceptFields) rsvpAcceptFields.style.display = 'block';
-      checkFormValidity();
-    });
-
-    rsvpBtnDecline.addEventListener('click', () => {
-      attendingState = false;
-      rsvpBtnDecline.classList.add('is-active');
-      rsvpBtnAccept.classList.remove('is-active');
-      if (rsvpAcceptFields) rsvpAcceptFields.style.display = 'none';
-      checkFormValidity();
-    });
-  }
-
-  // Event item checkboxes toggle
-  document.querySelectorAll('.rp-rsvp__event-item').forEach(item => {
-    item.addEventListener('click', (e) => {
-      const checkbox = item.querySelector('.rp-rsvp__event-check');
-      if (e.target !== checkbox) {
-        checkbox.checked = !checkbox.checked;
-      }
-      const eventName = checkbox.dataset.name || item.querySelector('.rp-rsvp__event-name').textContent.trim();
-      if (checkbox.checked) {
-        item.classList.add('is-selected');
-        if (!selectedEvents.includes(eventName)) selectedEvents.push(eventName);
-      } else {
-        item.classList.remove('is-selected');
-        selectedEvents = selectedEvents.filter(ev => ev !== eventName);
-      }
-    });
-  });
-
-  // Submit Handler
-  if (rsvpForm) {
-    rsvpForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const guestName = rsvpName ? rsvpName.value.trim() : '';
-      if (!guestName || attendingState === null) {
-        checkFormValidity();
-        return;
-      }
-
-      if (rsvpSubmitBtn) {
-        rsvpSubmitBtn.textContent = 'Sending...';
-        rsvpSubmitBtn.disabled = true;
-      }
-
-      // Payload matching the original API
-      const payload = {
-        invitationSlug: 'ravi-sowjanaya-wedding-invitation',
-        rsvpEmail: 'Vijayalakshmiinti19@gmail.com',
-        rsvpSubject: 'Vijayalakshmiinti19@gmail.com',
-        name: guestName,
-        attending: attendingState,
-        adults: rsvpAdults ? rsvpAdults.value : '1',
-        kids: rsvpChildren ? rsvpChildren.value : '0',
-        events: attendingState ? (selectedEvents.length > 0 ? selectedEvents : ['Wedding Ceremony']) : undefined,
-        message: rsvpMessage ? rsvpMessage.value.trim() : undefined
-      };
-
-      try {
-        await fetch('https://myshaadhilink.in/api/rsvp/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        }).catch(() => {});
-      } catch (err) {}
-
-      // Celebratory Confetti Burst (exact colors & origin from original site)
-      if (typeof confetti === 'function') {
-        confetti({
-          particleCount: 120,
-          spread: 70,
-          origin: { y: 0.7 },
-          colors: ['#f9d488', '#f3acbf', '#fef2d7', '#ce8f34', '#f2c9d1']
-        });
-      }
-
-      // Switch to exact Success State
-      rsvpForm.style.display = 'none';
-      if (rsvpSuccess) {
-        rsvpSuccess.style.display = 'flex';
-      }
-    });
-  }
-
-  // Share Invitation on WhatsApp buttons
+  // --- 8. Spread The Joy / Share This Invitation ---
   function shareInvitationOnWa() {
-    const shareText = "You are warmly invited to celebrate the wedding of Ravi Sri Surya Mani Sankar & Lakshmi Sowjanaya on Thursday, 5th November 2026 at Sitarama Community Hall, Mandapeta.\n\nView personal invitation: " + window.location.href;
+    const shareText = "You are warmly invited to celebrate the wedding of Ravi Sri Surya Mani Sankar & Lakshmi Sowjanya on Thursday, 5th November 2026 at Sitarama Community Hall, Mandapeta.\n\nView personal invitation: " + window.location.href;
     window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank', 'noopener,noreferrer');
   }
 
-  if (rsvpWhatsappBtn) {
-    rsvpWhatsappBtn.addEventListener('click', shareInvitationOnWa);
-  }
-  if (successShareWhatsappBtn) {
-    successShareWhatsappBtn.addEventListener('click', shareInvitationOnWa);
-  }
-
-  // --- 9. Spread The Joy / Share This Invitation ---
   const shareWaBtn = document.getElementById('shareInviteWaBtn');
   if (shareWaBtn) {
     shareWaBtn.addEventListener('click', shareInvitationOnWa);
@@ -574,8 +433,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'BEGIN:VEVENT',
         'DTSTART:20261105T162400Z',
         'DTEND:20261106T000000Z',
-        'SUMMARY:Wedding of Ravi & Sowjanaya',
-        'DESCRIPTION:Join us for the wedding ceremony of Ravi Sri Surya Mani Sankar and Lakshmi Sowjanaya on Thursday, 5th November 2026 at 9:54 PM at Sitarama Community Hall, Beside DharmaGundam Cheruvu, Mandapeta.',
+        'SUMMARY:Wedding of Ravi & Sowjanya',
+        'DESCRIPTION:Join us for the wedding ceremony of Ravi Sri Surya Mani Sankar and Lakshmi Sowjanya on Thursday, 5th November 2026 at 9:54 PM at Sitarama Community Hall, Beside DharmaGundam Cheruvu, Mandapeta.',
         'LOCATION:Sitarama Community Hall, Beside DharmaGundam Cheruvu, Mandapeta, Andhra Pradesh',
         'STATUS:CONFIRMED',
         'END:VEVENT',

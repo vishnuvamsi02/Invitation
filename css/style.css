@@ -2423,6 +2423,7 @@
 
 /* ========================================================
    EXACT MOBILE RATIOS & LAYOUTS MATCHING USER SCREENSHOTS
+   ENHANCED SIZING & READABILITY FOR REALME P1 5G & MOBILE
    ======================================================== */
 
 /* Global Mobile Viewport Constraints & Zero-Overflow Enforcers */
@@ -2447,9 +2448,10 @@ html, body {
   position: relative !important;
 }
 
+/* Optimized Container for Realme P1 5G & Mobile Devices (Utilizes full width comfortably) */
 .rp-container {
-  width: min(100% - 1.5rem, 440px) !important;
-  max-width: 440px !important;
+  width: min(100% - 1.25rem, 460px) !important;
+  max-width: 460px !important;
   margin-inline: auto !important;
   padding: 0 !important;
   box-sizing: border-box !important;
@@ -2477,8 +2479,8 @@ html, body {
   z-index: -2 !important;
   inset: 50% auto auto 50% !important;
   transform: translate(-50%, -50%) !important;
-  width: min(85vw, 400px) !important;
-  height: min(85vw, 400px) !important;
+  width: min(85vw, 420px) !important;
+  height: min(85vw, 420px) !important;
   max-width: 100% !important;
   opacity: 0.06 !important;
   overflow: hidden !important;
@@ -2497,8 +2499,8 @@ html, body {
 }
 
 .rp-entry__content {
-  width: min(88vw, 360px) !important;
-  gap: 0.8rem !important;
+  width: min(92vw, 400px) !important;
+  gap: 1rem !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
@@ -2506,86 +2508,102 @@ html, body {
   margin: 0 auto !important;
 }
 
+.rp-entry__title {
+  font-size: 0.88rem !important;
+  letter-spacing: 0.2em !important;
+}
+
 .rp-entry__mandala {
-  width: min(55vw, 200px) !important;
+  width: min(58vw, 220px) !important;
   height: auto !important;
   margin: 0 auto !important;
 }
 
 .rp-entry__names {
-  font-size: clamp(2.8rem, 12vw, 4rem) !important;
+  font-size: clamp(3rem, 13vw, 4.4rem) !important;
   line-height: 0.95 !important;
   margin: 0 !important;
   text-align: center !important;
 }
 
 .rp-entry__cta {
-  padding: 0.85rem 2.2rem !important;
+  min-height: 52px !important;
+  padding: 1rem 2.5rem !important;
   border-radius: 999px !important;
-  font-size: 0.82rem !important;
-  letter-spacing: 0.16em !important;
-  margin-top: 0.5rem !important;
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.18em !important;
+  margin-top: 0.75rem !important;
+  cursor: pointer !important;
 }
 
 /* Hero Section (Screenshot user_ratio_10.jpeg) */
 .rp-hero {
-  padding-top: 3.5rem !important;
-  padding-bottom: 2rem !important;
+  padding-top: 4rem !important;
+  padding-bottom: 2.5rem !important;
   text-align: center !important;
 }
 
 .rp-hero__emblem {
-  width: min(60vw, 220px) !important;
+  width: min(65vw, 240px) !important;
   height: auto !important;
-  margin: 0.4rem auto 0.6rem !important;
+  margin: 0.5rem auto 0.8rem !important;
   display: block !important;
 }
 
+.rp-hero__label {
+  font-size: 0.85rem !important;
+  letter-spacing: 0.22em !important;
+}
+
 .rp-hero__names {
-  gap: 0.4rem !important;
+  gap: 0.5rem !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  margin: 0.4rem 0 !important;
 }
 
 .rp-hero__name {
-  font-size: clamp(3rem, 13vw, 4.8rem) !important;
+  font-size: clamp(3.4rem, 14vw, 5.2rem) !important;
   line-height: 0.9 !important;
 }
 
 .rp-hero__amp {
-  font-size: clamp(1.4rem, 5.5vw, 2.4rem) !important;
+  font-size: clamp(1.6rem, 6vw, 2.6rem) !important;
   margin-bottom: 0.35rem !important;
 }
 
 .rp-hero__chip {
-  padding: 0.6rem 1.2rem !important;
+  padding: 0.7rem 1.4rem !important;
   border-radius: 999px !important;
-  font-size: 0.72rem !important;
-  letter-spacing: 0.12em !important;
-  margin: 0.4rem auto !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  margin: 0.6rem auto !important;
   display: inline-block !important;
 }
 
 .rp-hero__welcome {
-  font-size: 1.05rem !important;
+  font-size: 1.15rem !important;
+  line-height: 1.55 !important;
   max-width: 32ch !important;
-  margin: 0.2rem auto !important;
+  margin: 0.4rem auto !important;
 }
 
 /* The Couple Cards (Screenshots user_ratio_6.jpeg & user_ratio_7.jpeg) */
 .rp-couple__grid {
   display: flex !important;
   flex-direction: column !important;
-  gap: 1.5rem !important;
+  gap: 1.8rem !important;
   width: 100% !important;
-  max-width: 420px !important;
-  margin: 1.5rem auto 0 !important;
+  max-width: 460px !important;
+  margin: 1.8rem auto 0 !important;
 }
 
 .rp-couple__card {
   width: 100% !important;
-  padding: 2.2rem 1.2rem 2.4rem !important;
+  padding: 2.4rem 1.4rem 2.6rem !important;
   border-radius: 28px !important;
   background: linear-gradient(155deg, rgba(83, 35, 76, 0.65), rgba(31, 15, 43, 0.92)) !important;
   border: 1px solid rgba(245, 217, 157, 0.28) !important;
@@ -2594,123 +2612,134 @@ html, body {
 }
 
 .rp-couple__photo-wrap {
-  width: min(76vw, 275px) !important;
+  width: min(80vw, 300px) !important;
   aspect-ratio: 5 / 6 !important;
   margin: 0 auto !important;
   position: relative !important;
 }
 
 .rp-couple__arch {
-  width: 88% !important;
+  width: 90% !important;
   height: auto !important;
 }
 
 .rp-couple__photo {
-  width: 76% !important;
-  height: 85% !important;
+  width: 78% !important;
+  height: 86% !important;
   object-fit: cover !important;
   object-position: center top !important;
-  border-radius: 150px 150px 20px 20px !important;
+  border-radius: 160px 160px 22px 22px !important;
   border: 2px solid rgba(255, 238, 197, 0.35) !important;
 }
 
 .rp-couple__name {
-  font-size: clamp(1.4rem, 5.2vw, 1.85rem) !important;
+  font-size: clamp(1.65rem, 5.8vw, 2.15rem) !important;
   letter-spacing: 0.05em !important;
-  margin: 1.2rem 0 0.35rem !important;
+  margin: 1.3rem 0 0.45rem !important;
   color: #fff4da !important;
   text-align: center !important;
 }
 
 .rp-couple__parents-label {
-  font-size: 0.72rem !important;
-  letter-spacing: 0.2em !important;
-  margin-bottom: 0.25rem !important;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.22em !important;
+  margin-bottom: 0.35rem !important;
   color: var(--rp-gold-soft) !important;
   text-align: center !important;
 }
 
 .rp-couple__parents {
-  font-size: 1.05rem !important;
+  font-size: 1.2rem !important;
+  line-height: 1.45 !important;
   color: #f7ecd5 !important;
   text-align: center !important;
   margin: 0 !important;
 }
 
 .rp-couple__vow {
-  font-size: 1.02rem !important;
+  font-size: 1.15rem !important;
+  line-height: 1.55 !important;
   font-style: italic !important;
-  color: rgba(254, 242, 217, 0.9) !important;
+  color: rgba(254, 242, 217, 0.92) !important;
   text-align: center !important;
   max-width: 32ch !important;
-  margin: 1.4rem auto 0 !important;
+  margin: 1.6rem auto 0 !important;
 }
 
 /* Celebration Schedule (Screenshot user_ratio_5.jpeg) */
 .rp-events__grid {
   display: flex !important;
   flex-direction: column !important;
-  gap: 1.1rem !important;
+  gap: 1.3rem !important;
   width: 100% !important;
-  max-width: 420px !important;
-  margin: 1.5rem auto 0 !important;
+  max-width: 460px !important;
+  margin: 1.8rem auto 0 !important;
 }
 
 .rp-events__card {
   width: 100% !important;
   box-sizing: border-box !important;
-  padding: 1.3rem 1.2rem 1.4rem !important;
-  border-radius: 20px !important;
+  padding: 1.6rem 1.4rem 1.7rem !important;
+  border-radius: 22px !important;
   background: linear-gradient(155deg, rgba(87, 37, 70, 0.85), rgba(24, 12, 38, 0.96)) !important;
   border: 1px solid rgba(245, 217, 157, 0.25) !important;
 }
 
+.rp-events__badge {
+  font-size: 0.8rem !important;
+  letter-spacing: 0.16em !important;
+}
+
 .rp-events__name {
-  font-size: 1.35rem !important;
+  font-size: clamp(1.4rem, 5vw, 1.65rem) !important;
+  line-height: 1.25 !important;
   color: #fff4da !important;
-  margin: 0.3rem 0 0.4rem !important;
+  margin: 0.4rem 0 0.5rem !important;
 }
 
 .rp-events__ritual-desc {
-  font-size: 0.95rem !important;
-  color: rgba(250, 236, 210, 0.82) !important;
+  font-size: 1.05rem !important;
+  line-height: 1.55 !important;
+  color: rgba(250, 236, 210, 0.85) !important;
   font-style: italic !important;
-  line-height: 1.5 !important;
 }
 
 .rp-events__meta {
-  font-size: 0.85rem !important;
+  font-size: 0.96rem !important;
   color: var(--rp-gold-soft) !important;
   font-weight: 600 !important;
+  margin-top: 0.6rem !important;
 }
 
 .rp-events__venue {
-  font-size: 0.85rem !important;
-  color: rgba(254, 242, 217, 0.88) !important;
+  font-size: 0.96rem !important;
+  line-height: 1.4 !important;
+  color: rgba(254, 242, 217, 0.9) !important;
 }
 
 .rp-events__link {
-  font-size: 0.76rem !important;
-  letter-spacing: 0.12em !important;
+  font-size: 0.84rem !important;
+  letter-spacing: 0.14em !important;
   color: var(--rp-gold) !important;
   font-weight: 700 !important;
-  margin-top: 0.8rem !important;
+  margin-top: 0.9rem !important;
+  display: inline-block !important;
 }
 
 /* Countdown 2x2 Grid (Screenshot user_ratio_8.jpeg) */
 .rp-countdown__grid {
   display: grid !important;
   grid-template-columns: repeat(2, 1fr) !important;
-  gap: 0.75rem !important;
+  gap: 0.95rem !important;
   width: 100% !important;
-  max-width: 360px !important;
-  margin: 1.5rem auto 0 !important;
+  max-width: 420px !important;
+  margin: 1.8rem auto 0 !important;
   box-sizing: border-box !important;
 }
 
 .rp-countdown__cell {
-  padding: 1.3rem 0.5rem !important;
-  border-radius: 18px !important;
+  padding: 1.5rem 0.6rem !important;
+  border-radius: 20px !important;
   background: rgba(18, 10, 30, 0.78) !important;
   border: 1px solid rgba(245, 217, 157, 0.32) !important;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
@@ -2722,17 +2751,17 @@ html, body {
 }
 
 .rp-countdown__value {
-  font-size: clamp(2.2rem, 9vw, 2.85rem) !important;
+  font-size: clamp(2.6rem, 10.5vw, 3.4rem) !important;
   color: var(--rp-gold-soft) !important;
   font-family: var(--rp-font-cinzel), serif !important;
   line-height: 1 !important;
 }
 
 .rp-countdown__label {
-  font-size: 0.72rem !important;
-  letter-spacing: 0.16em !important;
-  color: rgba(253, 240, 211, 0.85) !important;
-  margin-top: 0.4rem !important;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.18em !important;
+  color: rgba(253, 240, 211, 0.88) !important;
+  margin-top: 0.5rem !important;
   font-weight: 700 !important;
 }
 
@@ -2740,20 +2769,20 @@ html, body {
 .rp-gallery__grid {
   display: grid !important;
   grid-template-columns: repeat(2, 1fr) !important;
-  gap: 0.75rem !important;
+  gap: 0.85rem !important;
   width: 100% !important;
-  max-width: 420px !important;
-  margin: 1.5rem auto 0 !important;
+  max-width: 460px !important;
+  margin: 1.8rem auto 0 !important;
   box-sizing: border-box !important;
 }
 
 .rp-gallery__item {
   aspect-ratio: 4 / 5 !important;
-  border-radius: 18px !important;
+  border-radius: 20px !important;
   overflow: hidden !important;
-  border: 1px solid rgba(245, 217, 157, 0.22) !important;
+  border: 1px solid rgba(245, 217, 157, 0.25) !important;
   background: rgba(18, 10, 30, 0.5) !important;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35) !important;
   width: 100% !important;
   display: block !important;
   padding: 0 !important;
@@ -2773,10 +2802,10 @@ html, body {
 .rp-venue__event-cards {
   display: flex !important;
   flex-direction: column !important;
-  gap: 0.65rem !important;
+  gap: 0.75rem !important;
   width: 100% !important;
-  max-width: 420px !important;
-  margin: 1.5rem auto !important;
+  max-width: 460px !important;
+  margin: 1.8rem auto !important;
   box-sizing: border-box !important;
 }
 
@@ -2788,115 +2817,140 @@ html, body {
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
-  padding: 0.85rem 1.2rem !important;
+  padding: 0.95rem 1.3rem !important;
   border-radius: 999px !important;
-  background: rgba(24, 12, 34, 0.75) !important;
+  background: rgba(24, 12, 34, 0.78) !important;
   border: 1px solid rgba(245, 217, 157, 0.3) !important;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
 }
 
 .rp-venue__event-name {
   font-family: var(--rp-font-cinzel), serif !important;
-  font-size: 0.78rem !important;
+  font-size: 0.86rem !important;
   font-weight: 700 !important;
   letter-spacing: 0.12em !important;
   color: var(--rp-gold) !important;
-  margin-bottom: 0.18rem !important;
+  margin-bottom: 0.2rem !important;
   text-transform: uppercase !important;
 }
 
 .rp-venue__event-detail {
   font-family: var(--rp-font-manrope), sans-serif !important;
-  font-size: 0.74rem !important;
-  color: rgba(254, 242, 217, 0.88) !important;
+  font-size: 0.82rem !important;
+  color: rgba(254, 242, 217, 0.9) !important;
   letter-spacing: 0.04em !important;
 }
 
+/* Venue Cards: Marriage & Reception (Dedicated Location Cards) */
 .rp-venue__card {
   width: 100% !important;
-  max-width: 420px !important;
+  max-width: 460px !important;
   margin: 0 auto !important;
-  padding: 1.5rem 1.2rem !important;
-  border-radius: 24px !important;
+  padding: 2rem 1.4rem 2.2rem !important;
+  border-radius: 26px !important;
+  background: linear-gradient(155deg, rgba(87, 37, 70, 0.88), rgba(24, 12, 38, 0.97)) !important;
+  border: 1px solid rgba(245, 217, 157, 0.32) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45) !important;
   box-sizing: border-box !important;
   text-align: center !important;
+}
+
+.rp-venue__card + .rp-venue__card {
+  margin-top: 1.8rem !important;
+}
+
+.rp-venue__badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.45rem !important;
+  padding: 0.45rem 1rem !important;
+  border-radius: 999px !important;
+  background: rgba(217, 163, 75, 0.16) !important;
+  border: 1px solid rgba(245, 217, 157, 0.36) !important;
+  color: var(--rp-gold) !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 0.9rem !important;
 }
 
 .rp-venue__name {
-  font-size: clamp(1.2rem, 4.5vw, 1.55rem) !important;
+  font-size: clamp(1.45rem, 5.5vw, 1.85rem) !important;
+  line-height: 1.25 !important;
+  color: #fff4da !important;
   text-align: center !important;
+  margin-bottom: 0.45rem !important;
 }
 
 .rp-venue__address {
-  font-size: 1.05rem !important;
+  font-size: 1.15rem !important;
+  line-height: 1.45 !important;
+  color: rgba(245, 217, 157, 0.95) !important;
   text-align: center !important;
-  margin-bottom: 1rem !important;
+  margin-bottom: 1.2rem !important;
 }
 
-/* RSVP Form Card (Screenshot user_ratio_4.jpeg) */
-.rp-rsvp__card {
+.rp-venue__map-wrap {
   width: 100% !important;
-  max-width: 420px !important;
-  margin: 0 auto !important;
-  padding: 1.4rem 1.15rem !important;
-  border-radius: 24px !important;
-  background: linear-gradient(150deg, rgba(78, 30, 70, 0.82), rgba(26, 13, 40, 0.96)) !important;
+  border-radius: 18px !important;
+  overflow: hidden !important;
   border: 1px solid rgba(245, 217, 157, 0.3) !important;
-  box-sizing: border-box !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+  margin-bottom: 1.4rem !important;
 }
 
-.rp-rsvp__attendance {
+.rp-venue__map {
+  width: 100% !important;
+  height: 240px !important;
+  border: none !important;
+  display: block !important;
+}
+
+.rp-venue__btn-wrap {
+  display: flex !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+.rp-venue__btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   gap: 0.65rem !important;
-  display: flex !important;
   width: 100% !important;
-}
-
-.rp-rsvp__attendance-btn {
-  flex: 1 !important;
-  padding: 0.75rem 0.5rem !important;
-  font-size: 0.82rem !important;
-  border-radius: 14px !important;
-}
-
-.rp-rsvp__field {
-  gap: 0.35rem !important;
-  font-size: 0.74rem !important;
-  letter-spacing: 0.14em !important;
-}
-
-.rp-rsvp__input, .rp-rsvp__textarea, .rp-rsvp__select {
-  padding: 0.75rem 0.85rem !important;
-  border-radius: 12px !important;
-  font-size: 0.92rem !important;
-  box-sizing: border-box !important;
-  width: 100% !important;
-}
-
-.rp-rsvp__actions {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 0.7rem !important;
-  margin-top: 0.6rem !important;
-  width: 100% !important;
-}
-
-.rp-rsvp__submit, .rp-rsvp__whatsapp {
-  width: 100% !important;
-  padding: 0.95rem 1.2rem !important;
+  min-height: 52px !important;
+  padding: 1rem 1.6rem !important;
   border-radius: 999px !important;
-  font-size: 0.84rem !important;
-  letter-spacing: 0.14em !important;
-  box-sizing: border-box !important;
+  background: linear-gradient(135deg, #a15450, #7a3c38) !important;
+  border: 1.5px solid rgba(245, 217, 157, 0.45) !important;
+  color: #ffffff !important;
+  font-family: var(--rp-font-manrope, sans-serif) !important;
+  font-size: 0.94rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45) !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: all 0.25s ease !important;
+}
+
+.rp-venue__btn:hover {
+  background: linear-gradient(135deg, #b8625e, #8f4844) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55) !important;
 }
 
 /* Share This Invitation Grid (Screenshot user_ratio_1.jpeg) */
 .rp-share__grid {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
-  gap: 0.75rem !important;
+  gap: 0.85rem !important;
   width: 100% !important;
-  max-width: 380px !important;
-  margin: 1.5rem auto 0 !important;
+  max-width: 420px !important;
+  margin: 1.8rem auto 0 !important;
   box-sizing: border-box !important;
 }
 
@@ -2905,11 +2959,12 @@ html, body {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 0.5rem !important;
-  padding: 0.85rem 1rem !important;
-  border-radius: 12px !important;
-  font-size: 0.88rem !important;
-  font-weight: 600 !important;
+  gap: 0.6rem !important;
+  min-height: 52px !important;
+  padding: 0.95rem 1.2rem !important;
+  border-radius: 14px !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
 }
 
 .rp-share__btn--whatsapp {
@@ -2926,19 +2981,19 @@ html, body {
   grid-column: 1 / -1 !important;
   justify-self: center !important;
   width: auto !important;
-  min-width: 190px !important;
+  min-width: 220px !important;
 }
 
 /* More Section / Contact Queries (CENTERED to Match Original Design) */
 .rp-footer__contact {
-  margin: 2.2rem auto 1.2rem !important;
-  padding: 1.25rem 1.4rem !important;
-  border-radius: 18px !important;
-  background: rgba(30, 14, 38, 0.85) !important;
-  border: 1px solid rgba(245, 217, 157, 0.3) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
-  max-width: 360px !important;
-  width: calc(100% - 1.5rem) !important;
+  margin: 2.4rem auto 1.4rem !important;
+  padding: 1.5rem 1.5rem !important;
+  border-radius: 20px !important;
+  background: rgba(30, 14, 38, 0.88) !important;
+  border: 1px solid rgba(245, 217, 157, 0.32) !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4) !important;
+  max-width: 420px !important;
+  width: 100% !important;
   text-align: center !important;
   display: flex !important;
   flex-direction: column !important;
@@ -2948,11 +3003,11 @@ html, body {
 }
 
 .rp-footer__contact-label {
-  font-size: 0.74rem !important;
-  letter-spacing: 0.18em !important;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.2em !important;
   color: var(--rp-gold) !important;
-  font-weight: 700 !important;
-  margin: 0 0 0.5rem 0 !important;
+  font-weight: 800 !important;
+  margin: 0 0 0.65rem 0 !important;
   text-align: center !important;
   width: 100% !important;
 }
@@ -2962,7 +3017,7 @@ html, body {
   flex-direction: column !important;
   align-items: center !important;
   text-align: center !important;
-  gap: 0.45rem !important;
+  gap: 0.55rem !important;
   list-style: none !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -2970,7 +3025,9 @@ html, body {
 }
 
 .rp-footer__contact-list li {
-  font-size: 0.88rem !important;
+  font-size: 1.05rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
   color: #f7ecd5 !important;
   text-align: center !important;
   width: 100% !important;
@@ -2988,8 +3045,8 @@ html, body {
 
 /* Footer Section (Screenshot user_ratio_1.jpeg) */
 .rp-footer {
-  padding-top: 3.5rem !important;
-  padding-bottom: 4.5rem !important;
+  padding-top: 3.8rem !important;
+  padding-bottom: 5rem !important;
   text-align: center !important;
 }
 
@@ -3000,51 +3057,58 @@ html, body {
   text-align: center !important;
 }
 
+.rp-footer__label {
+  font-size: 0.84rem !important;
+  letter-spacing: 0.22em !important;
+}
+
 .rp-footer__names {
-  font-size: clamp(2.8rem, 12vw, 4.4rem) !important;
+  font-size: clamp(3.2rem, 13vw, 4.8rem) !important;
   line-height: 0.95 !important;
   margin: 0.4rem 0 !important;
   text-align: center !important;
 }
 
 .rp-footer__date {
-  font-size: 0.76rem !important;
-  letter-spacing: 0.2em !important;
+  font-size: 0.84rem !important;
+  letter-spacing: 0.22em !important;
   color: var(--rp-gold-soft) !important;
   text-align: center !important;
 }
 
 .rp-footer__hash {
-  font-size: 1.05rem !important;
-  color: rgba(254, 242, 217, 0.88) !important;
+  font-size: 1.18rem !important;
+  color: rgba(254, 242, 217, 0.9) !important;
   text-align: center !important;
+  margin-top: 0.35rem !important;
 }
 
 .rp-footer__thanks {
+  font-size: 1.15rem !important;
+  line-height: 1.55 !important;
   text-align: center !important;
   max-width: 36ch !important;
-  margin: 0.8rem auto 0 !important;
+  margin: 0.9rem auto 0 !important;
 }
 
 /* Section Spacing Matching Mobile Viewports */
 .rp-section {
-  padding-top: 3.8rem !important;
-  padding-bottom: 3.8rem !important;
-}
-
-.rp-rsvp {
-  padding-top: 4rem !important;
-  padding-bottom: 4.5rem !important;
+  padding-top: 4.2rem !important;
+  padding-bottom: 4.2rem !important;
 }
 
 .rp-share {
-  padding-top: 4.5rem !important;
-  padding-bottom: 4rem !important;
+  padding-top: 4.8rem !important;
+  padding-bottom: 4.2rem !important;
 }
 
 /* Music Floating Button */
 .rp-music {
-  right: 1rem !important;
-  bottom: 1rem !important;
+  right: 1.1rem !important;
+  bottom: 1.1rem !important;
   z-index: 100 !important;
+  min-height: 44px !important;
+  padding: 0.75rem 1.1rem !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 0.12em !important;
 }
