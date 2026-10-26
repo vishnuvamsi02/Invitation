@@ -1185,7 +1185,7 @@
 }
 
 .rp-footer__contact {
-  margin-top:2rem;display:flex;flex-direction:column;align-items:center;gap:.75rem;padding:1.25rem 1.5rem;border:1px solid rgba(214,176,96,.22);border-radius:2px;background:rgba(28,12,24,.35);max-width:340px;width:100%
+  margin:2rem auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;padding:1.25rem 1.5rem;border:1px solid rgba(214,176,96,.22);border-radius:18px;background:rgba(28,12,24,.35);max-width:360px;width:calc(100% - 1.5rem);text-align:center;box-sizing:border-box;
 }
 
 .rp-footer__contact-label {
@@ -1248,10 +1248,10 @@
     padding:5.5rem 0
   }
   .rp-hero__content {
-    gap:.85rem;max-width:800px
+    gap:.85rem;max-width:520px;margin-inline:auto
   }
   .rp-couple__grid {
-    grid-template-columns:repeat(2,minmax(0,1fr));gap:1.1rem
+    grid-template-columns:1fr;gap:1.4rem;max-width:420px;margin-inline:auto
   }
   .rp-remem {
     padding:1rem 0 4rem
@@ -1293,13 +1293,13 @@
     gap:1rem
   }
   .rp-events__grid,.rp-rituals__grid {
-    grid-template-columns:repeat(2,minmax(0,1fr))
+    grid-template-columns:1fr;max-width:420px;margin-inline:auto
   }
   .rp-countdown__grid {
-    grid-template-columns:repeat(4,minmax(0,1fr))
+    grid-template-columns:repeat(2,minmax(0,1fr));max-width:360px;margin:1.5rem auto 0
   }
   .rp-gallery__grid {
-    grid-template-columns:repeat(3,minmax(0,1fr));gap:.86rem
+    grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;max-width:420px;margin:1.5rem auto 0
   }
   .rp-rsvp__card {
     padding:1.3rem
@@ -1317,16 +1317,16 @@
     object-position:center 24%
   }
   .rp-events__grid,.rp-rituals__grid {
-    grid-template-columns:repeat(4,minmax(0,1fr))
+    grid-template-columns:1fr;max-width:420px;margin-inline:auto
   }
   .rp-gallery__grid {
-    grid-template-columns:repeat(6,minmax(0,1fr))
+    grid-template-columns:repeat(2,minmax(0,1fr));max-width:420px;margin:1.5rem auto 0
   }
   .rp-gallery__item:first-child {
-    grid-column:span 2;grid-row:span 2
+    grid-column:auto;grid-row:auto
   }
   .rp-gallery__item:nth-child(4) {
-    grid-column:span 2
+    grid-column:auto
   }
   .rp-venue__card {
     padding:1.3rem
@@ -2425,388 +2425,626 @@
    EXACT MOBILE RATIOS & LAYOUTS MATCHING USER SCREENSHOTS
    ======================================================== */
 
-@media (max-width: 767px) {
-  /* Cover / Entry Screen (Screenshot 9) */
-  .rp-entry__content {
-    width: min(88vw, 360px);
-    gap: 0.8rem;
-  }
-  .rp-entry__mandala {
-    width: min(55vw, 200px);
-  }
-  .rp-entry__names {
-    font-size: clamp(2.8rem, 12vw, 4rem);
-    line-height: 0.95;
-  }
-  .rp-entry__cta {
-    padding: 0.85rem 2.2rem;
-    border-radius: 999px;
-    font-size: 0.82rem;
-    letter-spacing: 0.16em;
-  }
+/* Global Mobile Viewport Constraints & Zero-Overflow Enforcers */
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+}
 
-  /* Hero Section (Screenshot 10) */
-  .rp-hero {
-    padding-top: 3.5rem;
-    padding-bottom: 2rem;
-  }
-  .rp-hero__emblem {
-    width: min(60vw, 220px);
-    height: auto;
-    margin: 0.4rem 0 0.6rem;
-  }
-  .rp-hero__names {
-    gap: 0.4rem;
-  }
-  .rp-hero__name {
-    font-size: clamp(3rem, 13vw, 5rem);
-    line-height: 0.9;
-  }
-  .rp-hero__amp {
-    font-size: clamp(1.4rem, 5.5vw, 2.4rem);
-    margin-bottom: 0.35rem;
-  }
-  .rp-hero__chip {
-    padding: 0.6rem 1.2rem;
-    border-radius: 999px;
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    margin: 0.4rem 0;
-  }
-  .rp-hero__welcome {
-    font-size: 1.05rem;
-    max-width: 32ch;
-    margin: 0.2rem auto;
-  }
+*, *::before, *::after {
+  box-sizing: border-box !important;
+}
 
-  /* The Couple Cards (Screenshots 6 & 7) */
-  .rp-couple__grid {
-    grid-template-columns: 1fr;
-    gap: 1.4rem;
-  }
-  .rp-couple__card {
-    padding: 2.2rem 1.2rem 2.4rem;
-    border-radius: 28px;
-    background: linear-gradient(155deg, rgba(83, 35, 76, 0.65), rgba(31, 15, 43, 0.92));
-    border: 1px solid rgba(245, 217, 157, 0.28);
-  }
-  .rp-couple__photo-wrap {
-    width: min(76vw, 275px);
-    aspect-ratio: 5 / 6;
-    margin: 0 auto;
-    position: relative;
-  }
-  .rp-couple__arch {
-    width: 88%;
-    height: auto;
-  }
-  .rp-couple__photo {
-    width: 76%;
-    height: 85%;
-    object-fit: cover;
-    object-position: center top;
-    border-radius: 150px 150px 20px 20px;
-    border: 2px solid rgba(255, 238, 197, 0.35);
-  }
-  .rp-couple__name {
-    font-size: clamp(1.4rem, 5.2vw, 1.85rem);
-    letter-spacing: 0.05em;
-    margin: 1.2rem 0 0.35rem;
-    color: #fff4da;
-    text-align: center;
-  }
-  .rp-couple__parents-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    margin-bottom: 0.25rem;
-    color: var(--rp-gold-soft);
-    text-align: center;
-  }
-  .rp-couple__parents {
-    font-size: 1.05rem;
-    color: #f7ecd5;
-    text-align: center;
-    margin: 0;
-  }
-  .rp-couple__vow {
-    font-size: 1.02rem;
-    font-style: italic;
-    color: rgba(254, 242, 217, 0.9);
-    text-align: center;
-    max-width: 32ch;
-    margin: 1.4rem auto 0;
-  }
+.royal-premium {
+  width: 100% !important;
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+  position: relative !important;
+}
 
-  /* Celebration Schedule (Screenshot 5) */
-  .rp-events__grid {
-    grid-template-columns: 1fr;
-    gap: 1.1rem;
-  }
-  .rp-events__card {
-    padding: 1.3rem 1.2rem 1.4rem;
-    border-radius: 20px;
-    background: linear-gradient(155deg, rgba(87, 37, 70, 0.85), rgba(24, 12, 38, 0.96));
-    border: 1px solid rgba(245, 217, 157, 0.25);
-  }
-  .rp-events__name {
-    font-size: 1.35rem;
-    color: #fff4da;
-    margin: 0.3rem 0 0.4rem;
-  }
-  .rp-events__ritual-desc {
-    font-size: 0.95rem;
-    color: rgba(250, 236, 210, 0.82);
-    font-style: italic;
-    line-height: 1.5;
-  }
-  .rp-events__meta {
-    font-size: 0.85rem;
-    color: var(--rp-gold-soft);
-    font-weight: 600;
-  }
-  .rp-events__venue {
-    font-size: 0.85rem;
-    color: rgba(254, 242, 217, 0.88);
-  }
-  .rp-events__link {
-    font-size: 0.76rem;
-    letter-spacing: 0.12em;
-    color: var(--rp-gold);
-    font-weight: 700;
-    margin-top: 0.8rem;
-  }
+.rp-container {
+  width: min(100% - 1.5rem, 440px) !important;
+  max-width: 440px !important;
+  margin-inline: auto !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
 
-  /* Countdown 2x2 Grid (Screenshot 8) */
-  .rp-countdown__grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
-    max-width: 380px;
-    margin: 1.5rem auto 0;
-  }
-  .rp-countdown__cell {
-    padding: 1.3rem 0.5rem;
-    border-radius: 18px;
-    background: rgba(18, 10, 30, 0.78);
-    border: 1px solid rgba(245, 217, 157, 0.32);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-  }
-  .rp-countdown__value {
-    font-size: clamp(2.2rem, 9vw, 2.85rem);
-    color: var(--rp-gold-soft);
-    font-family: var(--rp-font-cinzel), serif;
-    line-height: 1;
-  }
-  .rp-countdown__label {
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
-    color: rgba(253, 240, 211, 0.85);
-    margin-top: 0.4rem;
-    font-weight: 700;
-  }
+/* Background SVGs and Overflows */
+.rp-entry, .rp-hero, .rp-section, .rp-footer {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  position: relative !important;
+}
 
-  /* Memories in Bloom / Gallery 2-Column (Screenshot 3) */
-  .rp-gallery__grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.65rem;
-  }
-  .rp-gallery__item {
-    aspect-ratio: 4 / 5;
-    border-radius: 18px;
-    overflow: hidden;
-    border: 1px solid rgba(245, 217, 157, 0.22);
-    background: rgba(18, 10, 30, 0.5);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-  }
-  .rp-gallery__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-  }
+.rp-entry__jali,
+.rp-hero__jali,
+.rp-countdown__jali,
+.rp-gallery__jali,
+.rp-share__jali,
+.rp-footer__jali {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
 
-  /* Venue Event Pills (Screenshot 2) */
-  .rp-venue__event-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 0.65rem;
-    margin-bottom: 1.5rem;
-    width: 100%;
-  }
-  .rp-venue__event-card {
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 0.82rem 1rem;
-    border-radius: 999px;
-    background: rgba(24, 12, 34, 0.75);
-    border: 1px solid rgba(245, 217, 157, 0.3);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-  }
-  .rp-venue__event-name {
-    font-family: var(--rp-font-cinzel), serif;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: var(--rp-gold);
-    margin-bottom: 0.18rem;
-    text-transform: uppercase;
-  }
-  .rp-venue__event-detail {
-    font-family: var(--rp-font-manrope), sans-serif;
-    font-size: 0.74rem;
-    color: rgba(254, 242, 217, 0.88);
-    letter-spacing: 0.04em;
-  }
-  .rp-venue__card {
-    padding: 1.5rem 1.2rem;
-    border-radius: 24px;
-  }
-  .rp-venue__name {
-    font-size: clamp(1.2rem, 4.5vw, 1.55rem);
-    text-align: center;
-  }
-  .rp-venue__address {
-    font-size: 1.05rem;
-    text-align: center;
-    margin-bottom: 1rem;
-  }
+.rp-hero__mandala-bg {
+  z-index: -2 !important;
+  inset: 50% auto auto 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: min(85vw, 400px) !important;
+  height: min(85vw, 400px) !important;
+  max-width: 100% !important;
+  opacity: 0.06 !important;
+  overflow: hidden !important;
+}
 
-  /* RSVP Form Card (Screenshot 4) */
-  .rp-rsvp__card {
-    padding: 1.4rem 1.15rem;
-    border-radius: 24px;
-    background: linear-gradient(150deg, rgba(78, 30, 70, 0.82), rgba(26, 13, 40, 0.96));
-    border: 1px solid rgba(245, 217, 157, 0.3);
-  }
-  .rp-rsvp__attendance {
-    gap: 0.65rem;
-  }
-  .rp-rsvp__attendance-btn {
-    padding: 0.75rem 0.5rem;
-    font-size: 0.82rem;
-    border-radius: 14px;
-  }
-  .rp-rsvp__field {
-    gap: 0.35rem;
-    font-size: 0.74rem;
-    letter-spacing: 0.14em;
-  }
-  .rp-rsvp__input, .rp-rsvp__textarea, .rp-rsvp__select {
-    padding: 0.75rem 0.85rem;
-    border-radius: 12px;
-    font-size: 0.92rem;
-  }
-  .rp-rsvp__actions {
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
-    margin-top: 0.6rem;
-  }
-  .rp-rsvp__submit, .rp-rsvp__whatsapp {
-    width: 100%;
-    padding: 0.95rem 1.2rem;
-    border-radius: 999px;
-    font-size: 0.84rem;
-    letter-spacing: 0.14em;
-  }
+/* Cover / Entry Screen (Screenshot user_ratio_9.jpeg) */
+.rp-entry {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
 
-  /* Share This Invitation Grid (Screenshot 1) */
-  .rp-share__grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.75rem;
-    margin-top: 1.5rem;
-    width: 100%;
-  }
-  .rp-share__btn--whatsapp,
-  .rp-share__btn--calendar {
-    flex: 1 1 calc(50% - 0.4rem);
-    min-width: 140px;
-    padding: 0.85rem 1rem;
-    border-radius: 12px;
-    font-size: 0.88rem;
-  }
-  .rp-share__btn--copy {
-    flex: 0 1 auto;
-    min-width: 175px;
-    padding: 0.85rem 1.4rem;
-    border-radius: 12px;
-    font-size: 0.88rem;
-  }
+.rp-entry__content {
+  width: min(88vw, 360px) !important;
+  gap: 0.8rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+}
 
-  /* Footer Section (Screenshot 1) */
-  .rp-footer {
-    padding-top: 3.5rem;
-    padding-bottom: 4.5rem;
-  }
-  .rp-footer__names {
-    font-size: clamp(2.8rem, 12vw, 4.4rem);
-    line-height: 0.95;
-    margin: 0.4rem 0;
-  }
-  .rp-footer__date {
-    font-size: 0.76rem;
-    letter-spacing: 0.2em;
-    color: var(--rp-gold-soft);
-  }
-  .rp-footer__hash {
-    font-size: 1.05rem;
-    color: rgba(254, 242, 217, 0.88);
-  }
+.rp-entry__mandala {
+  width: min(55vw, 200px) !important;
+  height: auto !important;
+  margin: 0 auto !important;
+}
 
-  /* More Section / Contact Queries */
-  .rp-footer__contact {
-    margin: 2.2rem auto 1.2rem;
-    padding: 1.25rem 1.4rem;
-    border-radius: 18px;
-    background: rgba(30, 14, 38, 0.85);
-    border: 1px solid rgba(245, 217, 157, 0.3);
-    max-width: 360px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-  }
-  .rp-footer__contact-label {
-    font-size: 0.74rem;
-    letter-spacing: 0.18em;
-    color: var(--rp-gold);
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-  }
-  .rp-footer__contact-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-  }
-  .rp-footer__contact-list li {
-    font-size: 0.88rem;
-    color: #f7ecd5;
-  }
-  .rp-footer__contact-list a {
-    color: inherit;
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-  .rp-footer__contact-list a:hover {
-    color: var(--rp-gold-soft);
-  }
+.rp-entry__names {
+  font-size: clamp(2.8rem, 12vw, 4rem) !important;
+  line-height: 0.95 !important;
+  margin: 0 !important;
+  text-align: center !important;
+}
 
-  /* Section Spacing on Mobile to Match exact 540x1200 / 390x844 viewports */
-  .rp-section {
-    padding-top: 3.8rem;
-    padding-bottom: 3.8rem;
-  }
-  .rp-rsvp {
-    padding-top: 4rem;
-    padding-bottom: 4.5rem;
-  }
-  .rp-share {
-    padding-top: 4.5rem;
-    padding-bottom: 4rem;
-  }
+.rp-entry__cta {
+  padding: 0.85rem 2.2rem !important;
+  border-radius: 999px !important;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.16em !important;
+  margin-top: 0.5rem !important;
+}
+
+/* Hero Section (Screenshot user_ratio_10.jpeg) */
+.rp-hero {
+  padding-top: 3.5rem !important;
+  padding-bottom: 2rem !important;
+  text-align: center !important;
+}
+
+.rp-hero__emblem {
+  width: min(60vw, 220px) !important;
+  height: auto !important;
+  margin: 0.4rem auto 0.6rem !important;
+  display: block !important;
+}
+
+.rp-hero__names {
+  gap: 0.4rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.rp-hero__name {
+  font-size: clamp(3rem, 13vw, 4.8rem) !important;
+  line-height: 0.9 !important;
+}
+
+.rp-hero__amp {
+  font-size: clamp(1.4rem, 5.5vw, 2.4rem) !important;
+  margin-bottom: 0.35rem !important;
+}
+
+.rp-hero__chip {
+  padding: 0.6rem 1.2rem !important;
+  border-radius: 999px !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 0.12em !important;
+  margin: 0.4rem auto !important;
+  display: inline-block !important;
+}
+
+.rp-hero__welcome {
+  font-size: 1.05rem !important;
+  max-width: 32ch !important;
+  margin: 0.2rem auto !important;
+}
+
+/* The Couple Cards (Screenshots user_ratio_6.jpeg & user_ratio_7.jpeg) */
+.rp-couple__grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.5rem !important;
+  width: 100% !important;
+  max-width: 420px !important;
+  margin: 1.5rem auto 0 !important;
+}
+
+.rp-couple__card {
+  width: 100% !important;
+  padding: 2.2rem 1.2rem 2.4rem !important;
+  border-radius: 28px !important;
+  background: linear-gradient(155deg, rgba(83, 35, 76, 0.65), rgba(31, 15, 43, 0.92)) !important;
+  border: 1px solid rgba(245, 217, 157, 0.28) !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
+}
+
+.rp-couple__photo-wrap {
+  width: min(76vw, 275px) !important;
+  aspect-ratio: 5 / 6 !important;
+  margin: 0 auto !important;
+  position: relative !important;
+}
+
+.rp-couple__arch {
+  width: 88% !important;
+  height: auto !important;
+}
+
+.rp-couple__photo {
+  width: 76% !important;
+  height: 85% !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+  border-radius: 150px 150px 20px 20px !important;
+  border: 2px solid rgba(255, 238, 197, 0.35) !important;
+}
+
+.rp-couple__name {
+  font-size: clamp(1.4rem, 5.2vw, 1.85rem) !important;
+  letter-spacing: 0.05em !important;
+  margin: 1.2rem 0 0.35rem !important;
+  color: #fff4da !important;
+  text-align: center !important;
+}
+
+.rp-couple__parents-label {
+  font-size: 0.72rem !important;
+  letter-spacing: 0.2em !important;
+  margin-bottom: 0.25rem !important;
+  color: var(--rp-gold-soft) !important;
+  text-align: center !important;
+}
+
+.rp-couple__parents {
+  font-size: 1.05rem !important;
+  color: #f7ecd5 !important;
+  text-align: center !important;
+  margin: 0 !important;
+}
+
+.rp-couple__vow {
+  font-size: 1.02rem !important;
+  font-style: italic !important;
+  color: rgba(254, 242, 217, 0.9) !important;
+  text-align: center !important;
+  max-width: 32ch !important;
+  margin: 1.4rem auto 0 !important;
+}
+
+/* Celebration Schedule (Screenshot user_ratio_5.jpeg) */
+.rp-events__grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.1rem !important;
+  width: 100% !important;
+  max-width: 420px !important;
+  margin: 1.5rem auto 0 !important;
+}
+
+.rp-events__card {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 1.3rem 1.2rem 1.4rem !important;
+  border-radius: 20px !important;
+  background: linear-gradient(155deg, rgba(87, 37, 70, 0.85), rgba(24, 12, 38, 0.96)) !important;
+  border: 1px solid rgba(245, 217, 157, 0.25) !important;
+}
+
+.rp-events__name {
+  font-size: 1.35rem !important;
+  color: #fff4da !important;
+  margin: 0.3rem 0 0.4rem !important;
+}
+
+.rp-events__ritual-desc {
+  font-size: 0.95rem !important;
+  color: rgba(250, 236, 210, 0.82) !important;
+  font-style: italic !important;
+  line-height: 1.5 !important;
+}
+
+.rp-events__meta {
+  font-size: 0.85rem !important;
+  color: var(--rp-gold-soft) !important;
+  font-weight: 600 !important;
+}
+
+.rp-events__venue {
+  font-size: 0.85rem !important;
+  color: rgba(254, 242, 217, 0.88) !important;
+}
+
+.rp-events__link {
+  font-size: 0.76rem !important;
+  letter-spacing: 0.12em !important;
+  color: var(--rp-gold) !important;
+  font-weight: 700 !important;
+  margin-top: 0.8rem !important;
+}
+
+/* Countdown 2x2 Grid (Screenshot user_ratio_8.jpeg) */
+.rp-countdown__grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 0.75rem !important;
+  width: 100% !important;
+  max-width: 360px !important;
+  margin: 1.5rem auto 0 !important;
+  box-sizing: border-box !important;
+}
+
+.rp-countdown__cell {
+  padding: 1.3rem 0.5rem !important;
+  border-radius: 18px !important;
+  background: rgba(18, 10, 30, 0.78) !important;
+  border: 1px solid rgba(245, 217, 157, 0.32) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+}
+
+.rp-countdown__value {
+  font-size: clamp(2.2rem, 9vw, 2.85rem) !important;
+  color: var(--rp-gold-soft) !important;
+  font-family: var(--rp-font-cinzel), serif !important;
+  line-height: 1 !important;
+}
+
+.rp-countdown__label {
+  font-size: 0.72rem !important;
+  letter-spacing: 0.16em !important;
+  color: rgba(253, 240, 211, 0.85) !important;
+  margin-top: 0.4rem !important;
+  font-weight: 700 !important;
+}
+
+/* Captured Chapters / Memories in Bloom (Screenshot user_ratio_3.jpeg) */
+.rp-gallery__grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 0.75rem !important;
+  width: 100% !important;
+  max-width: 420px !important;
+  margin: 1.5rem auto 0 !important;
+  box-sizing: border-box !important;
+}
+
+.rp-gallery__item {
+  aspect-ratio: 4 / 5 !important;
+  border-radius: 18px !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(245, 217, 157, 0.22) !important;
+  background: rgba(18, 10, 30, 0.5) !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3) !important;
+  width: 100% !important;
+  display: block !important;
+  padding: 0 !important;
+  grid-column: auto !important;
+  grid-row: auto !important;
+}
+
+.rp-gallery__image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+  transition: transform 0.4s ease !important;
+}
+
+/* Venue Event Pills (Screenshot user_ratio_2.jpeg) */
+.rp-venue__event-cards {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.65rem !important;
+  width: 100% !important;
+  max-width: 420px !important;
+  margin: 1.5rem auto !important;
+  box-sizing: border-box !important;
+}
+
+.rp-venue__event-card {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 0.85rem 1.2rem !important;
+  border-radius: 999px !important;
+  background: rgba(24, 12, 34, 0.75) !important;
+  border: 1px solid rgba(245, 217, 157, 0.3) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
+}
+
+.rp-venue__event-name {
+  font-family: var(--rp-font-cinzel), serif !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  color: var(--rp-gold) !important;
+  margin-bottom: 0.18rem !important;
+  text-transform: uppercase !important;
+}
+
+.rp-venue__event-detail {
+  font-family: var(--rp-font-manrope), sans-serif !important;
+  font-size: 0.74rem !important;
+  color: rgba(254, 242, 217, 0.88) !important;
+  letter-spacing: 0.04em !important;
+}
+
+.rp-venue__card {
+  width: 100% !important;
+  max-width: 420px !important;
+  margin: 0 auto !important;
+  padding: 1.5rem 1.2rem !important;
+  border-radius: 24px !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
+}
+
+.rp-venue__name {
+  font-size: clamp(1.2rem, 4.5vw, 1.55rem) !important;
+  text-align: center !important;
+}
+
+.rp-venue__address {
+  font-size: 1.05rem !important;
+  text-align: center !important;
+  margin-bottom: 1rem !important;
+}
+
+/* RSVP Form Card (Screenshot user_ratio_4.jpeg) */
+.rp-rsvp__card {
+  width: 100% !important;
+  max-width: 420px !important;
+  margin: 0 auto !important;
+  padding: 1.4rem 1.15rem !important;
+  border-radius: 24px !important;
+  background: linear-gradient(150deg, rgba(78, 30, 70, 0.82), rgba(26, 13, 40, 0.96)) !important;
+  border: 1px solid rgba(245, 217, 157, 0.3) !important;
+  box-sizing: border-box !important;
+}
+
+.rp-rsvp__attendance {
+  gap: 0.65rem !important;
+  display: flex !important;
+  width: 100% !important;
+}
+
+.rp-rsvp__attendance-btn {
+  flex: 1 !important;
+  padding: 0.75rem 0.5rem !important;
+  font-size: 0.82rem !important;
+  border-radius: 14px !important;
+}
+
+.rp-rsvp__field {
+  gap: 0.35rem !important;
+  font-size: 0.74rem !important;
+  letter-spacing: 0.14em !important;
+}
+
+.rp-rsvp__input, .rp-rsvp__textarea, .rp-rsvp__select {
+  padding: 0.75rem 0.85rem !important;
+  border-radius: 12px !important;
+  font-size: 0.92rem !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+}
+
+.rp-rsvp__actions {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.7rem !important;
+  margin-top: 0.6rem !important;
+  width: 100% !important;
+}
+
+.rp-rsvp__submit, .rp-rsvp__whatsapp {
+  width: 100% !important;
+  padding: 0.95rem 1.2rem !important;
+  border-radius: 999px !important;
+  font-size: 0.84rem !important;
+  letter-spacing: 0.14em !important;
+  box-sizing: border-box !important;
+}
+
+/* Share This Invitation Grid (Screenshot user_ratio_1.jpeg) */
+.rp-share__grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 0.75rem !important;
+  width: 100% !important;
+  max-width: 380px !important;
+  margin: 1.5rem auto 0 !important;
+  box-sizing: border-box !important;
+}
+
+.rp-share__btn {
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+  padding: 0.85rem 1rem !important;
+  border-radius: 12px !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+}
+
+.rp-share__btn--whatsapp {
+  grid-column: 1 !important;
+  width: 100% !important;
+}
+
+.rp-share__btn--calendar {
+  grid-column: 2 !important;
+  width: 100% !important;
+}
+
+.rp-share__btn--copy {
+  grid-column: 1 / -1 !important;
+  justify-self: center !important;
+  width: auto !important;
+  min-width: 190px !important;
+}
+
+/* More Section / Contact Queries (CENTERED to Match Original Design) */
+.rp-footer__contact {
+  margin: 2.2rem auto 1.2rem !important;
+  padding: 1.25rem 1.4rem !important;
+  border-radius: 18px !important;
+  background: rgba(30, 14, 38, 0.85) !important;
+  border: 1px solid rgba(245, 217, 157, 0.3) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+  max-width: 360px !important;
+  width: calc(100% - 1.5rem) !important;
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+}
+
+.rp-footer__contact-label {
+  font-size: 0.74rem !important;
+  letter-spacing: 0.18em !important;
+  color: var(--rp-gold) !important;
+  font-weight: 700 !important;
+  margin: 0 0 0.5rem 0 !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+.rp-footer__contact-list {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  gap: 0.45rem !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+.rp-footer__contact-list li {
+  font-size: 0.88rem !important;
+  color: #f7ecd5 !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+.rp-footer__contact-list a {
+  color: inherit !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+}
+
+.rp-footer__contact-list a:hover {
+  color: var(--rp-gold-soft) !important;
+}
+
+/* Footer Section (Screenshot user_ratio_1.jpeg) */
+.rp-footer {
+  padding-top: 3.5rem !important;
+  padding-bottom: 4.5rem !important;
+  text-align: center !important;
+}
+
+.rp-footer__content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+.rp-footer__names {
+  font-size: clamp(2.8rem, 12vw, 4.4rem) !important;
+  line-height: 0.95 !important;
+  margin: 0.4rem 0 !important;
+  text-align: center !important;
+}
+
+.rp-footer__date {
+  font-size: 0.76rem !important;
+  letter-spacing: 0.2em !important;
+  color: var(--rp-gold-soft) !important;
+  text-align: center !important;
+}
+
+.rp-footer__hash {
+  font-size: 1.05rem !important;
+  color: rgba(254, 242, 217, 0.88) !important;
+  text-align: center !important;
+}
+
+.rp-footer__thanks {
+  text-align: center !important;
+  max-width: 36ch !important;
+  margin: 0.8rem auto 0 !important;
+}
+
+/* Section Spacing Matching Mobile Viewports */
+.rp-section {
+  padding-top: 3.8rem !important;
+  padding-bottom: 3.8rem !important;
+}
+
+.rp-rsvp {
+  padding-top: 4rem !important;
+  padding-bottom: 4.5rem !important;
+}
+
+.rp-share {
+  padding-top: 4.5rem !important;
+  padding-bottom: 4rem !important;
+}
+
+/* Music Floating Button */
+.rp-music {
+  right: 1rem !important;
+  bottom: 1rem !important;
+  z-index: 100 !important;
 }
