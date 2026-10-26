@@ -677,39 +677,7 @@
       </div>
     </section>
 
-    <!-- The Photographer Section -->
-    <section class="rp-photog rp-section">
-      <div class="rp-container">
-        <div class="rp-photog__header">
-          <p class="rp-photog__label rp-font-label">Captured By</p>
-          <div class="rp-photog__divider" aria-hidden="true">
-            <span class="rp-photog__divider-line"></span>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-              <circle cx="12" cy="13" r="4"></circle>
-            </svg>
-            <span class="rp-photog__divider-line"></span>
-          </div>
-          <h2 class="rp-photog__title rp-font-heading">The Photographer</h2>
-        </div>
-        <div class="rp-photog__card">
-          <div class="rp-photog__logo">
-            <img src="assets/yellow-pixels.jpg" alt="Yellow Pixels by Sadhanala" width="96" height="96" class="rp-photog__logo-img" />
-          </div>
-          <h3 class="rp-photog__name rp-font-serif">Yellow Pixels by Sadhanala</h3>
-          <p class="rp-photog__tagline rp-font-label">Photography &amp; Cinematography</p>
-          <p class="rp-photog__desc rp-font-serif">Capturing weddings, events &amp; portraits since 2017 — over 100 happy couples and counting, turning moments into memories.</p>
-          <a href="https://www.instagram.com/yellowpixels_by_sadhanala" target="_blank" rel="noopener noreferrer" class="rp-photog__btn rp-font-label">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
-            View on Instagram
-          </a>
-        </div>
-      </div>
-    </section>
+    
 
     <!-- Venue & Travel Section (Matching Screenshot 4) -->
     <section class="rp-venue rp-section">
@@ -782,111 +750,136 @@
       </div>
     </section>
 
-    <!-- RSVP & Share Section (Matching Screenshots 2 & 3) -->
-    <section class="rp-rsvp rp-section">
+        <!-- Join The Celebration / RSVP Section -->
+    <section class="rp-rsvp rp-section" id="rsvpSection">
+      <img src="assets/jali-pattern.svg" alt="" class="rp-rsvp__jali" />
       <div class="rp-container">
-        <p class="rp-rsvp__pretitle rp-font-label">JOIN THE CELEBRATION</p>
-        <h2 class="rp-rsvp__title rp-font-heading">RSVP &amp; SHARE</h2>
+        <p class="rp-rsvp__pretitle rp-font-label">Join The Celebration</p>
+        <h2 class="rp-rsvp__title rp-font-heading">RSVP &amp; Share</h2>
         <p class="rp-rsvp__subtitle rp-font-serif">We would be honored to celebrate this day with you.</p>
         
         <div class="rp-rsvp__card">
-          <div class="rp-rsvp__attendance">
-            <button type="button" class="rp-rsvp__attendance-btn is-active" data-status="accept">Joyfully Accept</button>
-            <button type="button" class="rp-rsvp__attendance-btn" data-status="decline">Regretfully Decline</button>
+          <!-- Success State (Hidden by default) -->
+          <div class="rp-rsvp__success" id="rsvpSuccess" style="display: none;">
+            <p class="rp-rsvp__success-title rp-font-heading">Thank you for your response</p>
+            <p class="rp-font-serif" style="color: rgba(247,236,213,0.85); font-size: 1.05rem;">Your blessings mean the world to us.</p>
+            <button type="button" class="rp-rsvp__whatsapp rp-font-label" id="successShareWaBtn" style="margin-top: 0.6rem;">Share Invitation on WhatsApp</button>
           </div>
 
-          <!-- Name -->
-          <label class="rp-rsvp__field rp-font-label">
-            <span>YOUR NAME</span>
-            <input type="text" id="rsvpName" class="rp-rsvp__input" placeholder="Enter your name" required />
-          </label>
+          <!-- RSVP Form -->
+          <form class="rp-rsvp__form" id="rsvpForm">
+            <!-- Attendance Segmented Buttons -->
+            <div class="rp-rsvp__attendance">
+              <button type="button" class="rp-rsvp__attendance-btn is-active" id="rsvpBtnAccept">Joyfully Accept</button>
+              <button type="button" class="rp-rsvp__attendance-btn" id="rsvpBtnDecline">Regretfully Decline</button>
+            </div>
 
-          <!-- Attending Details Block -->
-          <div id="rsvpDetails">
-            <!-- Events selection -->
-            <div class="rp-rsvp__field rp-font-label">
-              <span>EVENTS YOU'LL ATTEND</span>
-              <div class="rp-rsvp__events">
-                <div class="rp-rsvp__event-item is-selected">
-                  <div class="rp-rsvp__event-left">
-                    <input type="checkbox" class="rp-rsvp__event-check" checked />
-                    <span class="rp-rsvp__event-tick">&#10003;</span>
+            <!-- Name Field -->
+            <label class="rp-rsvp__field rp-font-label">
+              <span>Your Name</span>
+              <input type="text" id="rsvpName" class="rp-rsvp__input" placeholder="Enter your name" required autocomplete="name" />
+            </label>
+
+            <!-- Attending Fields Container -->
+            <div id="rsvpAttendingFields">
+              <!-- Events List -->
+              <div class="rp-rsvp__field rp-font-label">
+                <span>Events You'll Attend</span>
+                <div class="rp-rsvp__events" id="rsvpEventsList">
+                  <label class="rp-rsvp__event-item is-selected">
+                    <input type="checkbox" class="rp-rsvp__event-check" checked data-name="Pelli Koduku Ceremony" />
+                    <span class="rp-rsvp__event-tick" aria-hidden="true">
+                      <svg width="8" height="6" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#1a0e00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    </span>
                     <span class="rp-rsvp__event-name">PELLI KODUKU CEREMONY</span>
-                  </div>
-                  <span class="rp-rsvp__event-date">WEDNESDAY, 26TH AUGUST 2026</span>
-                </div>
-                <div class="rp-rsvp__event-item is-selected">
-                  <div class="rp-rsvp__event-left">
-                    <input type="checkbox" class="rp-rsvp__event-check" checked />
-                    <span class="rp-rsvp__event-tick">&#10003;</span>
+                    <span class="rp-rsvp__event-date">WEDNESDAY, 26TH AUGUST 2026</span>
+                  </label>
+                  <label class="rp-rsvp__event-item is-selected">
+                    <input type="checkbox" class="rp-rsvp__event-check" checked data-name="Pelli Kuturu Ceremony" />
+                    <span class="rp-rsvp__event-tick" aria-hidden="true">
+                      <svg width="8" height="6" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#1a0e00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    </span>
                     <span class="rp-rsvp__event-name">PELLI KUTURU CEREMONY</span>
-                  </div>
-                  <span class="rp-rsvp__event-date">WEDNESDAY, 26TH AUGUST 2026</span>
-                </div>
-                <div class="rp-rsvp__event-item is-selected">
-                  <div class="rp-rsvp__event-left">
-                    <input type="checkbox" class="rp-rsvp__event-check" checked />
-                    <span class="rp-rsvp__event-tick">&#10003;</span>
+                    <span class="rp-rsvp__event-date">WEDNESDAY, 26TH AUGUST 2026</span>
+                  </label>
+                  <label class="rp-rsvp__event-item is-selected">
+                    <input type="checkbox" class="rp-rsvp__event-check" checked data-name="Haldi Ceremony" />
+                    <span class="rp-rsvp__event-tick" aria-hidden="true">
+                      <svg width="8" height="6" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#1a0e00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    </span>
                     <span class="rp-rsvp__event-name">HALDI CEREMONY</span>
-                  </div>
-                  <span class="rp-rsvp__event-date">THURSDAY, 27TH AUGUST 2026</span>
-                </div>
-                <div class="rp-rsvp__event-item is-selected">
-                  <div class="rp-rsvp__event-left">
-                    <input type="checkbox" class="rp-rsvp__event-check" checked />
-                    <span class="rp-rsvp__event-tick">&#10003;</span>
+                    <span class="rp-rsvp__event-date">THURSDAY, 27TH AUGUST 2026</span>
+                  </label>
+                  <label class="rp-rsvp__event-item is-selected">
+                    <input type="checkbox" class="rp-rsvp__event-check" checked data-name="Wedding Ceremony" />
+                    <span class="rp-rsvp__event-tick" aria-hidden="true">
+                      <svg width="8" height="6" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#1a0e00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    </span>
                     <span class="rp-rsvp__event-name">WEDDING CEREMONY</span>
-                  </div>
-                  <span class="rp-rsvp__event-date">THURSDAY, 27TH AUGUST 2026</span>
-                </div>
-                <div class="rp-rsvp__event-item is-selected">
-                  <div class="rp-rsvp__event-left">
-                    <input type="checkbox" class="rp-rsvp__event-check" checked />
-                    <span class="rp-rsvp__event-tick">&#10003;</span>
+                    <span class="rp-rsvp__event-date">THURSDAY, 27TH AUGUST 2026</span>
+                  </label>
+                  <label class="rp-rsvp__event-item is-selected">
+                    <input type="checkbox" class="rp-rsvp__event-check" checked data-name="Reception" />
+                    <span class="rp-rsvp__event-tick" aria-hidden="true">
+                      <svg width="8" height="6" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#1a0e00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    </span>
                     <span class="rp-rsvp__event-name">RECEPTION</span>
-                  </div>
-                  <span class="rp-rsvp__event-date">SATURDAY, 29TH AUGUST 2026</span>
+                    <span class="rp-rsvp__event-date">SATURDAY, 29TH AUGUST 2026</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Guest Row (Adults / Children) -->
+              <div class="rp-rsvp__guest-row">
+                <label class="rp-rsvp__field rp-font-label">
+                  <span>Adults</span>
+                  <select id="rsvpAdults" class="rp-rsvp__select">
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                  </select>
+                </label>
+                <label class="rp-rsvp__field rp-font-label">
+                  <span>Children</span>
+                  <select id="rsvpChildren" class="rp-rsvp__select">
+                    <option value="0" selected>0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                  </select>
+                </label>
+              </div>
+
+              <!-- Accommodation Suggestions Toggle -->
+              <div class="rp-rsvp__field rp-font-label" style="margin-top: 0.2rem;">
+                <span>Do you need accommodation suggestions?</span>
+                <div class="rp-rsvp__attendance rp-rsvp__attendance--compact">
+                  <button type="button" class="rp-rsvp__attendance-btn" id="rsvpAccYes">Yes</button>
+                  <button type="button" class="rp-rsvp__attendance-btn is-active" id="rsvpAccNo">No</button>
                 </div>
               </div>
             </div>
 
-            <!-- Adults & Children -->
-            <div class="rp-rsvp__guest-row">
-              <label class="rp-rsvp__field rp-font-label">
-                <span>ADULTS</span>
-                <select id="rsvpAdults" class="rp-rsvp__select">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6+">6+</option>
-                </select>
-              </label>
-              <label class="rp-rsvp__field rp-font-label">
-                <span>CHILDREN</span>
-                <select id="rsvpChildren" class="rp-rsvp__select">
-                  <option value="0">0</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4+">4+</option>
-                </select>
-              </label>
+            <!-- Message Field -->
+            <label class="rp-rsvp__field rp-font-label">
+              <span>Message</span>
+              <textarea id="rsvpMessage" class="rp-rsvp__textarea" rows="4" placeholder="Blessings for the couple"></textarea>
+            </label>
+
+            <!-- Actions -->
+            <div class="rp-rsvp__actions">
+              <button type="submit" id="rsvpSubmitBtn" class="rp-rsvp__submit rp-font-label" disabled>Send RSVP</button>
+              <button type="button" id="rsvpWhatsappBtn" class="rp-rsvp__whatsapp rp-font-label">Share on WhatsApp</button>
             </div>
-          </div>
-
-          <!-- Message -->
-          <label class="rp-rsvp__field rp-font-label">
-            <span>MESSAGE</span>
-            <textarea id="rsvpMessage" class="rp-rsvp__textarea" placeholder="Blessings for the couple"></textarea>
-          </label>
-
-          <!-- Buttons -->
-          <div class="rp-rsvp__actions">
-            <button type="button" id="sendRsvpBtn" class="rp-rsvp__submit rp-font-label">SEND RSVP</button>
-            <button type="button" id="shareWhatsappBtn" class="rp-rsvp__whatsapp rp-font-label">SHARE ON WHATSAPP</button>
-          </div>
+          </form>
         </div>
       </div>
     </section>
@@ -953,10 +946,7 @@
           We can’t wait to celebrate this auspicious milestone with you.
         </p>
       </div>
-      <a href="https://myshaadhilink.in" target="_blank" rel="noopener noreferrer" class="rp-footer__brand">
-        <span class="rp-footer__brand-text">This invitation is made by</span>
-        <span class="rp-footer__brand-name">MyShaadhiLink</span>
-      </a>
+      
     </footer>
 
   </div>

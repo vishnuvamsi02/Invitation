@@ -285,19 +285,6 @@ document.addEventListener('DOMContentLoaded', () => {
       y: 40, opacity: 0, scale: 0.96, duration: 0.9, ease: 'power3.out'
     });
 
-    // Photographer Section (Yellow Pixels)
-    if (document.querySelector('.rp-photog')) {
-      const photogTl = gsap.timeline({
-        scrollTrigger: { trigger: '.rp-photog', start: 'top 82%' },
-        defaults: { ease: 'power3.out' }
-      });
-      photogTl
-        .from('.rp-photog__header', { y: 35, opacity: 0, duration: 0.7 })
-        .from('.rp-photog__card', { y: 40, opacity: 0, scale: 0.96, duration: 0.75 }, '-=0.35')
-        .from('.rp-photog__logo', { scale: 0.4, opacity: 0, duration: 0.55, ease: 'back.out(1.8)' }, '-=0.4')
-        .from('.rp-photog__name, .rp-photog__tagline, .rp-photog__desc, .rp-photog__btn', { y: 16, opacity: 0, duration: 0.5, stagger: 0.1 }, '-=0.25');
-    }
-
     // Venue & Travel Section
     gsap.from('.rp-venue__title, .rp-venue__subtitle', {
       scrollTrigger: { trigger: '.rp-venue', start: 'top 85%' },
@@ -456,23 +443,60 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'ArrowRight' && lightboxNext) lightboxNext.click();
   });
 
-  // --- 8. RSVP & Share Interactions ---
-  const attendanceBtns = document.querySelectorAll('.rp-rsvp__attendance-btn');
-  const rsvpDetails = document.getElementById('rsvpDetails');
-  let attendingStatus = 'accept';
+  // --- 8. RSVP & Share Interactions (Exact Royal Premium Component Logic) ---
+  const rsvpForm = document.getElementById('rsvpForm');
+  const rsvpSuccess = document.getElementById('rsvpSuccess');
+  const rsvpName = document.getElementById('rsvpName');
+  const rsvpSubmitBtn = document.getElementById('rsvpSubmitBtn');
+  const rsvpBtnAccept = document.getElementById('rsvpBtnAccept');
+  const rsvpBtnDecline = document.getElementById('rsvpBtnDecline');
+  const rsvpAttendingFields = document.getElementById('rsvpAttendingFields');
+  const rsvpAccYes = document.getElementById('rsvpAccYes');
+  const rsvpAccNo = document.getElementById('rsvpAccNo');
+  const rsvpWhatsappBtn = document.getElementById('rsvpWhatsappBtn');
+  const successShareWaBtn = document.getElementById('successShareWaBtn');
 
-  attendanceBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      attendanceBtns.forEach(b => b.classList.remove('is-active'));
-      btn.classList.add('is-active');
-      attendingStatus = btn.dataset.status;
-      if (attendingStatus === 'accept') {
-        if (rsvpDetails) rsvpDetails.style.display = 'block';
-      } else {
-        if (rsvpDetails) rsvpDetails.style.display = 'none';
-      }
+  let isAttending = true;
+  let needAccommodation = false;
+
+  // Real-time validation for submit button
+  if (rsvpName && rsvpSubmitBtn) {
+    rsvpName.addEventListener('input', () => {
+      rsvpSubmitBtn.disabled = !rsvpName.value.trim();
     });
-  });
+  }
+
+  // Attendance Toggle
+  if (rsvpBtnAccept && rsvpBtnDecline) {
+    rsvpBtnAccept.addEventListener('click', () => {
+      isAttending = true;
+      rsvpBtnAccept.classList.add('is-active');
+      rsvpBtnDecline.classList.remove('is-active');
+      if (rsvpAttendingFields) rsvpAttendingFields.style.display = 'block';
+    });
+
+    rsvpBtnDecline.addEventListener('click', () => {
+      isAttending = false;
+      rsvpBtnDecline.classList.add('is-active');
+      rsvpBtnAccept.classList.remove('is-active');
+      if (rsvpAttendingFields) rsvpAttendingFields.style.display = 'none';
+    });
+  }
+
+  // Accommodation Toggle
+  if (rsvpAccYes && rsvpAccNo) {
+    rsvpAccYes.addEventListener('click', () => {
+      needAccommodation = true;
+      rsvpAccYes.classList.add('is-active');
+      rsvpAccNo.classList.remove('is-active');
+    });
+
+    rsvpAccNo.addEventListener('click', () => {
+      needAccommodation = false;
+      rsvpAccNo.classList.add('is-active');
+      rsvpAccYes.classList.remove('is-active');
+    });
+  }
 
   // Event item checkboxes toggle
   document.querySelectorAll('.rp-rsvp__event-item').forEach(item => {
@@ -489,63 +513,93 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Build formatted WhatsApp RSVP text
   function buildRsvpMessage() {
-    const guestName = document.getElementById('rsvpName').value.trim() || 'Guest';
-    const adults = document.getElementById('rsvpAdults') ? document.getElementById('rsvpAdults').value : '1';
-    const children = document.getElementById('rsvpChildren') ? document.getElementById('rsvpChildren').value : '0';
-    const message = document.getElementById('rsvpMessage').value.trim();
+    const guestName = rsvpName ? rsvpName.value.trim() : 'Guest';
+    const adultsEl = document.getElementById('rsvpAdults');
+    const childrenEl = document.getElementById('rsvpChildren');
+    const messageEl = document.getElementById('rsvpMessage');
+
+    const adults = adultsEl ? adultsEl.value : '1';
+    const children = childrenEl ? childrenEl.value : '0';
+    const message = messageEl ? messageEl.value.trim() : '';
 
     const selectedEvents = [];
     document.querySelectorAll('.rp-rsvp__event-item.is-selected .rp-rsvp__event-name').forEach(el => {
       selectedEvents.push(el.textContent.trim());
     });
 
-    let text = `*RSVP for Wedding of Bhanu Prakash & Vijaya Lakshmi*\n`;
+    let text = '*Wedding RSVP: Bhanu Prakash & Vijaya Lakshmi*\n';
     text += `*Name:* ${guestName}\n`;
-    text += `*Status:* ${attendingStatus === 'accept' ? 'Joyfully Accept' : 'Regretfully Decline'}\n`;
-    if (attendingStatus === 'accept') {
+    text += `*Status:* ${isAttending ? 'Joyfully Accept' : 'Regretfully Decline'}\n`;
+    if (isAttending) {
       text += `*Adults:* ${adults} | *Children:* ${children}\n`;
       if (selectedEvents.length > 0) {
         text += `*Events Attending:*\n- ${selectedEvents.join('\n- ')}\n`;
       }
+      text += `*Accommodation Suggestions:* ${needAccommodation ? 'Yes' : 'No'}\n`;
     }
     if (message) {
-      text += `*Message:* ${message}\n`;
+      text += `*Blessings / Message:* ${message}\n`;
     }
     return text;
   }
 
-  const sendRsvpBtn = document.getElementById('sendRsvpBtn');
-  if (sendRsvpBtn) {
-    sendRsvpBtn.addEventListener('click', () => {
-      const name = document.getElementById('rsvpName').value.trim();
-      if (!name) {
-        alert('Please enter your name.');
-        document.getElementById('rsvpName').focus();
+  // Handle RSVP Form Submission
+  if (rsvpForm) {
+    rsvpForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const guestName = rsvpName ? rsvpName.value.trim() : '';
+      if (!guestName) {
+        rsvpName.focus();
         return;
       }
-      const text = buildRsvpMessage();
-      const whatsappUrl = `https://wa.me/919553143929?text=${encodeURIComponent(text)}`;
-      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+
+      if (rsvpSubmitBtn) {
+        rsvpSubmitBtn.textContent = 'Sending...';
+        rsvpSubmitBtn.disabled = true;
+      }
+
+      setTimeout(() => {
+        // Confetti celebration burst
+        if (typeof confetti === 'function') {
+          confetti({
+            particleCount: 120,
+            spread: 70,
+            origin: { y: 0.7 },
+            colors: ['#f9d488', '#f3acbf', '#fef2d7', '#ce8f34', '#f2c9d1']
+          });
+        }
+
+        // Show Success card
+        const card = document.querySelector('.rp-rsvp__card');
+        if (card) card.classList.add('is-submitted');
+
+        // Send RSVP details via WhatsApp
+        const text = buildRsvpMessage();
+        const whatsappUrl = `https://wa.me/919553143929?text=${encodeURIComponent(text)}`;
+        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      }, 550);
     });
   }
 
-  const shareWhatsappBtn = document.getElementById('shareWhatsappBtn');
-  if (shareWhatsappBtn) {
-    shareWhatsappBtn.addEventListener('click', () => {
-      const shareText = `You are warmly invited to celebrate the wedding of Bhanu Prakash & Vijaya Lakshmi on Thursday, 27th August 2026.\n\nView personal invitation: ${window.location.href}`;
-      const url = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
-      window.open(url, '_blank', 'noopener,noreferrer');
-    });
+  // Share Invitation on WhatsApp buttons
+  function shareInvitationOnWa() {
+    const shareText = `You are warmly invited to celebrate the wedding of Bhanu Prakash & Vijaya Lakshmi on Thursday, 27th August 2026 at Sri Pulapartli Sampradayam Function Hall, Pasaladeevi.\n\nView personal invitation: ${window.location.href}`;
+    window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank', 'noopener,noreferrer');
+  }
+
+  if (rsvpWhatsappBtn) {
+    rsvpWhatsappBtn.addEventListener('click', shareInvitationOnWa);
+  }
+  if (successShareWaBtn) {
+    successShareWaBtn.addEventListener('click', shareInvitationOnWa);
   }
 
   // --- 9. Spread The Joy / Share This Invitation ---
   const shareWaBtn = document.getElementById('shareInviteWaBtn');
   if (shareWaBtn) {
-    shareWaBtn.addEventListener('click', () => {
-      const msg = `You are warmly invited to celebrate the wedding of Bhanu Prakash & Vijaya Lakshmi on Thursday, 27th August 2026 at Sri Pulapartli Sampradayam Function Hall, Pasaladeevi, West Godavari District.\n\nView personal invitation:\n${window.location.href}`;
-      window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
-    });
+    shareWaBtn.addEventListener('click', shareInvitationOnWa);
   }
 
   const shareCalBtn = document.getElementById('shareInviteCalBtn');
@@ -590,11 +644,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.removeChild(input);
       }
       const label = shareCopyBtn.querySelector('.rp-share__label');
-      const originalText = label.textContent;
-      label.textContent = 'Copied!';
-      setTimeout(() => {
-        label.textContent = originalText;
-      }, 2000);
+      if (label) {
+        const originalText = label.textContent;
+        label.textContent = 'Copied!';
+        setTimeout(() => {
+          label.textContent = originalText;
+        }, 2000);
+      }
     });
   }
 });

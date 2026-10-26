@@ -851,3 +851,294 @@
     font-size: 0.9rem !important;
   }
 }
+
+
+/* ========================================================
+   EXACT ROYAL PREMIUM RSVP FORM STYLES (MATCHING ORIGINAL)
+   ======================================================== */
+.rp-rsvp__card {
+  border-radius: var(--rp-radius-lg, 24px) !important;
+  border: 1px solid rgba(245, 217, 157, 0.28) !important;
+  background: linear-gradient(150deg, rgba(78, 30, 70, 0.76), rgba(26, 13, 40, 0.94)) !important;
+  padding: clamp(1.2rem, 3.5vw, 2.2rem) !important;
+  box-shadow: 0 20px 48px rgba(7, 4, 14, 0.6) !important;
+  max-width: 680px !important;
+  margin: 1.6rem auto 0 !important;
+  box-sizing: border-box !important;
+}
+
+.rp-rsvp__form {
+  display: grid !important;
+  gap: 0.85rem !important;
+}
+
+.rp-rsvp__attendance {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0.6rem !important;
+  margin-bottom: 0.4rem !important;
+}
+
+.rp-rsvp__attendance--compact {
+  margin-top: 0.4rem !important;
+}
+
+.rp-rsvp__attendance--compact .rp-rsvp__attendance-btn {
+  padding: 0.55rem !important;
+  font-size: 0.74rem !important;
+}
+
+.rp-rsvp__attendance-btn {
+  border: 1px solid rgba(245, 217, 157, 0.25) !important;
+  border-radius: 12px !important;
+  background: rgba(18, 10, 30, 0.72) !important;
+  color: rgba(247, 236, 213, 0.85) !important;
+  padding: 0.85rem 0.6rem !important;
+  cursor: pointer !important;
+  font-family: var(--rp-font-manrope, sans-serif) !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  transition: all 0.25s ease !important;
+  text-align: center !important;
+}
+
+.rp-rsvp__attendance-btn:hover {
+  border-color: rgba(245, 217, 157, 0.6) !important;
+  background: rgba(156, 88, 45, 0.25) !important;
+}
+
+.rp-rsvp__attendance-btn.is-active {
+  border-color: #f5d99d !important;
+  background: #613434 !important;
+  color: #fff4da !important;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3) !important;
+}
+
+.rp-rsvp__field {
+  display: grid !important;
+  gap: 0.42rem !important;
+  color: #f5d99d !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  text-align: left !important;
+}
+
+.rp-rsvp__input, .rp-rsvp__select, .rp-rsvp__textarea {
+  font-family: var(--rp-font-manrope, sans-serif) !important;
+  font-size: 0.92rem !important;
+  color: #fff4da !important;
+  background: rgba(15, 9, 24, 0.88) !important;
+  border: 1px solid rgba(245, 217, 157, 0.22) !important;
+  border-radius: 10px !important;
+  padding: 0.75rem 0.85rem !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  transition: border-color 0.2s ease !important;
+}
+
+.rp-rsvp__input:focus, .rp-rsvp__select:focus, .rp-rsvp__textarea:focus {
+  outline: none !important;
+  border-color: #d9a34b !important;
+  box-shadow: 0 0 0 2px rgba(217, 163, 75, 0.2) !important;
+}
+
+.rp-rsvp__events {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  margin-top: 4px !important;
+  width: 100% !important;
+}
+
+.rp-rsvp__event-item {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+  padding: 8px 12px !important;
+  border: 1px solid rgba(249, 212, 136, 0.25) !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  transition: border-color 0.2s ease, background 0.2s ease !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  box-sizing: border-box !important;
+}
+
+.rp-rsvp__event-item:hover {
+  border-color: rgba(249, 212, 136, 0.5) !important;
+  background: rgba(249, 212, 136, 0.06) !important;
+}
+
+.rp-rsvp__event-item.is-selected {
+  border-color: rgba(249, 212, 136, 0.8) !important;
+  background: rgba(249, 212, 136, 0.1) !important;
+}
+
+.rp-rsvp__event-check {
+  display: none !important;
+}
+
+.rp-rsvp__event-tick {
+  flex-shrink: 0 !important;
+  width: 16px !important;
+  height: 16px !important;
+  border: 1.5px solid rgba(249, 212, 136, 0.45) !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s ease !important;
+}
+
+.rp-rsvp__event-item.is-selected .rp-rsvp__event-tick {
+  border-color: #f9d488 !important;
+  background: #f9d488 !important;
+}
+
+.rp-rsvp__event-name {
+  flex: 1 !important;
+  font-size: 0.76rem !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  font-weight: 600 !important;
+}
+
+.rp-rsvp__event-date {
+  font-size: 0.68rem !important;
+  color: rgba(255, 255, 255, 0.45) !important;
+  letter-spacing: 0.03em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+}
+
+@media (max-width: 600px) {
+  .rp-rsvp__event-item {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
+  }
+  .rp-rsvp__event-date {
+    padding-left: 26px !important;
+    font-size: 0.64rem !important;
+  }
+}
+
+.rp-rsvp__guest-row {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 14px !important;
+  width: 100% !important;
+}
+
+.rp-rsvp__actions {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 0.85rem !important;
+  margin-top: 0.6rem !important;
+}
+
+@media (max-width: 580px) {
+  .rp-rsvp__actions {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.rp-rsvp__submit {
+  border: 1px solid rgba(245, 217, 157, 0.3) !important;
+  border-radius: 999px !important;
+  padding: 0.9rem 1.4rem !important;
+  background: linear-gradient(120deg, #7c3f3f, #944d4d) !important;
+  color: #fff4da !important;
+  cursor: pointer !important;
+  font-family: var(--rp-font-manrope, sans-serif) !important;
+  font-size: 0.84rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  transition: all 0.25s ease !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3) !important;
+  text-align: center !important;
+}
+
+.rp-rsvp__submit:hover:not(:disabled) {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 28px rgba(124, 63, 63, 0.45) !important;
+}
+
+.rp-rsvp__submit:disabled {
+  opacity: 0.45 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+.rp-rsvp__whatsapp {
+  border: none !important;
+  border-radius: 999px !important;
+  padding: 0.9rem 1.4rem !important;
+  background: linear-gradient(135deg, #25D366, #128c3e) !important;
+  color: #ffffff !important;
+  cursor: pointer !important;
+  font-family: var(--rp-font-manrope, sans-serif) !important;
+  font-size: 0.84rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  transition: all 0.25s ease !important;
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.28) !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.rp-rsvp__whatsapp:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 28px rgba(37, 211, 102, 0.45) !important;
+}
+
+.rp-rsvp__success { text-align: center !important; padding: 1.8rem 1rem !important; display: none !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 0.85rem !important;
+}
+
+.rp-rsvp__success-title {
+  font-size: 1.6rem !important;
+  color: #fff4da !important;
+  margin: 0 !important;
+}
+
+
+/* RSVP Success State Toggle */
+.rp-rsvp__success {
+  display: none;
+  text-align: center;
+  padding: 1.8rem 1rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+}
+.rp-rsvp__card.is-submitted .rp-rsvp__form {
+  display: none !important;
+}
+.rp-rsvp__card.is-submitted .rp-rsvp__success { display: flex !important; }
+
+/* Definitive RSVP Success toggle */
+.rp-rsvp__success {
+  display: none !important;
+}
+.rp-rsvp__card.is-submitted .rp-rsvp__form {
+  display: none !important;
+}
+.rp-rsvp__card.is-submitted .rp-rsvp__success {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  gap: 0.85rem !important;
+}
