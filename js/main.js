@@ -273,16 +273,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Video Section
-    gsap.from('.rp-video__title, .rp-video__subtitle', {
-      scrollTrigger: { trigger: '.rp-video', start: 'top 85%' },
-      y: 28, opacity: 0, stagger: 0.12, duration: 0.8, ease: 'power3.out'
-    });
-    gsap.from('.rp-video__player', {
-      scrollTrigger: { trigger: '.rp-video__player', start: 'top 90%' },
-      y: 40, opacity: 0, scale: 0.96, duration: 0.9, ease: 'power3.out'
-    });
-
     // Venue & Travel Section
     gsap.from('.rp-venue__title, .rp-venue__subtitle', {
       scrollTrigger: { trigger: '.rp-venue', start: 'top 85%' },
@@ -294,12 +284,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     gsap.from('.rp-venue__card', {
       scrollTrigger: { trigger: '.rp-venue__card', start: 'top 90%' },
-      y: 40, opacity: 0, scale: 0.96, duration: 0.9, ease: 'power3.out'
-    });
-
-    // Watch Live Stream
-    gsap.from('.rp-live__card', {
-      scrollTrigger: { trigger: '.rp-live', start: 'top 86%' },
       y: 40, opacity: 0, scale: 0.96, duration: 0.9, ease: 'power3.out'
     });
 
@@ -331,8 +315,8 @@ document.addEventListener('DOMContentLoaded', () => {
       scaleX: 0, opacity: 0, duration: 0.9, delay: 0.18, ease: 'power2.out'
     });
     gsap.from('.rp-share__btn', {
-      scrollTrigger: { trigger: '.rp-share', start: 'top 84%' },
-      y: 30, opacity: 0, duration: 0.7, stagger: 0.1, delay: 0.25, ease: 'power3.out'
+      scrollTrigger: { trigger: '.rp-share', start: 'top 95%' },
+      y: 16, duration: 0.6, stagger: 0.08, ease: 'power2.out'
     });
 
     // Footer

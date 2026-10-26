@@ -2760,4 +2760,53 @@
     font-size: 1.05rem;
     color: rgba(254, 242, 217, 0.88);
   }
+
+  /* More Section / Contact Queries */
+  .rp-footer__contact {
+    margin: 2.2rem auto 1.2rem;
+    padding: 1.25rem 1.4rem;
+    border-radius: 18px;
+    background: rgba(30, 14, 38, 0.85);
+    border: 1px solid rgba(245, 217, 157, 0.3);
+    max-width: 360px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+  .rp-footer__contact-label {
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    color: var(--rp-gold);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .rp-footer__contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+  .rp-footer__contact-list li {
+    font-size: 0.88rem;
+    color: #f7ecd5;
+  }
+  .rp-footer__contact-list a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .rp-footer__contact-list a:hover {
+    color: var(--rp-gold-soft);
+  }
+
+  /* Section Spacing on Mobile to Match exact 540x1200 / 390x844 viewports */
+  .rp-section {
+    padding-top: 3.8rem;
+    padding-bottom: 3.8rem;
+  }
+  .rp-rsvp {
+    padding-top: 4rem;
+    padding-bottom: 4.5rem;
+  }
+  .rp-share {
+    padding-top: 4.5rem;
+    padding-bottom: 4rem;
+  }
 }
