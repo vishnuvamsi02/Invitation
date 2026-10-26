@@ -443,58 +443,50 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'ArrowRight' && lightboxNext) lightboxNext.click();
   });
 
-  // --- 8. RSVP & Share Interactions (Exact Royal Premium Component Logic) ---
+  // --- 8. RSVP & Share Interactions (Exact Royal Premium Replicate) ---
   const rsvpForm = document.getElementById('rsvpForm');
   const rsvpSuccess = document.getElementById('rsvpSuccess');
   const rsvpName = document.getElementById('rsvpName');
   const rsvpSubmitBtn = document.getElementById('rsvpSubmitBtn');
   const rsvpBtnAccept = document.getElementById('rsvpBtnAccept');
   const rsvpBtnDecline = document.getElementById('rsvpBtnDecline');
-  const rsvpAttendingFields = document.getElementById('rsvpAttendingFields');
-  const rsvpAccYes = document.getElementById('rsvpAccYes');
-  const rsvpAccNo = document.getElementById('rsvpAccNo');
+  const rsvpAcceptFields = document.getElementById('rsvpAcceptFields');
+  const rsvpAdults = document.getElementById('rsvpAdults');
+  const rsvpChildren = document.getElementById('rsvpChildren');
+  const rsvpMessage = document.getElementById('rsvpMessage');
   const rsvpWhatsappBtn = document.getElementById('rsvpWhatsappBtn');
-  const successShareWaBtn = document.getElementById('successShareWaBtn');
+  const successShareWhatsappBtn = document.getElementById('successShareWhatsappBtn');
 
-  let isAttending = true;
-  let needAccommodation = false;
+  let attendingState = null; // null initially, true for accept, false for decline
+  let selectedEvents = [];
 
-  // Real-time validation for submit button
-  if (rsvpName && rsvpSubmitBtn) {
-    rsvpName.addEventListener('input', () => {
-      rsvpSubmitBtn.disabled = !rsvpName.value.trim();
-    });
+  function checkFormValidity() {
+    const nameValid = rsvpName && rsvpName.value.trim().length > 0;
+    const attendingValid = attendingState !== null;
+    if (rsvpSubmitBtn) {
+      rsvpSubmitBtn.disabled = !(nameValid && attendingValid);
+    }
   }
 
-  // Attendance Toggle
+  if (rsvpName) {
+    rsvpName.addEventListener('input', checkFormValidity);
+  }
+
   if (rsvpBtnAccept && rsvpBtnDecline) {
     rsvpBtnAccept.addEventListener('click', () => {
-      isAttending = true;
+      attendingState = true;
       rsvpBtnAccept.classList.add('is-active');
       rsvpBtnDecline.classList.remove('is-active');
-      if (rsvpAttendingFields) rsvpAttendingFields.style.display = 'block';
+      if (rsvpAcceptFields) rsvpAcceptFields.style.display = 'block';
+      checkFormValidity();
     });
 
     rsvpBtnDecline.addEventListener('click', () => {
-      isAttending = false;
+      attendingState = false;
       rsvpBtnDecline.classList.add('is-active');
       rsvpBtnAccept.classList.remove('is-active');
-      if (rsvpAttendingFields) rsvpAttendingFields.style.display = 'none';
-    });
-  }
-
-  // Accommodation Toggle
-  if (rsvpAccYes && rsvpAccNo) {
-    rsvpAccYes.addEventListener('click', () => {
-      needAccommodation = true;
-      rsvpAccYes.classList.add('is-active');
-      rsvpAccNo.classList.remove('is-active');
-    });
-
-    rsvpAccNo.addEventListener('click', () => {
-      needAccommodation = false;
-      rsvpAccNo.classList.add('is-active');
-      rsvpAccYes.classList.remove('is-active');
+      if (rsvpAcceptFields) rsvpAcceptFields.style.display = 'none';
+      checkFormValidity();
     });
   }
 
@@ -505,53 +497,24 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target !== checkbox) {
         checkbox.checked = !checkbox.checked;
       }
+      const eventName = checkbox.dataset.name || item.querySelector('.rp-rsvp__event-name').textContent.trim();
       if (checkbox.checked) {
         item.classList.add('is-selected');
+        if (!selectedEvents.includes(eventName)) selectedEvents.push(eventName);
       } else {
         item.classList.remove('is-selected');
+        selectedEvents = selectedEvents.filter(ev => ev !== eventName);
       }
     });
   });
 
-  // Build formatted WhatsApp RSVP text
-  function buildRsvpMessage() {
-    const guestName = rsvpName ? rsvpName.value.trim() : 'Guest';
-    const adultsEl = document.getElementById('rsvpAdults');
-    const childrenEl = document.getElementById('rsvpChildren');
-    const messageEl = document.getElementById('rsvpMessage');
-
-    const adults = adultsEl ? adultsEl.value : '1';
-    const children = childrenEl ? childrenEl.value : '0';
-    const message = messageEl ? messageEl.value.trim() : '';
-
-    const selectedEvents = [];
-    document.querySelectorAll('.rp-rsvp__event-item.is-selected .rp-rsvp__event-name').forEach(el => {
-      selectedEvents.push(el.textContent.trim());
-    });
-
-    let text = '*Wedding RSVP: Bhanu Prakash & Vijaya Lakshmi*\n';
-    text += `*Name:* ${guestName}\n`;
-    text += `*Status:* ${isAttending ? 'Joyfully Accept' : 'Regretfully Decline'}\n`;
-    if (isAttending) {
-      text += `*Adults:* ${adults} | *Children:* ${children}\n`;
-      if (selectedEvents.length > 0) {
-        text += `*Events Attending:*\n- ${selectedEvents.join('\n- ')}\n`;
-      }
-      text += `*Accommodation Suggestions:* ${needAccommodation ? 'Yes' : 'No'}\n`;
-    }
-    if (message) {
-      text += `*Blessings / Message:* ${message}\n`;
-    }
-    return text;
-  }
-
-  // Handle RSVP Form Submission
+  // Submit Handler
   if (rsvpForm) {
-    rsvpForm.addEventListener('submit', (e) => {
+    rsvpForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const guestName = rsvpName ? rsvpName.value.trim() : '';
-      if (!guestName) {
-        rsvpName.focus();
+      if (!guestName || attendingState === null) {
+        checkFormValidity();
         return;
       }
 
@@ -560,26 +523,42 @@ document.addEventListener('DOMContentLoaded', () => {
         rsvpSubmitBtn.disabled = true;
       }
 
-      setTimeout(() => {
-        // Confetti celebration burst
-        if (typeof confetti === 'function') {
-          confetti({
-            particleCount: 120,
-            spread: 70,
-            origin: { y: 0.7 },
-            colors: ['#f9d488', '#f3acbf', '#fef2d7', '#ce8f34', '#f2c9d1']
-          });
-        }
+      // Payload matching the original API
+      const payload = {
+        invitationSlug: 'bhanu-prakash-vijaya-lakshmi-wedding-invitation',
+        rsvpEmail: 'Vijayalakshmiinti19@gmail.com',
+        rsvpSubject: 'Vijayalakshmiinti19@gmail.com',
+        name: guestName,
+        attending: attendingState,
+        adults: rsvpAdults ? rsvpAdults.value : '1',
+        kids: rsvpChildren ? rsvpChildren.value : '0',
+        events: attendingState ? (selectedEvents.length > 0 ? selectedEvents : ['Wedding Ceremony']) : undefined,
+        message: rsvpMessage ? rsvpMessage.value.trim() : undefined
+      };
 
-        // Show Success card
-        const card = document.querySelector('.rp-rsvp__card');
-        if (card) card.classList.add('is-submitted');
+      try {
+        await fetch('https://myshaadhilink.in/api/rsvp/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).catch(() => {});
+      } catch (err) {}
 
-        // Send RSVP details via WhatsApp
-        const text = buildRsvpMessage();
-        const whatsappUrl = `https://wa.me/919553143929?text=${encodeURIComponent(text)}`;
-        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-      }, 550);
+      // Celebratory Confetti Burst (exact colors & origin from original site)
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 120,
+          spread: 70,
+          origin: { y: 0.7 },
+          colors: ['#f9d488', '#f3acbf', '#fef2d7', '#ce8f34', '#f2c9d1']
+        });
+      }
+
+      // Switch to exact Success State
+      rsvpForm.style.display = 'none';
+      if (rsvpSuccess) {
+        rsvpSuccess.style.display = 'flex';
+      }
     });
   }
 
@@ -592,8 +571,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (rsvpWhatsappBtn) {
     rsvpWhatsappBtn.addEventListener('click', shareInvitationOnWa);
   }
-  if (successShareWaBtn) {
-    successShareWaBtn.addEventListener('click', shareInvitationOnWa);
+  if (successShareWhatsappBtn) {
+    successShareWhatsappBtn.addEventListener('click', shareInvitationOnWa);
   }
 
   // --- 9. Spread The Joy / Share This Invitation ---

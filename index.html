@@ -16,348 +16,7 @@
 
   <!-- Compiled Stylesheet -->
   <link rel="stylesheet" href="css/style.css" />
-
-  <style>
-    /* Global & Responsive Reset */
-    html {
-      scroll-behavior: smooth;
-      -webkit-text-size-adjust: 100%;
-    }
-    body {
-      margin: 0;
-      padding: 0;
-      background: #12091f;
-      color: #f7ecd5;
-      font-family: var(--rp-font-manrope, 'Manrope', sans-serif);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* Falling Petals */
-    .rp-rain {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 100;
-      overflow: hidden;
-    }
-    .rp-rain__petal {
-      position: absolute;
-      top: -60px;
-      animation: rpFall linear infinite;
-    }
-    @keyframes rpFall {
-      0% { transform: translateY(0) rotate(0deg) scale(0.75); opacity: 0.8; }
-      80% { opacity: 0.7; }
-      100% { transform: translateY(115vh) rotate(360deg) scale(1); opacity: 0; }
-    }
-    .rp-rain__petal:nth-child(1) { left: 4%; animation-duration: 9s; animation-delay: 0s; }
-    .rp-rain__petal:nth-child(2) { left: 14%; animation-duration: 12s; animation-delay: 2s; }
-    .rp-rain__petal:nth-child(3) { left: 24%; animation-duration: 10s; animation-delay: 4s; }
-    .rp-rain__petal:nth-child(4) { left: 34%; animation-duration: 14s; animation-delay: 1s; }
-    .rp-rain__petal:nth-child(5) { left: 44%; animation-duration: 11s; animation-delay: 5s; }
-    .rp-rain__petal:nth-child(6) { left: 54%; animation-duration: 13s; animation-delay: 3s; }
-    .rp-rain__petal:nth-child(7) { left: 64%; animation-duration: 9.5s; animation-delay: 0.5s; }
-    .rp-rain__petal:nth-child(8) { left: 74%; animation-duration: 12.5s; animation-delay: 4.5s; }
-    .rp-rain__petal:nth-child(9) { left: 84%; animation-duration: 10.5s; animation-delay: 2.5s; }
-    .rp-rain__petal:nth-child(10) { left: 94%; animation-duration: 13.5s; animation-delay: 1.5s; }
-
-    /* Entry Screen */
-    .rp-entry {
-      position: fixed;
-      inset: 0;
-      z-index: 90;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #12091f;
-      overflow: hidden;
-    }
-    .rp-entry__photo {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.38;
-      filter: blur(1px);
-    }
-    .rp-entry__veil {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(18,9,31,0.6) 0%, rgba(18,9,31,0.92) 100%);
-    }
-    .rp-entry__glow {
-      position: absolute;
-      width: 480px;
-      height: 480px;
-      background: radial-gradient(circle, rgba(217, 163, 75, 0.28) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .rp-entry__flash {
-      position: absolute;
-      inset: 0;
-      background: #fff4da;
-      opacity: 0;
-      pointer-events: none;
-      z-index: 10;
-    }
-    .rp-entry__content {
-      position: relative;
-      z-index: 5;
-      text-align: center;
-      padding: 2rem 1.2rem;
-      max-width: 600px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .rp-entry__mandala {
-      animation: rpSpin 32s linear infinite;
-    }
-    @keyframes rpSpin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    .rp-entry__names {
-      font-size: clamp(2.6rem, 9vw, 4.6rem);
-      margin: 0.2rem 0;
-      color: #fff4da;
-      line-height: 1.1;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.6);
-    }
-    .rp-entry__amp {
-      font-size: 0.85em;
-      color: #d9a34b;
-      margin: 0 0.2rem;
-    }
-    .rp-entry__cta {
-      margin-top: 1rem;
-      padding: 0.95rem 2.8rem;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #d9a34b, #f5d99d);
-      color: #12091f;
-      border: 1px solid rgba(255, 244, 218, 0.4);
-      font-size: 0.82rem;
-      cursor: pointer;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      box-shadow: 0 10px 30px rgba(217, 163, 75, 0.38);
-      transition: all 0.3s ease;
-    }
-    .rp-entry__cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 40px rgba(217, 163, 75, 0.55);
-      background: linear-gradient(135deg, #f5d99d, #d9a34b);
-    }
-
-    /* Hero Section */
-    .rp-hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 5.5rem 1rem 4rem;
-      overflow: hidden;
-    }
-    .rp-hero__photo {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.3;
-      filter: brightness(0.85);
-    }
-    .rp-hero__bg {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(18,9,31,0.55) 0%, rgba(18,9,31,0.95) 100%);
-    }
-    .rp-hero__veil {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(18,9,31,0.3) 0%, rgba(18,9,31,0.98) 95%);
-    }
-    .rp-hero__mandala-bg {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      opacity: 0.08;
-      pointer-events: none;
-      animation: rpSpin 60s linear infinite;
-    }
-    .rp-hero__jali {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.06;
-      pointer-events: none;
-    }
-    .rp-hero__content {
-      position: relative;
-      z-index: 5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: 800px;
-    }
-    .rp-hero__emblem {
-      width: min(50vw, 178px);
-      height: auto;
-      margin: 0.4rem 0 0.6rem;
-      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.5));
-    }
-    .rp-hero__line {
-      width: 90px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, #d9a34b, transparent);
-      margin: 0.4rem 0;
-    }
-    .rp-hero__label {
-      color: #d9a34b;
-      margin: 0.2rem 0;
-    }
-    .rp-hero__names {
-      display: flex;
-      align-items: baseline;
-      justify-content: center;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin: 0.2rem 0;
-    }
-    .rp-hero__name {
-      font-size: clamp(2.4rem, 8vw, 4.8rem);
-      color: #fff4da;
-      margin: 0;
-      line-height: 1.1;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    }
-    .rp-hero__amp {
-      font-family: var(--rp-font-great-vibes, cursive);
-      font-size: clamp(1.8rem, 5vw, 3rem);
-      color: #d9a34b;
-    }
-    .rp-hero__chip {
-      display: inline-block;
-      padding: 0.45rem 1.4rem;
-      border-radius: 999px;
-      background: rgba(217, 163, 75, 0.12);
-      border: 1px solid rgba(217, 163, 75, 0.35);
-      color: #f5d99d;
-      margin: 0.75rem 0;
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-    }
-    .rp-hero__welcome {
-      max-width: 580px;
-      font-size: clamp(1.05rem, 3.5vw, 1.25rem);
-      line-height: 1.6;
-      margin: 0.6rem 0;
-      color: #f7ecd5;
-    }
-    .rp-hero__ornament {
-      max-width: 420px;
-      width: 85%;
-      height: auto;
-      margin: 0.8rem 0;
-    }
-    .rp-hero__scroll {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.2rem;
-      color: rgba(245, 217, 157, 0.7);
-      margin-top: 1.5rem;
-      animation: rpBounce 2s infinite ease-in-out;
-    }
-    @keyframes rpBounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(6px); }
-    }
-
-    /* Auspicious Blessing */
-    .rp-blessing {
-      text-align: center;
-      padding: 3.5rem 1.2rem;
-      background: rgba(44, 18, 50, 0.35);
-      position: relative;
-      border-top: 1px solid rgba(245, 217, 157, 0.15);
-      border-bottom: 1px solid rgba(245, 217, 157, 0.15);
-    }
-    .rp-blessing__text {
-      max-width: 720px;
-      margin: 0 auto 1.5rem;
-      font-size: clamp(1.15rem, 3vw, 1.45rem);
-      font-style: italic;
-      line-height: 1.7;
-      color: #fff4da;
-    }
-
-    /* Lightbox Modal */
-    .rp-lightbox {
-      position: fixed;
-      inset: 0;
-      z-index: 999;
-      background: rgba(8, 4, 14, 0.94);
-      backdrop-filter: blur(12px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .rp-lightbox.active {
-      opacity: 1;
-    }
-    .rp-lightbox__content {
-      position: relative;
-      max-width: 92vw;
-      max-height: 90vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .rp-lightbox__img {
-      max-width: 100%;
-      max-height: 85vh;
-      object-fit: contain;
-      border-radius: 12px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
-      border: 1px solid rgba(245, 217, 157, 0.3);
-    }
-    .rp-lightbox__btn {
-      position: absolute;
-      background: rgba(35, 17, 45, 0.75);
-      border: 1px solid rgba(245, 217, 157, 0.4);
-      color: #f5d99d;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 1.4rem;
-      transition: all 0.2s ease;
-      z-index: 1000;
-    }
-    .rp-lightbox__btn:hover {
-      background: #d9a34b;
-      color: #12091f;
-    }
-    .rp-lightbox__close { top: 20px; right: 20px; }
-    .rp-lightbox__prev { left: 16px; top: 50%; transform: translateY(-50%); }
-    .rp-lightbox__next { right: 16px; top: 50%; transform: translateY(-50%); }
-  </style>
-</head>
-<body class="royal-premium">
+</head><body class="royal-premium">
 
   <!-- 1. Floating Bokeh Light Particles -->
   <div class="rp-bokeh-container" aria-hidden="true">
@@ -451,9 +110,7 @@
           <article class="rp-couple__card">
             <div class="rp-couple__photo-wrap">
               <img src="assets/arch-gold.svg" alt="" width="220" height="272" class="rp-couple__arch" />
-              <div class="rp-couple__photo-frame">
-                <img src="assets/8c15cbb49c-2-1-scaled.jpeg" alt="Appikatla Bhanu Prakash" class="rp-couple__photo-zoom" />
-              </div>
+              <img src="assets/8c15cbb49c-2-1-scaled.jpeg" alt="Appikatla Bhanu Prakash" class="rp-couple__photo" />
             </div>
             <h3 class="rp-couple__name rp-font-heading">Appikatla Bhanu Prakash</h3>
             <p class="rp-couple__parents-label rp-font-label">Son of</p>
@@ -463,9 +120,7 @@
           <article class="rp-couple__card">
             <div class="rp-couple__photo-wrap">
               <img src="assets/arch-gold.svg" alt="" width="220" height="272" class="rp-couple__arch" />
-              <div class="rp-couple__photo-frame">
-                <img src="assets/d21c643437-1-1.jpeg" alt="Inti Vijaya Lakshmi" class="rp-couple__photo-zoom" />
-              </div>
+              <img src="assets/d21c643437-1-1.jpeg" alt="Inti Vijaya Lakshmi" class="rp-couple__photo" />
             </div>
             <h3 class="rp-couple__name rp-font-heading">Inti Vijaya Lakshmi</h3>
             <p class="rp-couple__parents-label rp-font-label">Daughter of</p>
@@ -750,91 +405,86 @@
       </div>
     </section>
 
-        <!-- Join The Celebration / RSVP Section -->
+            <!-- Join The Celebration / RSVP Section (Exact Replicate of Original) -->
     <section class="rp-rsvp rp-section" id="rsvpSection">
-      <img src="assets/jali-pattern.svg" alt="" class="rp-rsvp__jali" />
+      <img src="assets/jali-pattern.svg" alt="" width="1200" height="1200" class="rp-rsvp__jali" />
       <div class="rp-container">
         <p class="rp-rsvp__pretitle rp-font-label">Join The Celebration</p>
         <h2 class="rp-rsvp__title rp-font-heading">RSVP &amp; Share</h2>
         <p class="rp-rsvp__subtitle rp-font-serif">We would be honored to celebrate this day with you.</p>
-        
         <div class="rp-rsvp__card">
-          <!-- Success State (Hidden by default) -->
+          <!-- Success State (Shown after submission) -->
           <div class="rp-rsvp__success" id="rsvpSuccess" style="display: none;">
             <p class="rp-rsvp__success-title rp-font-heading">Thank you for your response</p>
-            <p class="rp-font-serif" style="color: rgba(247,236,213,0.85); font-size: 1.05rem;">Your blessings mean the world to us.</p>
-            <button type="button" class="rp-rsvp__whatsapp rp-font-label" id="successShareWaBtn" style="margin-top: 0.6rem;">Share Invitation on WhatsApp</button>
+            <p class="rp-font-serif">Your blessings mean the world to us.</p>
+            <button type="button" class="rp-rsvp__whatsapp rp-font-label" id="successShareWhatsappBtn">Share Invitation on WhatsApp</button>
           </div>
 
-          <!-- RSVP Form -->
+          <!-- Form State -->
           <form class="rp-rsvp__form" id="rsvpForm">
-            <!-- Attendance Segmented Buttons -->
             <div class="rp-rsvp__attendance">
-              <button type="button" class="rp-rsvp__attendance-btn is-active" id="rsvpBtnAccept">Joyfully Accept</button>
+              <button type="button" class="rp-rsvp__attendance-btn" id="rsvpBtnAccept">Joyfully Accept</button>
               <button type="button" class="rp-rsvp__attendance-btn" id="rsvpBtnDecline">Regretfully Decline</button>
             </div>
 
-            <!-- Name Field -->
             <label class="rp-rsvp__field rp-font-label">
-              <span>Your Name</span>
-              <input type="text" id="rsvpName" class="rp-rsvp__input" placeholder="Enter your name" required autocomplete="name" />
+              Your Name
+              <input class="rp-rsvp__input" id="rsvpName" placeholder="Enter your name" required="" value="" autocomplete="name" />
             </label>
 
-            <!-- Attending Fields Container -->
-            <div id="rsvpAttendingFields">
-              <!-- Events List -->
+            <!-- Dynamic Fields for Joyfully Accept -->
+            <div id="rsvpAcceptFields" style="display: none;">
               <div class="rp-rsvp__field rp-font-label">
-                <span>Events You'll Attend</span>
+                Events You'll Attend
                 <div class="rp-rsvp__events" id="rsvpEventsList">
-                  <label class="rp-rsvp__event-item is-selected">
-                    <input type="checkbox" class="rp-rsvp__event-check" checked data-name="Pelli Koduku Ceremony" />
+                  <label class="rp-rsvp__event-item">
+                    <input class="rp-rsvp__event-check" type="checkbox" data-name="Pelli Koduku Ceremony" />
                     <span class="rp-rsvp__event-tick" aria-hidden="true">
                       <svg width="8" height="6" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#1a0e00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                     </span>
-                    <span class="rp-rsvp__event-name">PELLI KODUKU CEREMONY</span>
-                    <span class="rp-rsvp__event-date">WEDNESDAY, 26TH AUGUST 2026</span>
+                    <span class="rp-rsvp__event-name">Pelli Koduku Ceremony</span>
+                    <span class="rp-rsvp__event-date">Wednesday, 26th August 2026</span>
                   </label>
-                  <label class="rp-rsvp__event-item is-selected">
-                    <input type="checkbox" class="rp-rsvp__event-check" checked data-name="Pelli Kuturu Ceremony" />
+                  <label class="rp-rsvp__event-item">
+                    <input class="rp-rsvp__event-check" type="checkbox" data-name="Pelli Kuturu Ceremony" />
                     <span class="rp-rsvp__event-tick" aria-hidden="true">
                       <svg width="8" height="6" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#1a0e00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                     </span>
-                    <span class="rp-rsvp__event-name">PELLI KUTURU CEREMONY</span>
-                    <span class="rp-rsvp__event-date">WEDNESDAY, 26TH AUGUST 2026</span>
+                    <span class="rp-rsvp__event-name">Pelli Kuturu Ceremony</span>
+                    <span class="rp-rsvp__event-date">Wednesday, 26th August 2026</span>
                   </label>
-                  <label class="rp-rsvp__event-item is-selected">
-                    <input type="checkbox" class="rp-rsvp__event-check" checked data-name="Haldi Ceremony" />
+                  <label class="rp-rsvp__event-item">
+                    <input class="rp-rsvp__event-check" type="checkbox" data-name="Haldi Ceremony" />
                     <span class="rp-rsvp__event-tick" aria-hidden="true">
                       <svg width="8" height="6" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#1a0e00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                     </span>
-                    <span class="rp-rsvp__event-name">HALDI CEREMONY</span>
-                    <span class="rp-rsvp__event-date">THURSDAY, 27TH AUGUST 2026</span>
+                    <span class="rp-rsvp__event-name">Haldi Ceremony</span>
+                    <span class="rp-rsvp__event-date">Thursday, 27th August 2026</span>
                   </label>
-                  <label class="rp-rsvp__event-item is-selected">
-                    <input type="checkbox" class="rp-rsvp__event-check" checked data-name="Wedding Ceremony" />
+                  <label class="rp-rsvp__event-item">
+                    <input class="rp-rsvp__event-check" type="checkbox" data-name="Wedding Ceremony" />
                     <span class="rp-rsvp__event-tick" aria-hidden="true">
                       <svg width="8" height="6" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#1a0e00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                     </span>
-                    <span class="rp-rsvp__event-name">WEDDING CEREMONY</span>
-                    <span class="rp-rsvp__event-date">THURSDAY, 27TH AUGUST 2026</span>
+                    <span class="rp-rsvp__event-name">Wedding Ceremony</span>
+                    <span class="rp-rsvp__event-date">Thursday, 27th August 2026</span>
                   </label>
-                  <label class="rp-rsvp__event-item is-selected">
-                    <input type="checkbox" class="rp-rsvp__event-check" checked data-name="Reception" />
+                  <label class="rp-rsvp__event-item">
+                    <input class="rp-rsvp__event-check" type="checkbox" data-name="Reception" />
                     <span class="rp-rsvp__event-tick" aria-hidden="true">
                       <svg width="8" height="6" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#1a0e00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                     </span>
-                    <span class="rp-rsvp__event-name">RECEPTION</span>
-                    <span class="rp-rsvp__event-date">SATURDAY, 29TH AUGUST 2026</span>
+                    <span class="rp-rsvp__event-name">Reception</span>
+                    <span class="rp-rsvp__event-date">Saturday, 29th August 2026</span>
                   </label>
                 </div>
               </div>
 
-              <!-- Guest Row (Adults / Children) -->
               <div class="rp-rsvp__guest-row">
                 <label class="rp-rsvp__field rp-font-label">
-                  <span>Adults</span>
-                  <select id="rsvpAdults" class="rp-rsvp__select">
-                    <option value="1" selected>1</option>
+                  Adults
+                  <select class="rp-rsvp__select" id="rsvpAdults">
+                    <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
@@ -845,9 +495,9 @@
                   </select>
                 </label>
                 <label class="rp-rsvp__field rp-font-label">
-                  <span>Children</span>
-                  <select id="rsvpChildren" class="rp-rsvp__select">
-                    <option value="0" selected>0</option>
+                  Children
+                  <select class="rp-rsvp__select" id="rsvpChildren">
+                    <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -857,27 +507,16 @@
                   </select>
                 </label>
               </div>
-
-              <!-- Accommodation Suggestions Toggle -->
-              <div class="rp-rsvp__field rp-font-label" style="margin-top: 0.2rem;">
-                <span>Do you need accommodation suggestions?</span>
-                <div class="rp-rsvp__attendance rp-rsvp__attendance--compact">
-                  <button type="button" class="rp-rsvp__attendance-btn" id="rsvpAccYes">Yes</button>
-                  <button type="button" class="rp-rsvp__attendance-btn is-active" id="rsvpAccNo">No</button>
-                </div>
-              </div>
             </div>
 
-            <!-- Message Field -->
             <label class="rp-rsvp__field rp-font-label">
-              <span>Message</span>
-              <textarea id="rsvpMessage" class="rp-rsvp__textarea" rows="4" placeholder="Blessings for the couple"></textarea>
+              Message
+              <textarea class="rp-rsvp__textarea" id="rsvpMessage" rows="4" placeholder="Blessings for the couple"></textarea>
             </label>
 
-            <!-- Actions -->
             <div class="rp-rsvp__actions">
-              <button type="submit" id="rsvpSubmitBtn" class="rp-rsvp__submit rp-font-label" disabled>Send RSVP</button>
-              <button type="button" id="rsvpWhatsappBtn" class="rp-rsvp__whatsapp rp-font-label">Share on WhatsApp</button>
+              <button type="submit" class="rp-rsvp__submit rp-font-label" id="rsvpSubmitBtn" disabled="">Send RSVP</button>
+              <button type="button" class="rp-rsvp__whatsapp rp-font-label" id="rsvpWhatsappBtn">Share on WhatsApp</button>
             </div>
           </form>
         </div>
