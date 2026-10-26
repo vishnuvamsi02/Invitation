@@ -1,0 +1,12 @@
+# HTTrack Cache & Logs
+hts-cache/
+hts-log.txt
+*.whtt
+backblue.gif
+fade.gif
+myshaadhilink.in/
+p7fosjg9fjbplnvq.public.blob.vercel-storage.com/
+
+# OS Files
+.DS_Store
+Thumbs.db

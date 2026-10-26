@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <title>Bhanu Prakash &amp; Vijaya Lakshmi Wedding Invitation | MyShaadhi Link</title>
+  <meta name="description" content="Celebrate the wedding of Bhanu Prakash &amp; Vijaya Lakshmi on 27th August 2026 at Sri Pulapartli Sampradayam Function Hall, Pasaladeevi, West Godavari District." />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="assets/bpvl-logo.webp" type="image/webp" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Compiled Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* Global & Responsive Reset */
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: #12091f;
+      color: #f7ecd5;
+      font-family: var(--rp-font-manrope, 'Manrope', sans-serif);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Falling Petals */
+    .rp-rain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+      overflow: hidden;
+    }
+    .rp-rain__petal {
+      position: absolute;
+      top: -60px;
+      animation: rpFall linear infinite;
+    }
+    @keyframes rpFall {
+      0% { transform: translateY(0) rotate(0deg) scale(0.75); opacity: 0.8; }
+      80% { opacity: 0.7; }
+      100% { transform: translateY(115vh) rotate(360deg) scale(1); opacity: 0; }
+    }
+    .rp-rain__petal:nth-child(1) { left: 4%; animation-duration: 9s; animation-delay: 0s; }
+    .rp-rain__petal:nth-child(2) { left: 14%; animation-duration: 12s; animation-delay: 2s; }
+    .rp-rain__petal:nth-child(3) { left: 24%; animation-duration: 10s; animation-delay: 4s; }
+    .rp-rain__petal:nth-child(4) { left: 34%; animation-duration: 14s; animation-delay: 1s; }
+    .rp-rain__petal:nth-child(5) { left: 44%; animation-duration: 11s; animation-delay: 5s; }
+    .rp-rain__petal:nth-child(6) { left: 54%; animation-duration: 13s; animation-delay: 3s; }
+    .rp-rain__petal:nth-child(7) { left: 64%; animation-duration: 9.5s; animation-delay: 0.5s; }
+    .rp-rain__petal:nth-child(8) { left: 74%; animation-duration: 12.5s; animation-delay: 4.5s; }
+    .rp-rain__petal:nth-child(9) { left: 84%; animation-duration: 10.5s; animation-delay: 2.5s; }
+    .rp-rain__petal:nth-child(10) { left: 94%; animation-duration: 13.5s; animation-delay: 1.5s; }
+
+    /* Entry Screen */
+    .rp-entry {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #12091f;
+      overflow: hidden;
+    }
+    .rp-entry__photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.38;
+      filter: blur(1px);
+    }
+    .rp-entry__veil {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(18,9,31,0.6) 0%, rgba(18,9,31,0.92) 100%);
+    }
+    .rp-entry__glow {
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(217, 163, 75, 0.28) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .rp-entry__flash {
+      position: absolute;
+      inset: 0;
+      background: #fff4da;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .rp-entry__content {
+      position: relative;
+      z-index: 5;
+      text-align: center;
+      padding: 2rem 1.2rem;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .rp-entry__mandala {
+      animation: rpSpin 32s linear infinite;
+    }
+    @keyframes rpSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .rp-entry__names {
+      font-size: clamp(2.6rem, 9vw, 4.6rem);
+      margin: 0.2rem 0;
+      color: #fff4da;
+      line-height: 1.1;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    }
+    .rp-entry__amp {
+      font-size: 0.85em;
+      color: #d9a34b;
+      margin: 0 0.2rem;
+    }
+    .rp-entry__cta {
+      margin-top: 1rem;
+      padding: 0.95rem 2.8rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #d9a34b, #f5d99d);
+      color: #12091f;
+      border: 1px solid rgba(255, 244, 218, 0.4);
+      font-size: 0.82rem;
+      cursor: pointer;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      box-shadow: 0 10px 30px rgba(217, 163, 75, 0.38);
+      transition: all 0.3s ease;
+    }
+    .rp-entry__cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(217, 163, 75, 0.55);
+      background: linear-gradient(135deg, #f5d99d, #d9a34b);
+    }
+
+    /* Hero Section */
+    .rp-hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 5.5rem 1rem 4rem;
+      overflow: hidden;
+    }
+    .rp-hero__photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.3;
+      filter: brightness(0.85);
+    }
+    .rp-hero__bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(18,9,31,0.55) 0%, rgba(18,9,31,0.95) 100%);
+    }
+    .rp-hero__veil {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(18,9,31,0.3) 0%, rgba(18,9,31,0.98) 95%);
+    }
+    .rp-hero__mandala-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.08;
+      pointer-events: none;
+      animation: rpSpin 60s linear infinite;
+    }
+    .rp-hero__jali {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.06;
+      pointer-events: none;
+    }
+    .rp-hero__content {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 800px;
+    }
+    .rp-hero__emblem {
+      width: min(50vw, 178px);
+      height: auto;
+      margin: 0.4rem 0 0.6rem;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.5));
+    }
+    .rp-hero__line {
+      width: 90px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #d9a34b, transparent);
+      margin: 0.4rem 0;
+    }
+    .rp-hero__label {
+      color: #d9a34b;
+      margin: 0.2rem 0;
+    }
+    .rp-hero__names {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin: 0.2rem 0;
+    }
+    .rp-hero__name {
+      font-size: clamp(2.4rem, 8vw, 4.8rem);
+      color: #fff4da;
+      margin: 0;
+      line-height: 1.1;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    .rp-hero__amp {
+      font-family: var(--rp-font-great-vibes, cursive);
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      color: #d9a34b;
+    }
+    .rp-hero__chip {
+      display: inline-block;
+      padding: 0.45rem 1.4rem;
+      border-radius: 999px;
+      background: rgba(217, 163, 75, 0.12);
+      border: 1px solid rgba(217, 163, 75, 0.35);
+      color: #f5d99d;
+      margin: 0.75rem 0;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+    }
+    .rp-hero__welcome {
+      max-width: 580px;
+      font-size: clamp(1.05rem, 3.5vw, 1.25rem);
+      line-height: 1.6;
+      margin: 0.6rem 0;
+      color: #f7ecd5;
+    }
+    .rp-hero__ornament {
+      max-width: 420px;
+      width: 85%;
+      height: auto;
+      margin: 0.8rem 0;
+    }
+    .rp-hero__scroll {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+      color: rgba(245, 217, 157, 0.7);
+      margin-top: 1.5rem;
+      animation: rpBounce 2s infinite ease-in-out;
+    }
+    @keyframes rpBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* Auspicious Blessing */
+    .rp-blessing {
+      text-align: center;
+      padding: 3.5rem 1.2rem;
+      background: rgba(44, 18, 50, 0.35);
+      position: relative;
+      border-top: 1px solid rgba(245, 217, 157, 0.15);
+      border-bottom: 1px solid rgba(245, 217, 157, 0.15);
+    }
+    .rp-blessing__text {
+      max-width: 720px;
+      margin: 0 auto 1.5rem;
+      font-size: clamp(1.15rem, 3vw, 1.45rem);
+      font-style: italic;
+      line-height: 1.7;
+      color: #fff4da;
+    }
+
+    /* Lightbox Modal */
+    .rp-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(8, 4, 14, 0.94);
+      backdrop-filter: blur(12px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .rp-lightbox.active {
+      opacity: 1;
+    }
+    .rp-lightbox__content {
+      position: relative;
+      max-width: 92vw;
+      max-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .rp-lightbox__img {
+      max-width: 100%;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+      border: 1px solid rgba(245, 217, 157, 0.3);
+    }
+    .rp-lightbox__btn {
+      position: absolute;
+      background: rgba(35, 17, 45, 0.75);
+      border: 1px solid rgba(245, 217, 157, 0.4);
+      color: #f5d99d;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.4rem;
+      transition: all 0.2s ease;
+      z-index: 1000;
+    }
+    .rp-lightbox__btn:hover {
+      background: #d9a34b;
+      color: #12091f;
+    }
+    .rp-lightbox__close { top: 20px; right: 20px; }
+    .rp-lightbox__prev { left: 16px; top: 50%; transform: translateY(-50%); }
+    .rp-lightbox__next { right: 16px; top: 50%; transform: translateY(-50%); }
+  </style>
+</head>
+<body class="royal-premium">
+
+  <!-- 1. Floating Bokeh Light Particles -->
+  <div class="rp-bokeh-container" aria-hidden="true">
+    <div class="rp-bokeh"></div>
+    <div class="rp-bokeh"></div>
+    <div class="rp-bokeh"></div>
+    <div class="rp-bokeh"></div>
+    <div class="rp-bokeh"></div>
+    <div class="rp-bokeh"></div>
+  </div>
+
+  <!-- 2. Floating Petals Effect -->
+  <div class="rp-rain" aria-hidden="true">
+    <div class="rp-rain__petal"><img src="assets/petal.svg" class="rp-rain__petal-img" alt="" width="38" height="38" /></div>
+    <div class="rp-rain__petal"><img src="assets/petal.svg" class="rp-rain__petal-img" alt="" width="38" height="38" /></div>
+    <div class="rp-rain__petal"><img src="assets/petal.svg" class="rp-rain__petal-img" alt="" width="38" height="38" /></div>
+    <div class="rp-rain__petal"><img src="assets/petal.svg" class="rp-rain__petal-img" alt="" width="38" height="38" /></div>
+    <div class="rp-rain__petal"><img src="assets/petal.svg" class="rp-rain__petal-img" alt="" width="38" height="38" /></div>
+    <div class="rp-rain__petal"><img src="assets/petal.svg" class="rp-rain__petal-img" alt="" width="38" height="38" /></div>
+    <div class="rp-rain__petal"><img src="assets/petal.svg" class="rp-rain__petal-img" alt="" width="38" height="38" /></div>
+    <div class="rp-rain__petal"><img src="assets/petal.svg" class="rp-rain__petal-img" alt="" width="38" height="38" /></div>
+    <div class="rp-rain__petal"><img src="assets/petal.svg" class="rp-rain__petal-img" alt="" width="38" height="38" /></div>
+    <div class="rp-rain__petal"><img src="assets/petal.svg" class="rp-rain__petal-img" alt="" width="38" height="38" /></div>
+  </div>
+
+  <!-- 3. Audio Player & Floating Sound Button -->
+  <audio id="bgMusic" src="assets/007088038f-ybhogam-lyrical-srinivasa-kalyanam-songs-nithiin-raashi-khanna-128k_DuAm0R5Y.mp3" loop preload="auto"></audio>
+  <button type="button" id="musicToggleBtn" class="rp-music" aria-label="Toggle background music">
+    <span class="rp-music__icon" aria-hidden="true">♪</span>
+    <span class="rp-music__text rp-font-label">Sound Off</span>
+  </button>
+
+  <!-- 4. Entry / Cover Screen -->
+  <div class="rp-entry" id="entryScreen">
+    <img src="assets/661570214f-17-1.jpeg" alt="Cover photo" class="rp-entry__photo" />
+    <div class="rp-entry__veil"></div>
+    <img src="assets/jali-pattern.svg" alt="" class="rp-entry__jali" />
+    <div class="rp-entry__glow"></div>
+    <div class="rp-entry__flash"></div>
+    <div class="rp-entry__content">
+      <img src="assets/ganesha-header.png" alt="Lord Ganesha" class="rp-entry__top-icon" width="80" height="62" />
+      <p class="rp-entry__title rp-font-label">The Wedding Celebration</p>
+      <img src="assets/mandala-bloom.svg" alt="" class="rp-entry__mandala" width="280" height="280" />
+      <h1 class="rp-entry__names rp-font-script">Bhanu <span class="rp-entry__amp">&amp;</span> Pinky</h1>
+      <img src="assets/ornate-divider.svg" alt="" class="rp-entry__ornament" width="300" height="34" />
+      <button id="openInvitationBtn" class="rp-entry__cta rp-font-label">Open Invitation</button>
+    </div>
+  </div>
+
+  <!-- 5. Main Wedding Invitation Content -->
+  <div id="mainInvitation" style="display:none; opacity:0;">
+    
+    <!-- Hero Section -->
+    <section class="rp-hero rp-section rp-hero--bpvl">
+      <img src="assets/661570214f-17-1.jpeg" alt="" class="rp-hero__photo" />
+      <div class="rp-hero__bg"></div>
+      <div class="rp-hero__veil"></div>
+      <div class="rp-hero__mandala-bg">
+        <img src="assets/mandala-bloom.svg" alt="" class="rp-hero__mandala-img" width="600" height="600" />
+      </div>
+      <img src="assets/jali-pattern.svg" alt="" class="rp-hero__jali" />
+      <div class="rp-hero__content rp-container">
+        <img src="assets/ganesha-header.png" alt="Lord Ganesha" class="rp-hero__ganesha" width="80" height="62" />
+        <img src="assets/bpvl-logo.webp" alt="Wedding logo of Bhanu Prakash and Vijaya Lakshmi — Two Souls, One Light" class="rp-hero__emblem" />
+        <div class="rp-hero__line"></div>
+        <p class="rp-hero__label rp-font-label">Wedding Celebration</p>
+        <div class="rp-hero__names">
+          <h1 class="rp-hero__name rp-font-script">Bhanu</h1>
+          <span class="rp-hero__amp">&amp;</span>
+          <h1 class="rp-hero__name rp-font-script">Pinky</h1>
+        </div>
+        <div class="rp-hero__line"></div>
+        <span class="rp-chip rp-hero__chip rp-font-label">Thursday, 27th August 2026 &nbsp;•&nbsp; 11:40 PM</span>
+        <p class="rp-hero__welcome rp-font-serif">Together with our families, we joyfully invite you to celebrate our union</p>
+        <img src="assets/ornate-divider.svg" alt="" class="rp-hero__ornament" width="520" height="48" />
+        <div class="rp-hero__scroll rp-font-label">
+          <span class="rp-hero__scroll-arrow">↓</span>
+          <span>Scroll to Explore</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Couple Section -->
+    <section class="rp-couple rp-section">
+      <div class="rp-container">
+        <img src="assets/ornate-divider.svg" alt="" width="520" height="44" class="rp-couple__divider" />
+        <h2 class="rp-couple__heading rp-font-heading">The Couple</h2>
+        <p class="rp-couple__sub rp-font-serif">Two families, many traditions, one timeless celebration.</p>
+        <div class="rp-couple__grid">
+          <!-- Groom -->
+          <article class="rp-couple__card">
+            <div class="rp-couple__photo-wrap">
+              <img src="assets/arch-gold.svg" alt="" width="220" height="272" class="rp-couple__arch" />
+              <div class="rp-couple__photo-frame">
+                <img src="assets/8c15cbb49c-2-1-scaled.jpeg" alt="Appikatla Bhanu Prakash" class="rp-couple__photo-zoom" />
+              </div>
+            </div>
+            <h3 class="rp-couple__name rp-font-heading">Appikatla Bhanu Prakash</h3>
+            <p class="rp-couple__parents-label rp-font-label">Son of</p>
+            <p class="rp-couple__parents rp-font-serif">Mr. Balaji Ram &amp; Mrs. Subhadra Devi</p>
+          </article>
+          <!-- Bride -->
+          <article class="rp-couple__card">
+            <div class="rp-couple__photo-wrap">
+              <img src="assets/arch-gold.svg" alt="" width="220" height="272" class="rp-couple__arch" />
+              <div class="rp-couple__photo-frame">
+                <img src="assets/d21c643437-1-1.jpeg" alt="Inti Vijaya Lakshmi" class="rp-couple__photo-zoom" />
+              </div>
+            </div>
+            <h3 class="rp-couple__name rp-font-heading">Inti Vijaya Lakshmi</h3>
+            <p class="rp-couple__parents-label rp-font-label">Daughter of</p>
+            <p class="rp-couple__parents rp-font-serif">Mr. Srinivas &amp; Mrs. Vara Lakshmi</p>
+          </article>
+        </div>
+        <p class="rp-couple__vow rp-font-serif">Bound by blessings, music, and sacred vows under one sky.</p>
+      </div>
+    </section>
+
+    <!-- Auspicious Blessing -->
+    <section class="rp-blessing">
+      <div class="rp-container">
+        <p class="rp-blessing__text rp-font-serif">
+          “May this sacred union be blessed with everlasting love, happiness, prosperity, and togetherness. Wishing the couple a lifetime filled with joy and cherished memories.”
+        </p>
+        <img src="assets/lotus-divider.svg" alt="" class="rp-divider" width="460" height="50" style="margin: 0 auto; display:block;" />
+      </div>
+    </section>
+
+    <!-- Celebration Schedule (Matching Screenshot 6) -->
+    <section class="rp-events rp-section">
+      <img src="assets/fb4f10a7f1-IMG_9966.jpg" alt="" class="rp-events__photo" />
+      <div class="rp-events__veil"></div>
+      <div class="rp-container">
+        <p class="rp-events__pretitle rp-font-label">Wedding Events</p>
+        <h2 class="rp-events__title rp-font-heading">Celebration Schedule</h2>
+        <p class="rp-events__subtitle rp-font-serif">Every ritual, every moment — beautifully planned for family and friends.</p>
+        <img src="assets/lotus-divider.svg" alt="" class="rp-divider" width="560" height="60" style="margin: 1.5rem auto; display:block;" />
+        
+        <div class="rp-events__grid">
+          <!-- Event 1: Pelli Koduku -->
+          <article class="rp-events__card">
+            <div>
+              <div class="rp-events__card-header">
+                <div class="rp-events__icon-wrap">
+                  <!-- Calendar with heart icon -->
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                    <path d="M12 14.5c-.8-1-2-1-2 .5 0 1.5 2 2.5 2 2.5s2-1 2-2.5c0-1.5-1.2-1.5-2-.5z" fill="currentColor"></path>
+                  </svg>
+                </div>
+                <p class="rp-events__badge rp-font-label">CELEBRATION</p>
+              </div>
+              <h3 class="rp-events__name rp-font-heading">PELLI KODUKU CEREMONY</h3>
+              <p class="rp-events__meta">Wednesday, 26th August 2026 &bull; 08:00 AM</p>
+              <p class="rp-events__venue">Sri Lakshmi Castle, Flat No. B5, 2nd Lane, Jayaprakash Nagar, Vijayawada</p>
+            </div>
+            <a href="https://maps.app.goo.gl/CXu1vRyaRTGwVE3v7" target="_blank" rel="noopener noreferrer" class="rp-events__link rp-font-label">GET DIRECTIONS &rarr;</a>
+          </article>
+
+          <!-- Event 2: Pelli Kuturu -->
+          <article class="rp-events__card">
+            <div>
+              <div class="rp-events__card-header">
+                <div class="rp-events__icon-wrap">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                    <path d="M12 14.5c-.8-1-2-1-2 .5 0 1.5 2 2.5 2 2.5s2-1 2-2.5c0-1.5-1.2-1.5-2-.5z" fill="currentColor"></path>
+                  </svg>
+                </div>
+                <p class="rp-events__badge rp-font-label">CELEBRATION</p>
+              </div>
+              <h3 class="rp-events__name rp-font-heading">PELLI KUTURU CEREMONY</h3>
+              <p class="rp-events__meta">Wednesday, 26th August 2026 &bull; 08:00 AM</p>
+              <p class="rp-events__venue">Near Home, Seetharampuram</p>
+            </div>
+            <a href="https://maps.app.goo.gl/o9wXhgkERR4hZ4MXA" target="_blank" rel="noopener noreferrer" class="rp-events__link rp-font-label">GET DIRECTIONS &rarr;</a>
+          </article>
+
+          <!-- Event 3: Haldi -->
+          <article class="rp-events__card">
+            <div>
+              <div class="rp-events__card-header">
+                <div class="rp-events__icon-wrap">
+                  <!-- Kalash pot icon -->
+                  <svg width="26" height="26" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 48 L16 44 C14 43 12 40 12 36 C12 30 15 28 15 28 L15 26 C14 25.5 13.5 25 13.5 24 C13.5 23 14.5 22 16 22 L36 22 C37.5 22 38.5 23 38.5 24 C38.5 25 38 25.5 37 26 L37 28 C37 28 40 30 40 36 C40 40 38 43 36 44 L36 48 Z"></path>
+                    <ellipse cx="26" cy="16" rx="4.5" ry="4"></ellipse>
+                    <path d="M22 16 C18 13 14 10 10 6"></path>
+                    <path d="M30 16 C34 13 38 10 42 6"></path>
+                  </svg>
+                </div>
+                <p class="rp-events__badge rp-font-label">PURITY &amp; JOY</p>
+              </div>
+              <h3 class="rp-events__name rp-font-heading">HALDI CEREMONY</h3>
+              <p class="rp-events__ritual-desc rp-font-serif">A joyful turmeric ceremony with blessings from elders and playful family rituals.</p>
+              <p class="rp-events__meta">Thursday, 27th August 2026 &bull; 09:00 AM</p>
+              <p class="rp-events__venue">Haritha Sahasra Beach Resort</p>
+              <p class="rp-events__dress-code">DRESS CODE: YELLOW</p>
+            </div>
+            <a href="https://maps.app.goo.gl/HSEiE1PQiveDXkak7" target="_blank" rel="noopener noreferrer" class="rp-events__link rp-font-label">GET DIRECTIONS &rarr;</a>
+          </article>
+
+          <!-- Event 4: Wedding -->
+          <article class="rp-events__card" style="border-color: rgba(217, 163, 75, 0.45);">
+            <div>
+              <div class="rp-events__card-header">
+                <div class="rp-events__icon-wrap">
+                  <!-- Diya sacred fire icon -->
+                  <svg width="26" height="26" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M26 6 C26 6 20 16 20 22 C20 25.5 22.5 28 26 28 C29.5 28 32 25.5 32 22 C32 16 26 6 26 6 Z"></path>
+                    <path d="M12 36 C12 30 18 28 26 28 C34 28 40 30 40 36 L40 40 L12 40 Z"></path>
+                    <line x1="10" y1="44" x2="42" y2="44" stroke-width="2"></line>
+                  </svg>
+                </div>
+                <p class="rp-events__badge rp-font-label">SACRED VOWS</p>
+              </div>
+              <h3 class="rp-events__name rp-font-heading">WEDDING CEREMONY</h3>
+              <p class="rp-events__ritual-desc rp-font-serif">Sacred mantras, varmala, and saat phere — the beginning of a new journey.</p>
+              <p class="rp-events__meta">Thursday, 27th August 2026 &bull; 11:40 PM</p>
+              <p class="rp-events__venue">Sri Pulapartli Sampradayam Function Hall Pasaladeevi (V),near Narsapur West Godavari District</p>
+            </div>
+            <a href="https://share.google/ODkMVgpW5uwr7s3t2" target="_blank" rel="noopener noreferrer" class="rp-events__link rp-font-label">GET DIRECTIONS &rarr;</a>
+          </article>
+
+          <!-- Event 5: Reception -->
+          <article class="rp-events__card">
+            <div>
+              <div class="rp-events__card-header">
+                <div class="rp-events__icon-wrap">
+                  <!-- Sparkles Celebration icon -->
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                  </svg>
+                </div>
+                <p class="rp-events__badge rp-font-label">GRAND CELEBRATION</p>
+              </div>
+              <h3 class="rp-events__name rp-font-heading">RECEPTION</h3>
+              <p class="rp-events__ritual-desc rp-font-serif">A grand evening of dining, dancing, and celebrating the newlyweds.</p>
+              <p class="rp-events__meta">Saturday, 29th August 2026 &bull; 07:00 PM</p>
+              <p class="rp-events__venue">Anne Vaari Kalyana Mandapam, 100 Feet Rd, Poranki, Vijayawada</p>
+            </div>
+            <a href="https://maps.app.goo.gl/zmQntu9X6cNrTdmg7" target="_blank" rel="noopener noreferrer" class="rp-events__link rp-font-label">GET DIRECTIONS &rarr;</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section class="rp-countdown rp-section">
+      <img src="assets/jali-pattern.svg" alt="" class="rp-countdown__jali" />
+      <div class="rp-countdown__bg"></div>
+      <div class="rp-container rp-countdown__inner">
+        <p class="rp-countdown__pretitle rp-font-label">Sacred Muhurat</p>
+        <h2 class="rp-countdown__title rp-font-heading">Countdown to the Big Day</h2>
+        <p class="rp-countdown__subtitle rp-font-serif">The auspicious moment is getting closer.</p>
+        <div class="rp-countdown__grid">
+          <div class="rp-countdown__cell">
+            <span class="rp-countdown__value rp-countdown__value--days rp-font-heading">00</span>
+            <span class="rp-countdown__label rp-font-label">Days</span>
+          </div>
+          <div class="rp-countdown__cell">
+            <span class="rp-countdown__value rp-countdown__value--hours rp-font-heading">00</span>
+            <span class="rp-countdown__label rp-font-label">Hours</span>
+          </div>
+          <div class="rp-countdown__cell">
+            <span class="rp-countdown__value rp-countdown__value--minutes rp-font-heading">00</span>
+            <span class="rp-countdown__label rp-font-label">Minutes</span>
+          </div>
+          <div class="rp-countdown__cell">
+            <span class="rp-countdown__value rp-countdown__value--seconds rp-font-heading">00</span>
+            <span class="rp-countdown__label rp-font-label">Seconds</span>
+          </div>
+        </div>
+        <img src="assets/ornate-divider.svg" alt="" class="rp-countdown__divider" width="620" height="70" />
+      </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section class="rp-gallery rp-section rp-gallery--third-last-full">
+      <img src="assets/jali-pattern.svg" alt="" class="rp-gallery__jali" />
+      <div class="rp-container">
+        <p class="rp-gallery__pretitle rp-font-label">Captured Chapters</p>
+        <h2 class="rp-gallery__title rp-font-heading">Memories in Bloom</h2>
+        <p class="rp-gallery__subtitle rp-font-serif">A glimpse of moments leading to our celebration.</p>
+        <img src="assets/ornate-divider.svg" alt="" class="rp-gallery__divider" width="520" height="48" />
+        <div class="rp-gallery__grid">
+          <button class="rp-gallery__item" type="button" aria-label="View photo 1"><img src="assets/661570214f-17-1.jpeg" alt="Gallery photo 1" class="rp-gallery__image" loading="lazy" /></button>
+          <button class="rp-gallery__item" type="button" aria-label="View photo 2"><img src="assets/30058f12d2-20-scaled.jpeg" alt="Gallery photo 2" class="rp-gallery__image" loading="lazy" /></button>
+          <button class="rp-gallery__item" type="button" aria-label="View photo 3"><img src="assets/e37b4477e3-5-1.jpeg" alt="Gallery photo 3" class="rp-gallery__image" loading="lazy" /></button>
+          <button class="rp-gallery__item" type="button" aria-label="View photo 4"><img src="assets/a4fc7044e3-6-2.jpeg" alt="Gallery photo 4" class="rp-gallery__image" loading="lazy" /></button>
+          <button class="rp-gallery__item" type="button" aria-label="View photo 5"><img src="assets/5d63459a14-12.jpeg" alt="Gallery photo 5" class="rp-gallery__image" loading="lazy" /></button>
+          <button class="rp-gallery__item" type="button" aria-label="View photo 6"><img src="assets/ed028d6a5a-IMG_9850.jpg" alt="Gallery photo 6" class="rp-gallery__image" loading="lazy" /></button>
+          <button class="rp-gallery__item" type="button" aria-label="View photo 7"><img src="assets/52242cb740-10.jpeg" alt="Gallery photo 7" class="rp-gallery__image" loading="lazy" /></button>
+          <button class="rp-gallery__item" type="button" aria-label="View photo 8"><img src="assets/f0447e5c6a-26.jpeg" alt="Gallery photo 8" class="rp-gallery__image" loading="lazy" /></button>
+          <button class="rp-gallery__item" type="button" aria-label="View photo 9"><img src="assets/4ec994c404-Untitled-design.png" alt="Gallery photo 9" class="rp-gallery__image" loading="lazy" /></button>
+          <button class="rp-gallery__item" type="button" aria-label="View photo 10"><img src="assets/c9d9cab5fd-13.jpeg" alt="Gallery photo 10" class="rp-gallery__image" loading="lazy" /></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video Story Section -->
+    <section class="rp-video rp-section">
+      <div class="rp-container">
+        <p class="rp-video__pretitle rp-font-label">Our Story</p>
+        <h2 class="rp-video__title rp-font-heading">A Special Glimpse</h2>
+        <p class="rp-video__subtitle rp-font-serif">A special glimpse of the moments that led us here.</p>
+        <img src="assets/ornate-divider.svg" alt="" class="rp-video__divider" width="520" height="48" />
+        <div class="rp-video__player">
+          <iframe class="rp-video__iframe" src="https://www.youtube.com/embed/madronEXfl0" title="A Special Glimpse" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Photographer Section -->
+    <section class="rp-photog rp-section">
+      <div class="rp-container">
+        <div class="rp-photog__header">
+          <p class="rp-photog__label rp-font-label">Captured By</p>
+          <div class="rp-photog__divider" aria-hidden="true">
+            <span class="rp-photog__divider-line"></span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+              <circle cx="12" cy="13" r="4"></circle>
+            </svg>
+            <span class="rp-photog__divider-line"></span>
+          </div>
+          <h2 class="rp-photog__title rp-font-heading">The Photographer</h2>
+        </div>
+        <div class="rp-photog__card">
+          <div class="rp-photog__logo">
+            <img src="assets/yellow-pixels.jpg" alt="Yellow Pixels by Sadhanala" width="96" height="96" class="rp-photog__logo-img" />
+          </div>
+          <h3 class="rp-photog__name rp-font-serif">Yellow Pixels by Sadhanala</h3>
+          <p class="rp-photog__tagline rp-font-label">Photography &amp; Cinematography</p>
+          <p class="rp-photog__desc rp-font-serif">Capturing weddings, events &amp; portraits since 2017 — over 100 happy couples and counting, turning moments into memories.</p>
+          <a href="https://www.instagram.com/yellowpixels_by_sadhanala" target="_blank" rel="noopener noreferrer" class="rp-photog__btn rp-font-label">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+            View on Instagram
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Venue & Travel Section (Matching Screenshot 4) -->
+    <section class="rp-venue rp-section">
+      <div class="rp-container">
+        <p class="rp-venue__pretitle rp-font-label">VENUE GUIDE</p>
+        <h2 class="rp-venue__title rp-font-heading">VENUE &amp; TRAVEL</h2>
+        <p class="rp-venue__subtitle rp-font-serif">Save the date and arrive with ease.</p>
+
+        <!-- 5 Event Pill Chips at Top -->
+        <div class="rp-venue__event-cards">
+          <div class="rp-venue__event-card">
+            <span class="rp-venue__event-name">PELLI KODUKU CEREMONY</span>
+            <span class="rp-venue__event-detail">Wednesday, 26th August 2026 &bull; 08:00 AM</span>
+          </div>
+          <div class="rp-venue__event-card">
+            <span class="rp-venue__event-name">PELLI KUTURU CEREMONY</span>
+            <span class="rp-venue__event-detail">Wednesday, 26th August 2026 &bull; 08:00 AM</span>
+          </div>
+          <div class="rp-venue__event-card">
+            <span class="rp-venue__event-name">HALDI CEREMONY</span>
+            <span class="rp-venue__event-detail">Thursday, 27th August 2026 &bull; 09:00 AM</span>
+          </div>
+          <div class="rp-venue__event-card">
+            <span class="rp-venue__event-name">WEDDING CEREMONY</span>
+            <span class="rp-venue__event-detail">Thursday, 27th August 2026 &bull; 11:40 PM</span>
+          </div>
+          <div class="rp-venue__event-card">
+            <span class="rp-venue__event-name">RECEPTION</span>
+            <span class="rp-venue__event-detail">Saturday, 29th August 2026 &bull; 07:00 PM</span>
+          </div>
+        </div>
+
+        <!-- Venue Card -->
+        <div class="rp-venue__card">
+          <h3 class="rp-venue__name rp-font-heading">SRI PULAPARTLI SAMPRADAYAM FUNCTION HALL PASALADEEVI (V), WEST GODAVARI DISTRICT</h3>
+          <p class="rp-venue__address rp-font-serif">Pasaladeevi (V), West Godavari District, India</p>
+          <div class="rp-venue__map-wrap" style="border-radius: 12px; overflow: hidden; margin: 1.5rem 0;">
+            <iframe class="rp-venue__map" src="https://maps.google.com/maps?q=Pulaparthi+plaza,+Sampradaya+Function+Hall+Pasaladeevi&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="320" style="border:0;" loading="lazy" allowfullscreen="" title="Venue map"></iframe>
+          </div>
+          <a class="rp-venue__btn rp-font-label" href="https://maps.app.goo.gl/zijj9rgjzDocC2Vj8" target="_blank" rel="noopener noreferrer">GET DIRECTIONS</a>
+        </div>
+
+        <!-- Travel Notes -->
+        <div class="rp-venue__notes" style="margin-top: 2rem; text-align: left; max-width: 820px; margin-inline: auto;">
+          <h4 class="rp-venue__notes-title rp-font-heading" style="font-size: 1.1rem; color:#f5d99d; margin-bottom: 0.8rem; letter-spacing: 0.1em;">TRAVEL NOTES</h4>
+          <ul class="rp-venue__notes-list rp-font-serif" style="list-style: disc; padding-left: 1.5rem; color: rgba(247,236,213,0.85); line-height: 1.8;">
+            <li>Arrive 30 minutes early for welcome rituals</li>
+            <li>Traditional attire is warmly encouraged</li>
+            <li>Parking available on-site</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Watch Live Stream Section -->
+    <section class="rp-live rp-section">
+      <div class="rp-container">
+        <div class="rp-live__card">
+          <div class="rp-live__badge rp-font-label">
+            <span class="rp-live__dot"></span>Live Stream
+          </div>
+          <img src="assets/ornate-divider.svg" alt="" width="300" height="32" class="rp-live__divider" />
+          <h2 class="rp-live__title rp-font-heading">Watch Live</h2>
+          <p class="rp-live__subtitle rp-font-serif">Can't make it in person? Join us virtually as we celebrate this beautiful moment together.</p>
+          <a href="https://www.youtube.com/live/6NaagfpwtjM" target="_blank" rel="noopener noreferrer" class="rp-live__btn rp-font-label">
+            <span style="font-size: 1.1rem; margin-right: 0.4rem;">&#9654;</span> Join Live Stream
+          </a>
+          <p class="rp-live__note rp-font-serif">The live stream will begin 30 minutes before the ceremony.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RSVP & Share Section (Matching Screenshots 2 & 3) -->
+    <section class="rp-rsvp rp-section">
+      <div class="rp-container">
+        <p class="rp-rsvp__pretitle rp-font-label">JOIN THE CELEBRATION</p>
+        <h2 class="rp-rsvp__title rp-font-heading">RSVP &amp; SHARE</h2>
+        <p class="rp-rsvp__subtitle rp-font-serif">We would be honored to celebrate this day with you.</p>
+        
+        <div class="rp-rsvp__card">
+          <div class="rp-rsvp__attendance">
+            <button type="button" class="rp-rsvp__attendance-btn is-active" data-status="accept">Joyfully Accept</button>
+            <button type="button" class="rp-rsvp__attendance-btn" data-status="decline">Regretfully Decline</button>
+          </div>
+
+          <!-- Name -->
+          <label class="rp-rsvp__field rp-font-label">
+            <span>YOUR NAME</span>
+            <input type="text" id="rsvpName" class="rp-rsvp__input" placeholder="Enter your name" required />
+          </label>
+
+          <!-- Attending Details Block -->
+          <div id="rsvpDetails">
+            <!-- Events selection -->
+            <div class="rp-rsvp__field rp-font-label">
+              <span>EVENTS YOU'LL ATTEND</span>
+              <div class="rp-rsvp__events">
+                <div class="rp-rsvp__event-item is-selected">
+                  <div class="rp-rsvp__event-left">
+                    <input type="checkbox" class="rp-rsvp__event-check" checked />
+                    <span class="rp-rsvp__event-tick">&#10003;</span>
+                    <span class="rp-rsvp__event-name">PELLI KODUKU CEREMONY</span>
+                  </div>
+                  <span class="rp-rsvp__event-date">WEDNESDAY, 26TH AUGUST 2026</span>
+                </div>
+                <div class="rp-rsvp__event-item is-selected">
+                  <div class="rp-rsvp__event-left">
+                    <input type="checkbox" class="rp-rsvp__event-check" checked />
+                    <span class="rp-rsvp__event-tick">&#10003;</span>
+                    <span class="rp-rsvp__event-name">PELLI KUTURU CEREMONY</span>
+                  </div>
+                  <span class="rp-rsvp__event-date">WEDNESDAY, 26TH AUGUST 2026</span>
+                </div>
+                <div class="rp-rsvp__event-item is-selected">
+                  <div class="rp-rsvp__event-left">
+                    <input type="checkbox" class="rp-rsvp__event-check" checked />
+                    <span class="rp-rsvp__event-tick">&#10003;</span>
+                    <span class="rp-rsvp__event-name">HALDI CEREMONY</span>
+                  </div>
+                  <span class="rp-rsvp__event-date">THURSDAY, 27TH AUGUST 2026</span>
+                </div>
+                <div class="rp-rsvp__event-item is-selected">
+                  <div class="rp-rsvp__event-left">
+                    <input type="checkbox" class="rp-rsvp__event-check" checked />
+                    <span class="rp-rsvp__event-tick">&#10003;</span>
+                    <span class="rp-rsvp__event-name">WEDDING CEREMONY</span>
+                  </div>
+                  <span class="rp-rsvp__event-date">THURSDAY, 27TH AUGUST 2026</span>
+                </div>
+                <div class="rp-rsvp__event-item is-selected">
+                  <div class="rp-rsvp__event-left">
+                    <input type="checkbox" class="rp-rsvp__event-check" checked />
+                    <span class="rp-rsvp__event-tick">&#10003;</span>
+                    <span class="rp-rsvp__event-name">RECEPTION</span>
+                  </div>
+                  <span class="rp-rsvp__event-date">SATURDAY, 29TH AUGUST 2026</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Adults & Children -->
+            <div class="rp-rsvp__guest-row">
+              <label class="rp-rsvp__field rp-font-label">
+                <span>ADULTS</span>
+                <select id="rsvpAdults" class="rp-rsvp__select">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6+">6+</option>
+                </select>
+              </label>
+              <label class="rp-rsvp__field rp-font-label">
+                <span>CHILDREN</span>
+                <select id="rsvpChildren" class="rp-rsvp__select">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4+">4+</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <!-- Message -->
+          <label class="rp-rsvp__field rp-font-label">
+            <span>MESSAGE</span>
+            <textarea id="rsvpMessage" class="rp-rsvp__textarea" placeholder="Blessings for the couple"></textarea>
+          </label>
+
+          <!-- Buttons -->
+          <div class="rp-rsvp__actions">
+            <button type="button" id="sendRsvpBtn" class="rp-rsvp__submit rp-font-label">SEND RSVP</button>
+            <button type="button" id="shareWhatsappBtn" class="rp-rsvp__whatsapp rp-font-label">SHARE ON WHATSAPP</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Spread The Joy / Share This Invitation (Matching Screenshot 1) -->
+    <section class="rp-share rp-section">
+      <img src="assets/jali-pattern.svg" alt="" class="rp-share__jali" />
+      <div class="rp-container">
+        <p class="rp-share__pretitle rp-font-label">SPREAD THE JOY</p>
+        <h2 class="rp-share__title rp-font-heading">SHARE THIS INVITATION</h2>
+        <p class="rp-share__subtitle rp-font-serif">Let your loved ones know about our special day</p>
+        
+        <div class="rp-share__divider-wrap">
+          <span class="rp-share__divider-line"></span>
+          <img src="assets/lotus-divider.svg" alt="" class="rp-share__divider-icon" />
+          <span class="rp-share__divider-line"></span>
+        </div>
+
+        <div class="rp-share__grid">
+          <!-- WhatsApp -->
+          <button type="button" id="shareInviteWaBtn" class="rp-share__btn rp-share__btn--whatsapp">
+            <svg class="rp-share__icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.888 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path>
+            </svg>
+            <span class="rp-share__label">WhatsApp</span>
+          </button>
+
+          <!-- Add to Calendar -->
+          <button type="button" id="shareInviteCalBtn" class="rp-share__btn rp-share__btn--calendar">
+            <svg class="rp-share__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+              <line x1="12" y1="13" x2="12" y2="17"></line>
+              <line x1="10" y1="15" x2="14" y2="15"></line>
+            </svg>
+            <span class="rp-share__label">Add to Calendar</span>
+          </button>
+
+          <!-- Copy Link -->
+          <button type="button" id="shareInviteCopyBtn" class="rp-share__btn rp-share__btn--copy">
+            <svg class="rp-share__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+            <span class="rp-share__label">Copy Link</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="rp-footer rp-section">
+      <img src="assets/c9d9cab5fd-13.jpeg" alt="" class="rp-footer__photo" />
+      <img src="assets/jali-pattern.svg" alt="" class="rp-footer__jali" />
+      <img src="assets/ornate-divider.svg" alt="" width="760" height="58" class="rp-footer__divider" />
+      <div class="rp-footer__content rp-container">
+        <p class="rp-footer__label rp-font-label">With Gratitude</p>
+        <h2 class="rp-footer__names rp-font-script">Bhanu <span class="rp-footer__amp">&amp;</span> Pinky</h2>
+        <p class="rp-footer__date rp-font-label">27th August 2026</p>
+        <p class="rp-footer__hash rp-font-ui">#BhanuPinkyWedding</p>
+        <p style="font-size: 0.95rem; color: rgba(247,236,213,0.7); max-width: 500px; margin: 1rem auto;">
+          We can’t wait to celebrate this auspicious milestone with you.
+        </p>
+      </div>
+      <a href="https://myshaadhilink.in" target="_blank" rel="noopener noreferrer" class="rp-footer__brand">
+        <span class="rp-footer__brand-text">This invitation is made by</span>
+        <span class="rp-footer__brand-name">MyShaadhiLink</span>
+      </a>
+    </footer>
+
+  </div>
+
+  <!-- Gallery Lightbox Modal -->
+  <div class="rp-lightbox" id="galleryLightbox">
+    <button class="rp-lightbox__btn rp-lightbox__close" id="lightboxClose" aria-label="Close lightbox">&times;</button>
+    <button class="rp-lightbox__btn rp-lightbox__prev" id="lightboxPrev" aria-label="Previous photo">&#10094;</button>
+    <div class="rp-lightbox__content">
+      <img src="" alt="Enlarged photo" class="rp-lightbox__img" id="lightboxImg" />
+    </div>
+    <button class="rp-lightbox__btn rp-lightbox__next" id="lightboxNext" aria-label="Next photo">&#10095;</button>
+  </div>
+
+  <!-- GSAP Animation Engine & ScrollTrigger -->
+  <script src="js/gsap.min.js"></script>
+  <script src="js/ScrollTrigger.min.js"></script>
+  
+  <!-- Confetti Engine -->
+  <script src="js/confetti.min.js"></script>
+  
+  <!-- Interactive Controller -->
+  <script src="js/main.js"></script>
+</body>
+</html>
