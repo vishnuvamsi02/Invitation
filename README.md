@@ -1,4 +1,4 @@
-# Bhanu Prakash & Vijaya Lakshmi — Wedding Invitation
+# Ravi & Sowjanya — Wedding Invitation
 
 A royal, mobile-first, fully responsive digital wedding invitation with interactive ceremonies guide, live countdown timer, photo gallery, RSVP via WhatsApp, and celebratory animations.
 
@@ -12,7 +12,7 @@ A royal, mobile-first, fully responsive digital wedding invitation with interact
   - Floating music toggle (*"Sound On / Sound Off"*) with gentle autoplay on invitation opening.
 - **Hero & Couple Details:**
   - Muhurat badge chip (*Thursday, 27th August 2026 • 11:40 PM*).
-  - Royal gold arch portrait cards for the Groom (*Appikatla Bhanu Prakash*) & Bride (*Inti Vijaya Lakshmi*) with family blessings.
+  - Royal gold arch portrait cards for the Groom (*Ravi Sri Surya Mani Shankar*) & Bride (*Sowjanya*) with family blessings.
 - **Celebration Schedule:**
   - 5 ritual cards with custom circular icons (*Pelli Koduku*, *Pelli Kuturu*, *Haldi*, *Wedding Ceremony*, *Reception*).
   - Haldi ceremony dress code badge (*DRESS CODE: YELLOW*).

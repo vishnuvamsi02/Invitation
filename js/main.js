@@ -9,6 +9,15 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Enforce page starts from top
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+  document.body.classList.add('is-entry-active');
+
   // Elements
   const entryScreen = document.getElementById('entryScreen');
   const openBtn = document.getElementById('openInvitationBtn');
@@ -159,15 +168,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const entryTl = gsap.timeline({ defaults: { ease: 'power2.out' } });
     entryTl
       .from('.rp-entry__glow', { scale: 0.6, opacity: 0, duration: 0.8 }, 0)
-      .from('.rp-entry__mandala', { scale: 0.8, opacity: 0, rotate: -15, duration: 0.6 }, 0.05)
+      .from('.rp-entry__mandala', { scale: 0.88, opacity: 0, y: 14, duration: 0.65 }, 0.05)
       .from('.rp-entry__top-icon', { y: -10, opacity: 0, duration: 0.45 }, 0.1)
       .from('.rp-entry__title', { y: 10, opacity: 0, duration: 0.45 }, 0.15)
       .from('.rp-entry__names', { scale: 0.92, opacity: 0, duration: 0.55 }, 0.2)
       .from('.rp-entry__ornament', { scaleX: 0.7, opacity: 0, duration: 0.45 }, 0.25)
       .from('.rp-entry__cta', { scale: 0.9, opacity: 0, duration: 0.45, ease: 'back.out(1.5)' }, 0.3);
 
-    // Idle breathing rotation of mandala
-    gsap.to('.rp-entry__mandala', { rotate: 8, duration: 6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+    // Idle gentle floating of emblem
+    gsap.to('.rp-entry__mandala', { y: -6, duration: 3, ease: 'sine.inOut', yoyo: true, repeat: -1 });
   }
 
   // Ensure CTA button is always visible even if GSAP is interrupted or delayed
@@ -232,6 +241,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isInvitationOpened) return;
     isInvitationOpened = true;
 
+    // Immediately reset scroll position to top
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+
     playAudio();
 
     if (entryScreen) {
@@ -246,6 +260,14 @@ document.addEventListener('DOMContentLoaded', () => {
             entryScreen.style.setProperty('display', 'none', 'important');
             entryScreen.style.setProperty('pointer-events', 'none', 'important');
           }
+          // Enforce starting from the very top section
+          window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+          document.documentElement.scrollTop = 0;
+          document.body.scrollTop = 0;
+          const heroEl = document.querySelector('.rp-hero');
+          if (heroEl) {
+            heroEl.scrollIntoView({ behavior: 'instant', block: 'start' });
+          }
           initScrollAnimations();
         }
       });
@@ -257,19 +279,26 @@ document.addEventListener('DOMContentLoaded', () => {
         .call(fireConfetti, [], 0.15)
         .to('.rp-entry__flash', { opacity: 1, duration: 0.25, ease: 'power2.in' }, 0.2)
         .call(() => {
+          document.body.classList.remove('is-entry-active');
           if (mainInvitation) {
             mainInvitation.style.display = 'block';
             mainInvitation.style.opacity = '1';
+            window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
           }
         }, [], 0.35)
         .to(entryScreen, { opacity: 0, duration: 0.35, ease: 'power2.out' }, 0.35);
     } else {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       fireConfetti();
       entryScreen.style.opacity = '0';
       setTimeout(() => {
+        document.body.classList.remove('is-entry-active');
         entryScreen.style.display = 'none';
         mainInvitation.style.display = 'block';
         mainInvitation.style.opacity = '1';
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       }, 500);
     }
   });
@@ -277,6 +306,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- 5. GSAP ScrollTrigger Animations ---
   function initScrollAnimations() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
 
     ScrollTrigger.refresh();
 
@@ -866,16 +899,58 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Button: "DOWNLOAD VIDEO"
+    // Button: "DOWNLOAD VIDEO" (Enhanced for guaranteed file download across mobile and desktop)
     if (downloadBtn) {
-      downloadBtn.addEventListener('click', () => {
-        // Allow native browser download without blocking; provide visual feedback
+      downloadBtn.addEventListener('click', (e) => {
         const label = downloadBtn.querySelector('.rp-video__download-label') || downloadBtn;
-        const orig = label.textContent;
-        label.textContent = 'Downloading...';
-        setTimeout(() => {
-          label.textContent = orig;
-        }, 3500);
+        const origText = 'Download Video';
+
+        if (downloadBtn.dataset.downloading === 'true') {
+          return;
+        }
+
+        if (window.location.protocol.startsWith('http')) {
+          e.preventDefault();
+          downloadBtn.dataset.downloading = 'true';
+          label.textContent = 'Downloading...';
+
+          fetch('assets/invitation-video.mp4')
+            .then(res => {
+              if (!res.ok) throw new Error('Download failed');
+              return res.blob();
+            })
+            .then(blob => {
+              const blobUrl = URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.style.display = 'none';
+              a.href = blobUrl;
+              a.download = 'Ravi-Sowjanya-Wedding-Invitation.mp4';
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              setTimeout(() => URL.revokeObjectURL(blobUrl), 20000);
+
+              label.textContent = 'Saved to Downloads!';
+              setTimeout(() => {
+                label.textContent = origText;
+                downloadBtn.dataset.downloading = 'false';
+              }, 4000);
+            })
+            .catch(err => {
+              console.warn('Blob download fallback:', err);
+              downloadBtn.dataset.downloading = 'false';
+              label.textContent = 'Opening Video...';
+              window.open('assets/invitation-video.mp4', '_blank');
+              setTimeout(() => {
+                label.textContent = origText;
+              }, 3000);
+            });
+        } else {
+          label.textContent = 'Downloading...';
+          setTimeout(() => {
+            label.textContent = origText;
+          }, 3500);
+        }
       });
     }
   }
