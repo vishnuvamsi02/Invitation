@@ -30,13 +30,17 @@
   <!-- Floating Music Toggle Button -->
   <button type="button" id="musicToggleBtn" class="rp-music" aria-label="Toggle background music">
     <span class="rp-music__icon" id="musicIcon" aria-hidden="true">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M9 18V5l12-2v13"></path>
-        <circle cx="6" cy="18" r="3"></circle>
-        <circle cx="18" cy="16" r="3"></circle>
+      <svg class="rp-music__icon-on" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+      </svg>
+      <svg class="rp-music__icon-off" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <line x1="23" y1="9" x2="17" y2="15"></line>
+        <line x1="17" y1="9" x2="23" y2="15"></line>
       </svg>
     </span>
-    <span class="rp-music__text" id="musicText">SOUND ON</span>
+    <span class="rp-music__text" id="musicText">SOUND OFF</span>
   </button>
 
   <!-- Floating Bokeh Particles -->
@@ -317,7 +321,7 @@
 
         <div class="rp-video__card">
           <div class="rp-video__frame" id="videoFrame">
-            <video id="weddingVideo" class="rp-video__player" playsinline preload="metadata" poster="assets/video-poster.jpg">
+            <video id="weddingVideo" class="rp-video__player" playsinline webkit-playsinline x5-playsinline preload="metadata" poster="assets/video-poster.jpg">
               <source src="assets/invitation-video.mp4" type="video/mp4" />
               <source src="invitation video.mp4" type="video/mp4" />
               Your browser does not support the video tag.
@@ -386,22 +390,22 @@
             <p class="rp-video__caption-sub rp-font-serif">A cinematic preview of our wedding celebration</p>
           </div>
 
-          <!-- Video Action Links for Direct Stream & Download -->
+          <!-- Video Action Links for Direct Play & Download -->
           <div class="rp-video__actions">
-            <a href="assets/invitation-video.mp4" target="_blank" rel="noopener noreferrer" class="rp-video__btn rp-font-label">
+            <button type="button" id="playVideoDirectBtn" class="rp-video__btn rp-font-label">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <polygon points="5 3 19 12 5 21 5 3"></polygon>
               </svg>
-              <span>WATCH FULLSCREEN / OPEN VIDEO</span>
-            </a>
-            <a href="assets/invitation-video.mp4" download="ravi-sowjanya-wedding-invitation.mp4" class="rp-video__btn rp-video__btn--outline rp-font-label">
+              <span>PLAY VIDEO DIRECTLY</span>
+            </button>
+            <button type="button" id="downloadVideoBtn" class="rp-video__btn rp-video__btn--outline rp-font-label">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                 <polyline points="7 10 12 15 17 10"></polyline>
                 <line x1="12" y1="15" x2="12" y2="3"></line>
               </svg>
-              <span>DOWNLOAD VIDEO (HD)</span>
-            </a>
+              <span class="rp-video__download-label">DOWNLOAD VIDEO</span>
+            </button>
           </div>
         </div>
       </div>
@@ -584,6 +588,36 @@
       <img src="assets/gallery-1.jpg" alt="Enlarged gallery photo" id="lightboxImg" class="rp-lightbox__img" />
     </div>
     <button type="button" class="rp-lightbox__next" id="lightboxNext" aria-label="Next image">&rarr;</button>
+  </div>
+
+  <!-- Calendar Selection Modal -->
+  <div id="calendarModal" class="rp-modal" aria-hidden="true" style="display:none;">
+    <div class="rp-modal__backdrop" id="calendarModalBackdrop"></div>
+    <div class="rp-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="calModalTitle">
+      <button type="button" class="rp-modal__close" id="calendarModalClose" aria-label="Close calendar options">&times;</button>
+      <div class="rp-modal__header">
+        <h3 class="rp-modal__title rp-font-heading" id="calModalTitle">SAVE THE DATE</h3>
+        <p class="rp-modal__subtitle rp-font-serif">Ravi &amp; Sowjanya Wedding Ceremony</p>
+        <p class="rp-modal__meta rp-font-ui">Thursday, 5th November 2026 &bull; 09:54 PM</p>
+      </div>
+      <div class="rp-modal__actions">
+        <a id="calGoogleLink" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding+of+Ravi+%26+Sowjanya&dates=20261105T162400Z/20261106T000000Z&details=Join+us+for+the+wedding+ceremony+of+Ravi+Sri+Surya+Mani+Shankar+and+Lakshmi+Sowjanya+on+Thursday%2C+5th+November+2026+at+9%3A54+PM+at+Sitarama+Community+Hall%2C+Beside+DharmaGundam+Cheruvu%2C+Mandapeta.&location=Sitarama+Community+Hall%2C+Beside+DharmaGundam+Cheruvu%2C+Mandapeta%2C+Andhra+Pradesh" target="_blank" rel="noopener noreferrer" class="rp-modal__btn rp-modal__btn--google rp-font-label">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/>
+          </svg>
+          <span>GOOGLE CALENDAR</span>
+        </a>
+        <button type="button" id="calIcsBtn" class="rp-modal__btn rp-modal__btn--ics rp-font-label">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span>APPLE / OUTLOOK (.ICS)</span>
+        </button>
+      </div>
+    </div>
   </div>
 
   <!-- Scripts -->

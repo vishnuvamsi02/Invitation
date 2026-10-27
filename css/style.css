@@ -3376,3 +3376,144 @@ html, body {
   border-color: var(--rp-gold) !important;
   color: #fff4da !important;
 }
+
+/* Share Button Copied Feedback */
+.rp-share__btn--copied {
+  border-color: var(--rp-gold) !important;
+  background: rgba(217, 163, 75, 0.25) !important;
+  color: #ffffff !important;
+}
+
+/* ========================================================
+   CALENDAR SELECTION MODAL
+   ======================================================== */
+.rp-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 1000 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 1rem !important;
+  box-sizing: border-box !important;
+}
+
+.rp-modal__backdrop {
+  position: absolute !important;
+  inset: 0 !important;
+  background: rgba(14, 7, 22, 0.85) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+.rp-modal__dialog {
+  position: relative !important;
+  z-index: 1001 !important;
+  width: min(100%, 420px) !important;
+  background: linear-gradient(155deg, rgba(87, 37, 70, 0.98), rgba(24, 12, 38, 0.99)) !important;
+  border: 1.5px solid rgba(245, 217, 157, 0.4) !important;
+  border-radius: 24px !important;
+  padding: 2.2rem 1.6rem 2rem !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(217, 163, 75, 0.15) !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+  animation: rp-modal-pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+@keyframes rp-modal-pop {
+  from { opacity: 0; transform: scale(0.92) translateY(12px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.rp-modal__close {
+  position: absolute !important;
+  top: 14px !important;
+  right: 16px !important;
+  background: transparent !important;
+  border: none !important;
+  color: rgba(254, 242, 217, 0.7) !important;
+  font-size: 1.8rem !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  padding: 4px !important;
+  transition: color 0.2s ease, transform 0.2s ease !important;
+}
+
+.rp-modal__close:hover {
+  color: var(--rp-gold) !important;
+  transform: scale(1.15) !important;
+}
+
+.rp-modal__title {
+  font-size: 1.35rem !important;
+  color: var(--rp-gold) !important;
+  margin: 0 0 0.3rem 0 !important;
+  letter-spacing: 0.12em !important;
+}
+
+.rp-modal__subtitle {
+  font-size: 1.15rem !important;
+  color: #fff4da !important;
+  margin: 0 0 0.4rem 0 !important;
+}
+
+.rp-modal__meta {
+  font-size: 0.88rem !important;
+  color: rgba(245, 217, 157, 0.85) !important;
+  margin: 0 0 1.6rem 0 !important;
+  font-weight: 600 !important;
+}
+
+.rp-modal__actions {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.85rem !important;
+  width: 100% !important;
+}
+
+.rp-modal__btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.65rem !important;
+  width: 100% !important;
+  min-height: 52px !important;
+  padding: 0.95rem 1.4rem !important;
+  border-radius: 999px !important;
+  font-family: var(--rp-font-manrope), sans-serif !important;
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+  transition: all 0.25s ease !important;
+}
+
+.rp-modal__btn--google {
+  background: linear-gradient(135deg, #a15450, #7a3c38) !important;
+  border: 1.5px solid rgba(245, 217, 157, 0.45) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35) !important;
+}
+
+.rp-modal__btn--google:hover {
+  background: linear-gradient(135deg, #b8625e, #8f4844) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5) !important;
+}
+
+.rp-modal__btn--ics {
+  background: rgba(30, 14, 38, 0.85) !important;
+  border: 1.5px solid rgba(245, 217, 157, 0.35) !important;
+  color: var(--rp-gold) !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3) !important;
+}
+
+.rp-modal__btn--ics:hover {
+  background: rgba(217, 163, 75, 0.2) !important;
+  border-color: var(--rp-gold) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+}
