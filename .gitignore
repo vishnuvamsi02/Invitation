@@ -11,7 +11,6 @@ p7fosjg9fjbplnvq.public.blob.vercel-storage.com/
 .DS_Store
 Thumbs.db
 
-# Root raw media copies (curated versions tracked in assets/)
+# Raw media
 /invitation video.mp4
 /Invitation audio.mpeg
-/assets/bg-music.mp3

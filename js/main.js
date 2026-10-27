@@ -18,122 +18,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let isMusicPlaying = false;
   let isInvitationOpened = false;
-  let fadeAudioInterval = null;
 
-  // --- 1. Audio Control with Smooth Fade-In ---
-  function updateMusicButtonUI(playing) {
-    if (!musicBtn) return;
-    const text = musicBtn.querySelector('.rp-music__text');
-    const iconOn = musicBtn.querySelector('.rp-music__icon-on');
-    const iconOff = musicBtn.querySelector('.rp-music__icon-off');
-
-    if (playing) {
-      musicBtn.classList.add('rp-music--playing');
-      if (text) text.textContent = 'SOUND ON';
-      if (iconOn) iconOn.style.display = 'block';
-      if (iconOff) iconOff.style.display = 'none';
-      musicBtn.setAttribute('aria-label', 'Pause background music');
-    } else {
-      musicBtn.classList.remove('rp-music--playing');
-      if (text) text.textContent = 'SOUND OFF';
-      if (iconOn) iconOn.style.display = 'none';
-      if (iconOff) iconOff.style.display = 'block';
-      musicBtn.setAttribute('aria-label', 'Play background music');
-    }
-  }
-
-  function fadeInAudio(targetVolume = 0.85, durationMs = 2500) {
-    if (!bgMusic) return;
-    if (fadeAudioInterval) clearInterval(fadeAudioInterval);
-
-    bgMusic.volume = 0;
-    const playPromise = bgMusic.play();
-    if (playPromise !== undefined) {
-      playPromise.then(() => {
-        isMusicPlaying = true;
-        updateMusicButtonUI(true);
-        const stepMs = 50;
-        const steps = durationMs / stepMs;
-        const volumeStep = targetVolume / steps;
-
-        fadeAudioInterval = setInterval(() => {
-          if (!isMusicPlaying) {
-            clearInterval(fadeAudioInterval);
-            return;
-          }
-          if (bgMusic.volume + volumeStep >= targetVolume) {
-            bgMusic.volume = targetVolume;
-            clearInterval(fadeAudioInterval);
-          } else {
-            bgMusic.volume = Math.min(targetVolume, bgMusic.volume + volumeStep);
-          }
-        }, stepMs);
-      }).catch(err => {
-        console.warn('Autoplay prevented by browser:', err);
-        isMusicPlaying = false;
-        updateMusicButtonUI(false);
-      });
-    }
-  }
-
-  function fadeOutAudio(durationMs = 600, callback) {
-    if (!bgMusic) return;
-    if (fadeAudioInterval) clearInterval(fadeAudioInterval);
-
-    const stepMs = 50;
-    const steps = durationMs / stepMs;
-    const currentVol = bgMusic.volume || 0.8;
-    const volumeStep = currentVol / steps;
-
-    fadeAudioInterval = setInterval(() => {
-      if (bgMusic.volume - volumeStep <= 0.05) {
-        bgMusic.volume = 0;
-        bgMusic.pause();
-        clearInterval(fadeAudioInterval);
-        isMusicPlaying = false;
-        updateMusicButtonUI(false);
-        if (callback) callback();
-      } else {
-        bgMusic.volume = Math.max(0, bgMusic.volume - volumeStep);
-      }
-    }, stepMs);
-  }
-
+  // --- 1. Audio Control ---
   function playAudio() {
-    fadeInAudio(0.85, 2000);
-  }
-
-  function pauseAudio(immediate = false) {
-    if (immediate) {
-      if (fadeAudioInterval) clearInterval(fadeAudioInterval);
-      if (bgMusic) {
-        bgMusic.pause();
-        bgMusic.volume = 0;
-      }
+    if (!bgMusic) return;
+    bgMusic.play().then(() => {
+      isMusicPlaying = true;
+      musicBtn.classList.add('rp-music--playing');
+      musicBtn.querySelector('.rp-music__text').textContent = 'Sound On';
+    }).catch(err => {
+      console.warn('Autoplay prevented by browser:', err);
       isMusicPlaying = false;
-      updateMusicButtonUI(false);
-    } else {
-      fadeOutAudio(600);
-    }
-  }
-
-  if (musicBtn) {
-    musicBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (isMusicPlaying) {
-        pauseAudio(false);
-      } else {
-        const vid = document.getElementById('weddingVideo');
-        if (vid && !vid.paused) {
-          vid.pause();
-        }
-        fadeInAudio(0.85, 2000);
-      }
+      musicBtn.classList.remove('rp-music--playing');
+      musicBtn.querySelector('.rp-music__text').textContent = 'Sound Off';
     });
   }
 
-  // Initial state check
-  updateMusicButtonUI(false);
+  function pauseAudio() {
+    if (!bgMusic) return;
+    bgMusic.pause();
+    isMusicPlaying = false;
+    musicBtn.classList.remove('rp-music--playing');
+    musicBtn.querySelector('.rp-music__text').textContent = 'Sound Off';
+  }
+
+  musicBtn.addEventListener('click', () => {
+    if (isMusicPlaying) {
+      pauseAudio();
+    } else {
+      playAudio();
+    }
+  });
 
   // --- 2. Initial Entry Screen Animation (GSAP) ---
   if (typeof gsap !== 'undefined') {
@@ -498,69 +413,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- 8. Spread The Joy / Share This Invitation ---
-  const shareWaBtn = document.getElementById('shareInviteWaBtn');
-  const shareCalBtn = document.getElementById('shareInviteCalBtn');
-  const shareCopyBtn = document.getElementById('shareInviteCopyBtn');
-
-  // Calendar Modal Elements
-  const calendarModal = document.getElementById('calendarModal');
-  const calendarModalClose = document.getElementById('calendarModalClose');
-  const calendarModalBackdrop = document.getElementById('calendarModalBackdrop');
-  const calIcsBtn = document.getElementById('calIcsBtn');
-
   function shareInvitationOnWa() {
-    const url = window.location.href;
-    const shareText = "You are warmly invited to celebrate the wedding ceremony of Ravi Sri Surya Mani Shankar & Lakshmi Sowjanya on Thursday, 5th November 2026 at Sitarama Community Hall, Mandapeta.\n\nView personal invitation: " + url;
-    const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
-
-    // Mobile vs Desktop handling for WhatsApp
-    const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
-    if (isMobile) {
-      window.location.href = waUrl;
-    } else {
-      window.open(waUrl, '_blank', 'noopener,noreferrer');
-    }
+    const shareText = "You are warmly invited to celebrate the wedding of Ravi Sri Surya Mani Shankar & Lakshmi Sowjanya on Thursday, 5th November 2026 at Sitarama Community Hall, Mandapeta.\n\nView personal invitation: " + window.location.href;
+    window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank', 'noopener,noreferrer');
   }
 
+  const shareWaBtn = document.getElementById('shareInviteWaBtn');
   if (shareWaBtn) {
-    shareWaBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      shareInvitationOnWa();
-    });
+    shareWaBtn.addEventListener('click', shareInvitationOnWa);
   }
 
-  // Open Calendar Selection Modal
-  if (shareCalBtn && calendarModal) {
-    shareCalBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      calendarModal.style.display = 'flex';
-      calendarModal.setAttribute('aria-hidden', 'false');
-    });
-  }
-
-  function closeCalendarModal() {
-    if (calendarModal) {
-      calendarModal.style.display = 'none';
-      calendarModal.setAttribute('aria-hidden', 'true');
-    }
-  }
-
-  if (calendarModalClose) {
-    calendarModalClose.addEventListener('click', closeCalendarModal);
-  }
-  if (calendarModalBackdrop) {
-    calendarModalBackdrop.addEventListener('click', closeCalendarModal);
-  }
-
-  // Download .ICS calendar file (for Apple / Outlook)
-  if (calIcsBtn) {
-    calIcsBtn.addEventListener('click', () => {
+  const shareCalBtn = document.getElementById('shareInviteCalBtn');
+  if (shareCalBtn) {
+    shareCalBtn.addEventListener('click', () => {
       const icsData = [
         'BEGIN:VCALENDAR',
         'VERSION:2.0',
         'PRODID:-//RoyalWedding//Invitation//EN',
-        'CALSCALE:GREGORIAN',
-        'METHOD:PUBLISH',
         'BEGIN:VEVENT',
         'DTSTART:20261105T162400Z',
         'DTEND:20261106T000000Z',
@@ -573,319 +442,36 @@ document.addEventListener('DOMContentLoaded', () => {
       ].join('\r\n');
 
       const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
-      const blobUrl = URL.createObjectURL(blob);
       const link = document.createElement('a');
-      link.href = blobUrl;
+      link.href = URL.createObjectURL(blob);
       link.download = 'ravi-sowjanya-wedding.ics';
-      document.body.appendChild(link);
       link.click();
-      setTimeout(() => {
-        document.body.removeChild(link);
-        URL.revokeObjectURL(blobUrl);
-      }, 45000);
-      closeCalendarModal();
+      URL.revokeObjectURL(link.href);
     });
   }
 
-  // Bulletproof Copy Link Function
+  const shareCopyBtn = document.getElementById('shareInviteCopyBtn');
   if (shareCopyBtn) {
-    shareCopyBtn.addEventListener('click', async (e) => {
-      e.stopPropagation();
+    shareCopyBtn.addEventListener('click', async () => {
       const url = window.location.href;
-      let copied = false;
-
-      if (navigator.clipboard && window.isSecureContext) {
-        try {
-          await navigator.clipboard.writeText(url);
-          copied = true;
-        } catch (err) {
-          copied = false;
-        }
+      try {
+        await navigator.clipboard.writeText(url);
+      } catch (err) {
+        const input = document.createElement('input');
+        input.value = url;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
       }
-
-      if (!copied) {
-        const textarea = document.createElement('textarea');
-        textarea.value = url;
-        textarea.setAttribute('readonly', '');
-        textarea.style.position = 'fixed';
-        textarea.style.top = '0';
-        textarea.style.left = '-9999px';
-        textarea.style.opacity = '0';
-        document.body.appendChild(textarea);
-        textarea.focus();
-        textarea.select();
-        textarea.setSelectionRange(0, 99999);
-        try {
-          copied = document.execCommand('copy');
-        } catch (err) {
-          copied = false;
-        }
-        document.body.removeChild(textarea);
-      }
-
-      const label = shareCopyBtn.querySelector('.rp-share__label') || shareCopyBtn;
-      const originalText = label.textContent;
-      label.textContent = 'Link Copied! ✓';
-      shareCopyBtn.classList.add('rp-share__btn--copied');
-      setTimeout(() => {
-        label.textContent = originalText;
-        shareCopyBtn.classList.remove('rp-share__btn--copied');
-      }, 2500);
-    });
-  }
-
-  // --- 9. Cinematic Wedding Video Player ---
-  function initVideoPlayer() {
-    const video = document.getElementById('weddingVideo');
-    const videoFrame = document.getElementById('videoFrame');
-    const bigPlayBtn = document.getElementById('videoBigPlayBtn');
-    const playPauseCtrl = document.getElementById('videoPlayPauseCtrl');
-    const iconPlay = playPauseCtrl ? playPauseCtrl.querySelector('.rp-video__icon-play') : null;
-    const iconPause = playPauseCtrl ? playPauseCtrl.querySelector('.rp-video__icon-pause') : null;
-    const progressBar = document.getElementById('videoProgressBar');
-    const progressFill = document.getElementById('videoProgressFill');
-    const timeDisplay = document.getElementById('videoTimeDisplay');
-    const muteCtrl = document.getElementById('videoMuteCtrl');
-    const iconVol = muteCtrl ? muteCtrl.querySelector('.rp-video__icon-vol') : null;
-    const iconMute = muteCtrl ? muteCtrl.querySelector('.rp-video__icon-mute') : null;
-    const fsCtrl = document.getElementById('videoFsCtrl');
-    const playDirectBtn = document.getElementById('playVideoDirectBtn');
-    const downloadBtn = document.getElementById('downloadVideoBtn');
-
-    if (!video) return;
-
-    let wasMusicPlayingBeforeVideo = false;
-    let isToggling = false;
-
-    function formatTime(seconds) {
-      if (isNaN(seconds) || seconds < 0) return '0:00';
-      const m = Math.floor(seconds / 60);
-      const s = Math.floor(seconds % 60);
-      return `${m}:${s < 10 ? '0' : ''}${s}`;
-    }
-
-    function updateVideoPlayState(isPlaying) {
-      if (videoFrame) {
-        if (isPlaying) {
-          videoFrame.classList.add('is-playing');
-        } else {
-          videoFrame.classList.remove('is-playing');
-        }
-      }
-      if (iconPlay) iconPlay.style.display = isPlaying ? 'none' : 'block';
-      if (iconPause) iconPause.style.display = isPlaying ? 'block' : 'none';
-    }
-
-    function toggleVideoPlay() {
-      if (isToggling) return;
-      isToggling = true;
-      setTimeout(() => { isToggling = false; }, 300);
-
-      if (video.paused) {
-        if (isMusicPlaying) {
-          wasMusicPlayingBeforeVideo = true;
-          pauseAudio(true);
-        }
-
-        // Try unmuted play first
-        video.muted = false;
-        const playPromise = video.play();
-        if (playPromise !== undefined) {
-          playPromise.then(() => {
-            updateVideoPlayState(true);
-          }).catch(err => {
-            console.warn('Unmuted play blocked by mobile policy, falling back to muted play:', err);
-            video.muted = true;
-            if (iconVol) iconVol.style.display = 'none';
-            if (iconMute) iconMute.style.display = 'block';
-            video.play().then(() => {
-              updateVideoPlayState(true);
-            }).catch(e => {
-              console.error('Video play error:', e);
-            });
-          });
-        }
-      } else {
-        video.pause();
-      }
-    }
-
-    video.addEventListener('play', () => {
-      updateVideoPlayState(true);
-      if (isMusicPlaying) {
-        wasMusicPlayingBeforeVideo = true;
-        pauseAudio(true);
-      }
-    });
-
-    video.addEventListener('pause', () => {
-      updateVideoPlayState(false);
-      if (wasMusicPlayingBeforeVideo && !isMusicPlaying) {
-        fadeInAudio(0.85, 1500);
-      }
-    });
-
-    video.addEventListener('ended', () => {
-      updateVideoPlayState(false);
-      if (wasMusicPlayingBeforeVideo && !isMusicPlaying) {
-        fadeInAudio(0.85, 1500);
-      }
-    });
-
-    video.addEventListener('timeupdate', () => {
-      if (video.duration) {
-        const percent = (video.currentTime / video.duration) * 100;
-        if (progressFill) progressFill.style.width = percent + '%';
-        if (progressBar) progressBar.setAttribute('aria-valuenow', Math.round(percent));
-        if (timeDisplay) timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
-      }
-    });
-
-    video.addEventListener('loadedmetadata', () => {
-      if (timeDisplay && video.duration) {
-        timeDisplay.textContent = `0:00 / ${formatTime(video.duration)}`;
-      }
-    });
-
-    // Big Center Play Button
-    if (bigPlayBtn) {
-      bigPlayBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleVideoPlay();
-      });
-    }
-
-    // Bottom Controls Play / Pause
-    if (playPauseCtrl) {
-      playPauseCtrl.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleVideoPlay();
-      });
-    }
-
-    // Clicking anywhere on the video frame
-    if (videoFrame) {
-      videoFrame.addEventListener('click', (e) => {
-        if (!e.target.closest('#videoControls') && !e.target.closest('#videoBigPlayBtn')) {
-          toggleVideoPlay();
-        }
-      });
-    }
-
-    // Clicking video element directly
-    video.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleVideoPlay();
-    });
-
-    // Scrubber Progress Bar
-    if (progressBar) {
-      progressBar.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const rect = progressBar.getBoundingClientRect();
-        const clickX = e.clientX - rect.left;
-        const pos = Math.max(0, Math.min(1, clickX / rect.width));
-        if (video.duration) {
-          video.currentTime = pos * video.duration;
-        }
-      });
-    }
-
-    // Mute / Unmute Toggle
-    if (muteCtrl) {
-      muteCtrl.addEventListener('click', (e) => {
-        e.stopPropagation();
-        video.muted = !video.muted;
-        if (video.muted) {
-          if (iconVol) iconVol.style.display = 'none';
-          if (iconMute) iconMute.style.display = 'block';
-        } else {
-          if (iconVol) iconVol.style.display = 'block';
-          if (iconMute) iconMute.style.display = 'none';
-        }
-      });
-    }
-
-    // Fullscreen Expansion
-    if (fsCtrl) {
-      fsCtrl.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (document.fullscreenElement) {
-          document.exitFullscreen().catch(() => {});
-        } else if (video.requestFullscreen) {
-          video.requestFullscreen().catch(() => {});
-        } else if (video.webkitEnterFullscreen) {
-          video.webkitEnterFullscreen();
-        }
-      });
-    }
-
-    // Button: "PLAY VIDEO DIRECTLY"
-    if (playDirectBtn) {
-      playDirectBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (isMusicPlaying) {
-          wasMusicPlayingBeforeVideo = true;
-          pauseAudio(true);
-        }
-
-        // Scroll to video frame smoothly
-        videoFrame.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-        // Play video
-        video.muted = false;
-        const p = video.play();
-        if (p !== undefined) {
-          p.then(() => {
-            updateVideoPlayState(true);
-            // On mobile devices, enter fullscreen for direct immersion
-            if (window.innerWidth <= 768) {
-              if (video.requestFullscreen) {
-                video.requestFullscreen().catch(() => {});
-              } else if (video.webkitEnterFullscreen) {
-                video.webkitEnterFullscreen();
-              }
-            }
-          }).catch(err => {
-            console.warn('Direct play policy fallback:', err);
-            video.muted = true;
-            if (iconVol) iconVol.style.display = 'none';
-            if (iconMute) iconMute.style.display = 'block';
-            video.play().then(() => {
-              updateVideoPlayState(true);
-            }).catch(() => {
-              window.open('assets/invitation-video.mp4', '_blank');
-            });
-          });
-        }
-      });
-    }
-
-    // Button: "DOWNLOAD VIDEO"
-    if (downloadBtn) {
-      downloadBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const videoSrc = 'assets/invitation-video.mp4';
-        const fileName = 'Ravi-Sowjanya-Wedding-Invitation.mp4';
-
-        const a = document.createElement('a');
-        a.href = videoSrc;
-        a.download = fileName;
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
-        document.body.appendChild(a);
-        a.click();
-        setTimeout(() => document.body.removeChild(a), 1000);
-
-        const label = downloadBtn.querySelector('.rp-video__download-label') || downloadBtn;
-        const orig = label.textContent;
-        label.textContent = 'Downloading...';
+      const label = shareCopyBtn.querySelector('.rp-share__label');
+      if (label) {
+        const originalText = label.textContent;
+        label.textContent = 'Copied!';
         setTimeout(() => {
-          label.textContent = orig;
-        }, 3000);
-      });
-    }
+          label.textContent = originalText;
+        }, 2000);
+      }
+    });
   }
-
-  initVideoPlayer();
 });
