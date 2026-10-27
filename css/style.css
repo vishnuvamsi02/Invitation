@@ -33,7 +33,7 @@
 }
 
 .royal-premium:before {
-  background:url(/assets/royal-premium/jali-pattern.svg) 50%/280px 280px repeat;opacity:.12
+  background:url(../assets/jali-pattern.svg) 50%/280px 280px repeat;opacity:.12
 }
 
 .royal-premium:after {
@@ -3361,4 +3361,30 @@ html, body {
   border-color: var(--rp-gold) !important;
   color: #fff4da !important;
   transform: translateY(-2px) !important;
+}
+
+/* Entry Screen Hidden State */
+.rp-entry.is-hidden {
+  display: none !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+/* Ensure background animations and particles NEVER block clicks */
+.rp-rain,
+.rp-rain *,
+.rp-bokeh-container,
+.rp-bokeh-container * {
+  pointer-events: none !important;
+}
+
+/* Video Player Mobile Touch Control Visibility */
+.rp-video__frame.show-controls .rp-video__controls,
+.rp-video__frame:focus-within .rp-video__controls {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+.rp-video__frame.show-controls .rp-video__play-btn {
+  opacity: 0.9 !important;
+  pointer-events: auto !important;
 }

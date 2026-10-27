@@ -19,36 +19,140 @@ document.addEventListener('DOMContentLoaded', () => {
   let isMusicPlaying = false;
   let isInvitationOpened = false;
 
-  // --- 1. Audio Control ---
-  function playAudio() {
-    if (!bgMusic) return;
-    bgMusic.play().then(() => {
-      isMusicPlaying = true;
+  // --- 1. Audio Control with Smooth Fade-In Effect ---
+  let fadeAudioInterval = null;
+
+  function updateMusicButtonUI(playing) {
+    if (!musicBtn) return;
+    const text = musicBtn.querySelector('.rp-music__text');
+    if (playing) {
       musicBtn.classList.add('rp-music--playing');
-      musicBtn.querySelector('.rp-music__text').textContent = 'Sound On';
-    }).catch(err => {
-      console.warn('Autoplay prevented by browser:', err);
-      isMusicPlaying = false;
+      if (text) text.textContent = 'Sound On';
+    } else {
       musicBtn.classList.remove('rp-music--playing');
-      musicBtn.querySelector('.rp-music__text').textContent = 'Sound Off';
+      if (text) text.textContent = 'Sound Off';
+    }
+  }
+
+  function fadeInAudio(targetVolume = 0.85, durationMs = 2500) {
+    if (!bgMusic) return;
+    if (fadeAudioInterval) {
+      clearInterval(fadeAudioInterval);
+      fadeAudioInterval = null;
+    }
+
+    try {
+      bgMusic.volume = 0;
+    } catch (e) {}
+
+    const playPromise = bgMusic.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        isMusicPlaying = true;
+        updateMusicButtonUI(true);
+
+        const stepMs = 50;
+        const steps = Math.max(1, Math.floor(durationMs / stepMs));
+        const volumeStep = targetVolume / steps;
+
+        fadeAudioInterval = setInterval(() => {
+          if (!isMusicPlaying || bgMusic.paused) {
+            clearInterval(fadeAudioInterval);
+            fadeAudioInterval = null;
+            return;
+          }
+          try {
+            if (bgMusic.volume + volumeStep >= targetVolume) {
+              bgMusic.volume = targetVolume;
+              clearInterval(fadeAudioInterval);
+              fadeAudioInterval = null;
+            } else {
+              bgMusic.volume = Math.min(targetVolume, bgMusic.volume + volumeStep);
+            }
+          } catch (e) {
+            clearInterval(fadeAudioInterval);
+            fadeAudioInterval = null;
+          }
+        }, stepMs);
+      }).catch(err => {
+        console.warn('Autoplay prevented by browser:', err);
+        isMusicPlaying = false;
+        updateMusicButtonUI(false);
+      });
+    }
+  }
+
+  function fadeOutAudio(durationMs = 400, callback) {
+    if (!bgMusic) return;
+    if (fadeAudioInterval) {
+      clearInterval(fadeAudioInterval);
+      fadeAudioInterval = null;
+    }
+
+    isMusicPlaying = false;
+    updateMusicButtonUI(false);
+
+    const stepMs = 40;
+    const steps = Math.max(1, Math.floor(durationMs / stepMs));
+    const startVol = bgMusic.volume;
+    const volumeStep = startVol / steps;
+
+    fadeAudioInterval = setInterval(() => {
+      try {
+        if (bgMusic.volume - volumeStep <= 0.05) {
+          bgMusic.volume = 0;
+          bgMusic.pause();
+          clearInterval(fadeAudioInterval);
+          fadeAudioInterval = null;
+          if (callback) callback();
+        } else {
+          bgMusic.volume = Math.max(0, bgMusic.volume - volumeStep);
+        }
+      } catch (e) {
+        if (bgMusic) bgMusic.pause();
+        clearInterval(fadeAudioInterval);
+        fadeAudioInterval = null;
+        if (callback) callback();
+      }
+    }, stepMs);
+  }
+
+  function playAudio() {
+    fadeInAudio(0.85, 2500);
+  }
+
+  function pauseAudio(immediate = false) {
+    if (immediate) {
+      if (fadeAudioInterval) {
+        clearInterval(fadeAudioInterval);
+        fadeAudioInterval = null;
+      }
+      if (bgMusic) {
+        bgMusic.pause();
+        try { bgMusic.volume = 0; } catch (e) {}
+      }
+      isMusicPlaying = false;
+      updateMusicButtonUI(false);
+    } else {
+      fadeOutAudio(400);
+    }
+  }
+
+  if (musicBtn) {
+    musicBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (bgMusic && !bgMusic.paused) {
+        pauseAudio(false);
+      } else {
+        const vid = document.getElementById('weddingVideo');
+        if (vid && !vid.paused) {
+          vid.pause();
+        }
+        playAudio();
+      }
     });
   }
-
-  function pauseAudio() {
-    if (!bgMusic) return;
-    bgMusic.pause();
-    isMusicPlaying = false;
-    musicBtn.classList.remove('rp-music--playing');
-    musicBtn.querySelector('.rp-music__text').textContent = 'Sound Off';
-  }
-
-  musicBtn.addEventListener('click', () => {
-    if (isMusicPlaying) {
-      pauseAudio();
-    } else {
-      playAudio();
-    }
-  });
 
   // --- 2. Initial Entry Screen Animation (GSAP) ---
   if (typeof gsap !== 'undefined') {
@@ -130,10 +234,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     playAudio();
 
+    if (entryScreen) {
+      entryScreen.style.setProperty('pointer-events', 'none', 'important');
+    }
+
     if (typeof gsap !== 'undefined') {
       const exitTl = gsap.timeline({
         onComplete: () => {
-          entryScreen.style.display = 'none';
+          if (entryScreen) {
+            entryScreen.classList.add('is-hidden');
+            entryScreen.style.setProperty('display', 'none', 'important');
+            entryScreen.style.setProperty('pointer-events', 'none', 'important');
+          }
           initScrollAnimations();
         }
       });
@@ -413,9 +525,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- 8. Spread The Joy / Share This Invitation ---
-  function shareInvitationOnWa() {
-    const shareText = "You are warmly invited to celebrate the wedding of Ravi Sri Surya Mani Shankar & Lakshmi Sowjanya on Thursday, 5th November 2026 at Sitarama Community Hall, Mandapeta.\n\nView personal invitation: " + window.location.href;
-    window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank', 'noopener,noreferrer');
+  function getShareUrl() {
+    let url = window.location.href;
+    if (!url || url.startsWith('file:') || url.includes('localhost') || url.includes('127.0.0.1')) {
+      url = 'https://vishnuvamsi02.github.io/Invitation/';
+    }
+    return url;
+  }
+
+  function shareInvitationOnWa(e) {
+    if (e) e.preventDefault();
+    const shareUrl = getShareUrl();
+    const shareText = "You are warmly invited to celebrate the wedding ceremony of Ravi Sri Surya Mani Shankar and Lakshmi Sowjanya on Thursday, 5th November 2026 at Sitarama Community Hall, Mandapeta.\n\nView personal invitation: " + shareUrl;
+    const encoded = encodeURIComponent(shareText);
+    const waUrl = `https://api.whatsapp.com/send?text=${encoded}`;
+    window.open(waUrl, '_blank');
   }
 
   const shareWaBtn = document.getElementById('shareInviteWaBtn');
@@ -425,12 +549,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const shareCalBtn = document.getElementById('shareInviteCalBtn');
   if (shareCalBtn) {
-    shareCalBtn.addEventListener('click', () => {
+    shareCalBtn.addEventListener('click', (e) => {
+      if (e) e.preventDefault();
+
+      const googleCalUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding+of+Ravi+%26+Sowjanya&dates=20261105T162400Z/20261106T000000Z&details=Join+us+for+the+wedding+ceremony+of+Ravi+Sri+Surya+Mani+Shankar+and+Lakshmi+Sowjanya+on+Thursday%2C+5th+November+2026+at+9%3A54+PM+at+Sitarama+Community+Hall%2C+Beside+DharmaGundam+Cheruvu%2C+Mandapeta.&location=Sitarama+Community+Hall%2C+Beside+DharmaGundam+Cheruvu%2C+Mandapeta%2C+Andhra+Pradesh';
+
+      const isAndroid = /Android/i.test(navigator.userAgent);
+      if (isAndroid) {
+        window.open(googleCalUrl, '_blank');
+        return;
+      }
+
       const icsData = [
         'BEGIN:VCALENDAR',
         'VERSION:2.0',
         'PRODID:-//RoyalWedding//Invitation//EN',
+        'CALSCALE:GREGORIAN',
+        'METHOD:PUBLISH',
         'BEGIN:VEVENT',
+        'UID:wedding-ravi-sowjanya-20261105@myshaadhi',
+        'DTSTAMP:20261027T000000Z',
         'DTSTART:20261105T162400Z',
         'DTEND:20261106T000000Z',
         'SUMMARY:Wedding of Ravi & Sowjanya',
@@ -441,39 +579,70 @@ document.addEventListener('DOMContentLoaded', () => {
         'END:VCALENDAR'
       ].join('\r\n');
 
-      const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = 'ravi-sowjanya-wedding.ics';
-      link.click();
-      URL.revokeObjectURL(link.href);
+      try {
+        const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
+        const blobUrl = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.setAttribute('download', 'ravi-sowjanya-wedding.ics');
+        document.body.appendChild(link);
+        link.click();
+        setTimeout(() => {
+          document.body.removeChild(link);
+          URL.revokeObjectURL(blobUrl);
+        }, 30000);
+      } catch (err) {
+        window.open(googleCalUrl, '_blank');
+      }
     });
   }
 
   const shareCopyBtn = document.getElementById('shareInviteCopyBtn');
   if (shareCopyBtn) {
-    shareCopyBtn.addEventListener('click', async () => {
-      const url = window.location.href;
+    shareCopyBtn.addEventListener('click', async (e) => {
+      if (e) e.preventDefault();
+      const url = getShareUrl();
+      let copied = false;
+
       try {
-        await navigator.clipboard.writeText(url);
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(url);
+          copied = true;
+        }
       } catch (err) {
-        const input = document.createElement('input');
-        input.value = url;
-        document.body.appendChild(input);
-        input.select();
-        document.execCommand('copy');
-        document.body.removeChild(input);
+        copied = false;
       }
-      const label = shareCopyBtn.querySelector('.rp-share__label');
+
+      if (!copied) {
+        try {
+          const textarea = document.createElement('textarea');
+          textarea.value = url;
+          textarea.style.position = 'fixed';
+          textarea.style.top = '-9999px';
+          textarea.style.left = '-9999px';
+          textarea.setAttribute('readonly', '');
+          document.body.appendChild(textarea);
+          textarea.focus();
+          textarea.select();
+          textarea.setSelectionRange(0, 99999);
+          copied = document.execCommand('copy');
+          document.body.removeChild(textarea);
+        } catch (err) {
+          console.warn('execCommand fallback failed:', err);
+        }
+      }
+
+      const label = shareCopyBtn.querySelector('.rp-share__label') || shareCopyBtn;
       if (label) {
         const originalText = label.textContent;
-        label.textContent = 'Copied!';
+        label.textContent = 'Link Copied!';
         setTimeout(() => {
           label.textContent = originalText;
-        }, 2000);
+        }, 2500);
       }
     });
   }
+
   // --- 9. Celebration Video Player ---
   function initVideoPlayer() {
     const video = document.getElementById('weddingVideo');
@@ -492,8 +661,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const iconMute = muteCtrl?.querySelector('.rp-video__icon-mute');
     const fsCtrl = document.getElementById('videoFullscreenCtrl');
     const playDirectBtn = document.getElementById('videoPlayDirectBtn');
+    const downloadBtn = document.getElementById('videoDownloadBtn');
 
     let wasMusicPlayingBeforeVideo = false;
+    let isToggling = false;
 
     function formatTime(seconds) {
       if (!seconds || isNaN(seconds)) return '0:00';
@@ -515,10 +686,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function toggleVideoPlay() {
+      if (isToggling) return;
+      isToggling = true;
+      setTimeout(() => { isToggling = false; }, 350);
+
       if (video.paused) {
         if (isMusicPlaying) {
           wasMusicPlayingBeforeVideo = true;
-          pauseAudio();
+          pauseAudio(true);
         }
         const p = video.play();
         if (p !== undefined) {
@@ -548,7 +723,7 @@ document.addEventListener('DOMContentLoaded', () => {
       updateVideoPlayState(true);
       if (isMusicPlaying) {
         wasMusicPlayingBeforeVideo = true;
-        pauseAudio();
+        pauseAudio(true);
       }
     });
 
@@ -583,18 +758,24 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Clicking anywhere on video frame
-    if (videoFrame) {
-      videoFrame.addEventListener('click', (e) => {
-        if (e.target.closest('#videoControls') || e.target.closest('#videoBigPlayBtn')) return;
-        toggleVideoPlay();
-      });
+    let controlsHideTimer = null;
+    function showControlsTemporarily() {
+      if (!videoFrame) return;
+      videoFrame.classList.add('show-controls');
+      if (controlsHideTimer) clearTimeout(controlsHideTimer);
+      controlsHideTimer = setTimeout(() => {
+        if (!video.paused) {
+          videoFrame.classList.remove('show-controls');
+        }
+      }, 3500);
     }
 
-    // Big Center Play Button
-    if (bigPlayBtn) {
-      bigPlayBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
+    // Unified Click Handler on video frame (handles video, big play button, and frame without double-triggering)
+    if (videoFrame) {
+      videoFrame.addEventListener('click', (e) => {
+        if (e.target.closest('#videoControls')) return;
+        e.preventDefault();
+        showControlsTemporarily();
         toggleVideoPlay();
       });
     }
@@ -602,16 +783,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Bottom Controls Play / Pause
     if (playPauseCtrl) {
       playPauseCtrl.addEventListener('click', (e) => {
+        e.preventDefault();
         e.stopPropagation();
         toggleVideoPlay();
       });
     }
-
-    // Clicking video element directly
-    video.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleVideoPlay();
-    });
 
     // Scrubber Progress Bar
     if (progressBar) {
@@ -655,21 +831,51 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Button: "PLAY VIDEO"
+    // Button: "PLAY VIDEO DIRECTLY"
     if (playDirectBtn) {
       playDirectBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         videoFrame?.scrollIntoView({ behavior: 'smooth', block: 'center' });
         if (isMusicPlaying) {
           wasMusicPlayingBeforeVideo = true;
-          pauseAudio();
+          pauseAudio(true);
         }
         video.muted = false;
-        video.play().then(() => {
-          updateVideoPlayState(true);
-        }).catch(err => {
-          console.warn('Direct play policy fallback:', err);
-        });
+        const p = video.play();
+        if (p !== undefined) {
+          p.then(() => {
+            updateVideoPlayState(true);
+            if (window.innerWidth <= 768) {
+              if (video.requestFullscreen) {
+                video.requestFullscreen().catch(() => {});
+              } else if (video.webkitEnterFullscreen) {
+                video.webkitEnterFullscreen();
+              }
+            }
+          }).catch(() => {
+            video.muted = true;
+            if (iconVol) iconVol.style.display = 'none';
+            if (iconMute) iconMute.style.display = 'block';
+            video.play().then(() => {
+              updateVideoPlayState(true);
+            }).catch(() => {
+              window.open('assets/invitation-video.mp4', '_blank');
+            });
+          });
+        }
+      });
+    }
+
+    // Button: "DOWNLOAD VIDEO"
+    if (downloadBtn) {
+      downloadBtn.addEventListener('click', () => {
+        // Allow native browser download without blocking; provide visual feedback
+        const label = downloadBtn.querySelector('.rp-video__download-label') || downloadBtn;
+        const orig = label.textContent;
+        label.textContent = 'Downloading...';
+        setTimeout(() => {
+          label.textContent = orig;
+        }, 3500);
       });
     }
   }
