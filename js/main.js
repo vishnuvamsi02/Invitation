@@ -474,4 +474,205 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+  // --- 9. Celebration Video Player ---
+  function initVideoPlayer() {
+    const video = document.getElementById('weddingVideo');
+    if (!video) return;
+
+    const videoFrame = document.getElementById('videoFrame');
+    const bigPlayBtn = document.getElementById('videoBigPlayBtn');
+    const playPauseCtrl = document.getElementById('videoPlayPauseCtrl');
+    const iconPlay = playPauseCtrl?.querySelector('.rp-video__icon-play');
+    const iconPause = playPauseCtrl?.querySelector('.rp-video__icon-pause');
+    const progressBar = document.getElementById('videoProgressBar');
+    const progressFill = document.getElementById('videoProgressFill');
+    const timeDisplay = document.getElementById('videoTimeDisplay');
+    const muteCtrl = document.getElementById('videoMuteCtrl');
+    const iconVol = muteCtrl?.querySelector('.rp-video__icon-vol');
+    const iconMute = muteCtrl?.querySelector('.rp-video__icon-mute');
+    const fsCtrl = document.getElementById('videoFullscreenCtrl');
+    const playDirectBtn = document.getElementById('videoPlayDirectBtn');
+
+    let wasMusicPlayingBeforeVideo = false;
+
+    function formatTime(seconds) {
+      if (!seconds || isNaN(seconds)) return '0:00';
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      return `${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+
+    function updateVideoPlayState(isPlaying) {
+      if (isPlaying) {
+        videoFrame?.classList.add('is-playing');
+        if (iconPlay) iconPlay.style.display = 'none';
+        if (iconPause) iconPause.style.display = 'block';
+      } else {
+        videoFrame?.classList.remove('is-playing');
+        if (iconPlay) iconPlay.style.display = 'block';
+        if (iconPause) iconPause.style.display = 'none';
+      }
+    }
+
+    function toggleVideoPlay() {
+      if (video.paused) {
+        if (isMusicPlaying) {
+          wasMusicPlayingBeforeVideo = true;
+          pauseAudio();
+        }
+        const p = video.play();
+        if (p !== undefined) {
+          p.then(() => {
+            updateVideoPlayState(true);
+          }).catch(err => {
+            console.warn('Video play error, attempting muted playback:', err);
+            video.muted = true;
+            if (iconVol) iconVol.style.display = 'none';
+            if (iconMute) iconMute.style.display = 'block';
+            video.play().then(() => {
+              updateVideoPlayState(true);
+            }).catch(e => console.error('Fallback play error:', e));
+          });
+        }
+      } else {
+        video.pause();
+        updateVideoPlayState(false);
+        if (wasMusicPlayingBeforeVideo) {
+          playAudio();
+          wasMusicPlayingBeforeVideo = false;
+        }
+      }
+    }
+
+    video.addEventListener('play', () => {
+      updateVideoPlayState(true);
+      if (isMusicPlaying) {
+        wasMusicPlayingBeforeVideo = true;
+        pauseAudio();
+      }
+    });
+
+    video.addEventListener('pause', () => {
+      updateVideoPlayState(false);
+      if (wasMusicPlayingBeforeVideo) {
+        playAudio();
+        wasMusicPlayingBeforeVideo = false;
+      }
+    });
+
+    video.addEventListener('ended', () => {
+      updateVideoPlayState(false);
+      if (wasMusicPlayingBeforeVideo) {
+        playAudio();
+        wasMusicPlayingBeforeVideo = false;
+      }
+    });
+
+    video.addEventListener('timeupdate', () => {
+      if (video.duration) {
+        const percent = (video.currentTime / video.duration) * 100;
+        if (progressFill) progressFill.style.width = percent + '%';
+        if (progressBar) progressBar.setAttribute('aria-valuenow', Math.round(percent));
+        if (timeDisplay) timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+      }
+    });
+
+    video.addEventListener('loadedmetadata', () => {
+      if (timeDisplay && video.duration) {
+        timeDisplay.textContent = `0:00 / ${formatTime(video.duration)}`;
+      }
+    });
+
+    // Clicking anywhere on video frame
+    if (videoFrame) {
+      videoFrame.addEventListener('click', (e) => {
+        if (e.target.closest('#videoControls') || e.target.closest('#videoBigPlayBtn')) return;
+        toggleVideoPlay();
+      });
+    }
+
+    // Big Center Play Button
+    if (bigPlayBtn) {
+      bigPlayBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleVideoPlay();
+      });
+    }
+
+    // Bottom Controls Play / Pause
+    if (playPauseCtrl) {
+      playPauseCtrl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleVideoPlay();
+      });
+    }
+
+    // Clicking video element directly
+    video.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleVideoPlay();
+    });
+
+    // Scrubber Progress Bar
+    if (progressBar) {
+      progressBar.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const rect = progressBar.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const pos = Math.max(0, Math.min(1, clickX / rect.width));
+        if (video.duration) {
+          video.currentTime = pos * video.duration;
+        }
+      });
+    }
+
+    // Mute / Unmute Toggle
+    if (muteCtrl) {
+      muteCtrl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        video.muted = !video.muted;
+        if (video.muted) {
+          if (iconVol) iconVol.style.display = 'none';
+          if (iconMute) iconMute.style.display = 'block';
+        } else {
+          if (iconVol) iconVol.style.display = 'block';
+          if (iconMute) iconMute.style.display = 'none';
+        }
+      });
+    }
+
+    // Fullscreen Expansion
+    if (fsCtrl) {
+      fsCtrl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (document.fullscreenElement) {
+          document.exitFullscreen().catch(() => {});
+        } else if (video.requestFullscreen) {
+          video.requestFullscreen().catch(() => {});
+        } else if (video.webkitEnterFullscreen) {
+          video.webkitEnterFullscreen();
+        }
+      });
+    }
+
+    // Button: "PLAY VIDEO"
+    if (playDirectBtn) {
+      playDirectBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        videoFrame?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (isMusicPlaying) {
+          wasMusicPlayingBeforeVideo = true;
+          pauseAudio();
+        }
+        video.muted = false;
+        video.play().then(() => {
+          updateVideoPlayState(true);
+        }).catch(err => {
+          console.warn('Direct play policy fallback:', err);
+        });
+      });
+    }
+  }
+
+  initVideoPlayer();
 });
