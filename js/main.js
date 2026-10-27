@@ -24,13 +24,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!bgMusic) return;
     bgMusic.play().then(() => {
       isMusicPlaying = true;
-      musicBtn.classList.add('rp-music--playing');
-      musicBtn.querySelector('.rp-music__text').textContent = 'Sound On';
+      if (musicBtn) {
+        musicBtn.classList.add('rp-music--playing');
+        const text = musicBtn.querySelector('.rp-music__text');
+        if (text) text.textContent = 'Sound On';
+      }
     }).catch(err => {
       console.warn('Autoplay prevented by browser:', err);
       isMusicPlaying = false;
-      musicBtn.classList.remove('rp-music--playing');
-      musicBtn.querySelector('.rp-music__text').textContent = 'Sound Off';
+      if (musicBtn) {
+        musicBtn.classList.remove('rp-music--playing');
+        const text = musicBtn.querySelector('.rp-music__text');
+        if (text) text.textContent = 'Sound Off';
+      }
     });
   }
 
@@ -38,17 +44,36 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!bgMusic) return;
     bgMusic.pause();
     isMusicPlaying = false;
-    musicBtn.classList.remove('rp-music--playing');
-    musicBtn.querySelector('.rp-music__text').textContent = 'Sound Off';
+    if (musicBtn) {
+      musicBtn.classList.remove('rp-music--playing');
+      const text = musicBtn.querySelector('.rp-music__text');
+      if (text) text.textContent = 'Sound Off';
+    }
   }
 
-  musicBtn.addEventListener('click', () => {
-    if (isMusicPlaying) {
-      pauseAudio();
-    } else {
-      playAudio();
-    }
-  });
+  if (musicBtn) {
+    musicBtn.addEventListener('click', () => {
+      if (isMusicPlaying) {
+        pauseAudio();
+      } else {
+        playAudio();
+      }
+    });
+  }
+
+  // Attempt autoplay immediately if browser allows, otherwise user clicking "Open Invitation" will start it
+  if (bgMusic) {
+    bgMusic.play().then(() => {
+      isMusicPlaying = true;
+      if (musicBtn) {
+        musicBtn.classList.add('rp-music--playing');
+        const text = musicBtn.querySelector('.rp-music__text');
+        if (text) text.textContent = 'Sound On';
+      }
+    }).catch(() => {
+      // Browser autoplay policy will activate when user taps "Open Invitation"
+    });
+  }
 
   // --- 2. Initial Entry Screen Animation (GSAP) ---
   if (typeof gsap !== 'undefined') {
@@ -414,7 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- 8. Spread The Joy / Share This Invitation ---
   function shareInvitationOnWa() {
-    const shareText = "You are warmly invited to celebrate the wedding of Ravi Sri Surya Mani Sankar & Lakshmi Sowjanya on Thursday, 5th November 2026 at Sitarama Community Hall, Mandapeta.\n\nView personal invitation: " + window.location.href;
+    const shareText = "You are warmly invited to celebrate the wedding of Ravi Sri Surya Mani Shankar & Lakshmi Sowjanya on Thursday, 5th November 2026 at Sitarama Community Hall, Mandapeta.\n\nView personal invitation: " + window.location.href;
     window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank', 'noopener,noreferrer');
   }
 
@@ -434,7 +459,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'DTSTART:20261105T162400Z',
         'DTEND:20261106T000000Z',
         'SUMMARY:Wedding of Ravi & Sowjanya',
-        'DESCRIPTION:Join us for the wedding ceremony of Ravi Sri Surya Mani Sankar and Lakshmi Sowjanya on Thursday, 5th November 2026 at 9:54 PM at Sitarama Community Hall, Beside DharmaGundam Cheruvu, Mandapeta.',
+        'DESCRIPTION:Join us for the wedding ceremony of Ravi Sri Surya Mani Shankar and Lakshmi Sowjanya on Thursday, 5th November 2026 at 9:54 PM at Sitarama Community Hall, Beside DharmaGundam Cheruvu, Mandapeta.',
         'LOCATION:Sitarama Community Hall, Beside DharmaGundam Cheruvu, Mandapeta, Andhra Pradesh',
         'STATUS:CONFIRMED',
         'END:VEVENT',
@@ -444,7 +469,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
-      link.download = 'bhanu-prakash-vijaya-lakshmi-wedding.ics';
+      link.download = 'ravi-sowjanya-wedding.ics';
       link.click();
       URL.revokeObjectURL(link.href);
     });
@@ -474,4 +499,152 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // --- 9. Cinematic Wedding Video Player ---
+  function initVideoPlayer() {
+    const video = document.getElementById('weddingVideo');
+    const videoFrame = document.getElementById('videoFrame');
+    const bigPlayBtn = document.getElementById('videoBigPlayBtn');
+    const playPauseCtrl = document.getElementById('videoPlayPauseCtrl');
+    const iconPlay = playPauseCtrl ? playPauseCtrl.querySelector('.rp-video__icon-play') : null;
+    const iconPause = playPauseCtrl ? playPauseCtrl.querySelector('.rp-video__icon-pause') : null;
+    const progressBar = document.getElementById('videoProgressBar');
+    const progressFill = document.getElementById('videoProgressFill');
+    const timeDisplay = document.getElementById('videoTimeDisplay');
+    const muteCtrl = document.getElementById('videoMuteCtrl');
+    const iconVol = muteCtrl ? muteCtrl.querySelector('.rp-video__icon-vol') : null;
+    const iconMute = muteCtrl ? muteCtrl.querySelector('.rp-video__icon-mute') : null;
+    const fsCtrl = document.getElementById('videoFsCtrl');
+
+    if (!video) return;
+
+    let wasMusicPlayingBeforeVideo = false;
+
+    function formatTime(seconds) {
+      if (isNaN(seconds) || seconds < 0) return '0:00';
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      return `${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+
+    function toggleVideoPlay() {
+      if (video.paused) {
+        if (isMusicPlaying) {
+          wasMusicPlayingBeforeVideo = true;
+          pauseAudio();
+        }
+        video.play().then(() => {
+          if (videoFrame) videoFrame.classList.add('is-playing');
+          if (iconPlay) iconPlay.style.display = 'none';
+          if (iconPause) iconPause.style.display = 'block';
+        }).catch(err => {
+          console.warn('Video playback error:', err);
+        });
+      } else {
+        video.pause();
+      }
+    }
+
+    video.addEventListener('play', () => {
+      if (videoFrame) videoFrame.classList.add('is-playing');
+      if (iconPlay) iconPlay.style.display = 'none';
+      if (iconPause) iconPause.style.display = 'block';
+    });
+
+    video.addEventListener('pause', () => {
+      if (videoFrame) videoFrame.classList.remove('is-playing');
+      if (iconPlay) iconPlay.style.display = 'block';
+      if (iconPause) iconPause.style.display = 'none';
+      if (wasMusicPlayingBeforeVideo && !isMusicPlaying) {
+        playAudio();
+      }
+    });
+
+    video.addEventListener('ended', () => {
+      if (videoFrame) videoFrame.classList.remove('is-playing');
+      if (iconPlay) iconPlay.style.display = 'block';
+      if (iconPause) iconPause.style.display = 'none';
+      if (wasMusicPlayingBeforeVideo && !isMusicPlaying) {
+        playAudio();
+      }
+    });
+
+    video.addEventListener('timeupdate', () => {
+      if (video.duration) {
+        const percent = (video.currentTime / video.duration) * 100;
+        if (progressFill) progressFill.style.width = percent + '%';
+        if (progressBar) progressBar.setAttribute('aria-valuenow', Math.round(percent));
+        if (timeDisplay) timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+      }
+    });
+
+    video.addEventListener('loadedmetadata', () => {
+      if (timeDisplay && video.duration) {
+        timeDisplay.textContent = `0:00 / ${formatTime(video.duration)}`;
+      }
+    });
+
+    if (bigPlayBtn) {
+      bigPlayBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleVideoPlay();
+      });
+    }
+
+    if (playPauseCtrl) {
+      playPauseCtrl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleVideoPlay();
+      });
+    }
+
+    if (videoFrame) {
+      videoFrame.addEventListener('click', (e) => {
+        if (!e.target.closest('#videoControls') && !e.target.closest('#videoBigPlayBtn')) {
+          toggleVideoPlay();
+        }
+      });
+    }
+
+    if (progressBar) {
+      progressBar.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const rect = progressBar.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const pos = Math.max(0, Math.min(1, clickX / rect.width));
+        if (video.duration) {
+          video.currentTime = pos * video.duration;
+        }
+      });
+    }
+
+    if (muteCtrl) {
+      muteCtrl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        video.muted = !video.muted;
+        if (video.muted) {
+          if (iconVol) iconVol.style.display = 'none';
+          if (iconMute) iconMute.style.display = 'block';
+        } else {
+          if (iconVol) iconVol.style.display = 'block';
+          if (iconMute) iconMute.style.display = 'none';
+        }
+      });
+    }
+
+    if (fsCtrl) {
+      fsCtrl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (document.fullscreenElement) {
+          document.exitFullscreen().catch(() => {});
+        } else if (video.requestFullscreen) {
+          video.requestFullscreen().catch(() => {});
+        } else if (video.webkitEnterFullscreen) {
+          video.webkitEnterFullscreen();
+        }
+      });
+    }
+  }
+
+  initVideoPlayer();
 });
